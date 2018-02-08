@@ -65,8 +65,7 @@ public class Ini {
 	/**
 	 * Construct an INI structure from a file
 	 * 
-	 * @param is
-	 *            A filename from which the INI structure is read
+	 * @paraA filename from which the INI structure is read
 	 * @throws IOException
 	 *             Exceptions thrown when reading from the input file
 	 */

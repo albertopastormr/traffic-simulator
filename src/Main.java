@@ -13,8 +13,8 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import es.ucm.fdi.control.Controlador;
-import es.ucm.fdi.model.SimuladorTrafico;
+import control.Controller;
+import model.TrafficSimulator;
 
 
 public class Main {
@@ -104,14 +104,14 @@ public class Main {
 	}
 
 	private static void iniciaModoEstandar() throws IOException {
-		InputStream is = new FileInputStream(new File(Main.ficheroEntrada));
+		/*InputStream is = new FileInputStream(new File(Main.ficheroEntrada));
 		OutputStream os = Main.ficheroSalida == null ? System.out : new FileOutputStream(new File(Main.ficheroSalida));
-		SimuladorTrafico sim = new SimuladorTrafico();
-		Controlador ctrl = new Controlador(sim,Main.limiteTiempo,is,os);
+		TrafficSimulator sim = new TrafficSimulator();
+		Controller ctrl = new Controller(sim,Main.limiteTiempo,is,os);
 		ctrl.ejecuta();
 		is.close();
 		System.out.println("Done!");
-
+        */
 	}
 
 	public static void main(String[] args) throws IOException {

@@ -3,10 +3,6 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
-import es.ucm.fdi.ini.Ini;
-
-
-
 public class Comprobador {
 	
 	/**
