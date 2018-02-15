@@ -104,22 +104,21 @@ public class Main {
 	}
 
 	private static void iniciaModoEstandar() throws IOException {
-		/*InputStream is = new FileInputStream(new File(Main.ficheroEntrada));
+		InputStream is = new FileInputStream(new File(Main.ficheroEntrada));
 		OutputStream os = Main.ficheroSalida == null ? System.out : new FileOutputStream(new File(Main.ficheroSalida));
 		TrafficSimulator sim = new TrafficSimulator();
-		Controller ctrl = new Controller(sim,Main.limiteTiempo,is,os);
+		Controller ctrl = new Controller(sim, Main.limiteTiempo, is, os);
 		ctrl.ejecuta();
 		is.close();
 		System.out.println("Done!");
-        */
 	}
 
 	public static void main(String[] args) throws IOException {
 
 		// example command lines:
 		//
-		// -i resources/examples/events/basic/ex1.ini
-		// -i resources/examples/events/advanced/ex1.ini
+		// -i resources/examples/event/basic/ex1.ini
+		// -i resources/examples/event/advanced/ex1.ini
 		// --help
 		//
 		

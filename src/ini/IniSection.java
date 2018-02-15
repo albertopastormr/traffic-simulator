@@ -1,3 +1,5 @@
+package ini;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -92,7 +94,7 @@ public class IniSection {
 	/**
 	 * Adds a comment to be printed just before the the section
 	 * 
-	 * @param key
+	 * @param
 	 * @param comment
 	 */
 	public void addSectionComment(String comment) {

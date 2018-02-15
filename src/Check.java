@@ -1,9 +1,11 @@
+import ini.Ini;
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
-public class Comprobador {
+public class Check {
 	
 	/**
 	 * This method run the simulator on all files that ends with .ini if the given
@@ -40,7 +42,7 @@ public class Comprobador {
 	
 
 	public static void main(String[] args) throws IOException, InvocationTargetException, InterruptedException {		
-		test("resources/examples/events/basic");
+		test("resources/examples/event/basic");
 	}
 
 }
