@@ -47,9 +47,7 @@ public abstract class EventConstructor {
                 valorPorDefecto;
     }
 
-    protected static int parseaIntNoNegativo(IniSection seccion,
-                                             String clave,
-                                             int valorPorDefecto) {
+    protected static int parseaIntNoNegativo(IniSection seccion, String clave, int valorPorDefecto) {
         int i = EventConstructor.parseaInt(seccion, clave, valorPorDefecto);
         if (i < 0)
             throw new IllegalArgumentException("El valor " + i + " para " + clave +

@@ -21,7 +21,7 @@ public class TrafficSimulator {
             // Por completar
             @Override
             public int compare(Event o1, Event o2) {
-                return 0;
+                return Integer.compare(o1.getTime(), o2.getTime());
             }
         };
         this.events = new SortedArrayList<>(cmp); // estructura ordenada por “tiempo”
@@ -36,7 +36,7 @@ public class TrafficSimulator {
             // escribir el informe en “fileOutput”, controlando que no sea null.
         }
     }
-    public void insertaEvento(Event e){
+    public void insertEvent(Event e){
 
         // inserta un evento en “eventos”, controlando que el tiempo de
         // ejecución del evento sea menor que “contadorTiempo”

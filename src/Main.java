@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,8 +12,6 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-
 import control.Controller;
 import model.TrafficSimulator;
 
@@ -20,8 +19,8 @@ import model.TrafficSimulator;
 public class Main {
 
 
-	private final static Integer limiteTiempoPorDefecto = 10;
-	private static Integer limiteTiempo = null;
+	private final static Integer timeLimitPorDefecto = 10;
+	private static Integer timeLimit = null;
 	private static String ficheroEntrada = null;
 	private static String ficheroSalida = null;
 
@@ -50,10 +49,10 @@ public class Main {
 				String error = "Illegal arguments:";
 				for (String o : resto)
 					error += (" " + o);
-				throw new ParseException(error);
+				throw new error.ParseException(error);
 			}
 
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			System.err.println(e.getLocalizedMessage());
 			System.exit(1);
 		}
@@ -68,7 +67,7 @@ public class Main {
 		opcionesLineacomandos.addOption(
 				Option.builder("o").longOpt("output").hasArg().desc("Fichero de salida, donde se escriben los informes.").build());
 		opcionesLineacomandos.addOption(Option.builder("t").longOpt("ticks").hasArg()
-				.desc("Pasos que ejecuta el simulador en su bucle principal (el valor por defecto es " + Main.limiteTiempoPorDefecto + ").")
+				.desc("Pasos que ejecuta el simulador en su bucle principal (el valor por defecto es " + Main.timeLimitPorDefecto + ").")
 				.build());
 
 		return opcionesLineacomandos;
@@ -82,24 +81,24 @@ public class Main {
 		}
 	}
 
-	private static void parseaOpcionFicheroIN(CommandLine linea) throws ParseException {
+	private static void parseaOpcionFicheroIN(CommandLine linea) throws error.ParseException {
 		Main.ficheroEntrada = linea.getOptionValue("i");
 		if (Main.ficheroEntrada == null) {
-			throw new ParseException("El fichero de eventos no existe");
+			throw new error.ParseException("El fichero de eventos no existe");
 		}
 	}
 
-	private static void parseaOpcionFicheroOUT(CommandLine linea) throws ParseException {
+	private static void parseaOpcionFicheroOUT(CommandLine linea) throws error.ParseException {
 		Main.ficheroSalida = linea.getOptionValue("o");
 	}
 
-	private static void parseaOpcionSTEPS(CommandLine linea) throws ParseException {
-		String t = linea.getOptionValue("t", Main.limiteTiempoPorDefecto.toString());
+	private static void parseaOpcionSTEPS(CommandLine linea) throws error.ParseException {
+		String t = linea.getOptionValue("t", Main.timeLimitPorDefecto.toString());
 		try {
-			Main.limiteTiempo = Integer.parseInt(t);
-			assert (Main.limiteTiempo < 0);
+			Main.timeLimit = Integer.parseInt(t);
+			assert (Main.timeLimit < 0);
 		} catch (Exception e) {
-			throw new ParseException("Valor invalido para el limite de tiempo: " + t);
+			throw new error.ParseException("Valor invalido para el limite de tiempo: " + t);
 		}
 	}
 
@@ -107,8 +106,8 @@ public class Main {
 		InputStream is = new FileInputStream(new File(Main.ficheroEntrada));
 		OutputStream os = Main.ficheroSalida == null ? System.out : new FileOutputStream(new File(Main.ficheroSalida));
 		TrafficSimulator sim = new TrafficSimulator();
-		Controller ctrl = new Controller(sim, Main.limiteTiempo, is, os);
-		ctrl.ejecuta();
+		Controller ctrl = new Controller(sim, Main.timeLimit, is, os);
+		ctrl.execute();
 		is.close();
 		System.out.println("Done!");
 	}

@@ -15,12 +15,12 @@ public class EventParser {
     // bucle de prueba y error
     public static Event EventParse(IniSection sec) {
         int i = 0;
-        boolean seguir = true;
+        boolean cntinue = true;
         Event e = null;
-        while (i < EventParser.events.length && seguir) {
+        while (i < EventParser.events.length && cntinue) {
             // ConstructorEventos contiene el método parse(sec)
             e = EventParser.events[i].parser(sec);
-            if (e != null) seguir = false;
+            if (e != null) cntinue = false;
             else i++;
         }
         return e;

@@ -1,20 +1,36 @@
 package logic;
 
-import java.util.ArrayList;
+import ini.IniSection;
 
-public class Vehicle{
+import java.util.List;
 
-    private String id;
-    private float kilometrage;
-    private float speedMax;
-    private float speedActual;
+public class Vehicle extends SimulationObject {
+
+    private int kilometrage;
+    private int speedMax;
+    private int speedActual;
     private Road roadActual;
-    private float locationActual;
-    private ArrayList<Junction> junctions;
+    private int locationActual;
+    private List<Junction> itinerary;
     private int breakdownTime;
     private boolean destiny;
+    private int timeBreak;
 
-    public void setSpeedActual(float speedActual) {
+
+    public Vehicle(String id, int speedMax, List<Junction> itinerary) {
+        super(id);
+
+    }
+
+    public int getTimeBreak() {
+        return timeBreak;
+    }
+
+    public int getLocationActual() {
+        return this.locationActual;
+    }
+
+    public void setSpeedActual(int speedActual) {
         if (speedActual > this.speedMax)
             this.speedActual = this.speedMax;
         else
@@ -41,13 +57,27 @@ public class Vehicle{
     }
 
 
-    public String generateReport() {
+    public String generateReport(int time) {
         return "[vehicle_report]\n" +
-                "id = " + id +
+                "id = " + this.id +
                 "\nkilometrage = " + kilometrage +
                 "\nspeedActual = " + speedActual +
+                "\ntime = " + time +
                 "\nlocationActual = " + locationActual +
                 "\nbreakdownTime = " + breakdownTime +
                 '}';
     }
+
+    @Override
+    public void completeSectionDetails(IniSection is) {
+        // Por completar
+        is.setValue("location", this.destiny ? "arrived" : this.roadActual + ":" + this.getLocationActual());
+    }
+
+    @Override
+    public String getSectionName() {
+        return "vehicle_report";
+    }
+
+
 }

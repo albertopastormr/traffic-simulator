@@ -1,5 +1,6 @@
 package control;
 
+import error.SimulationError;
 import event.Event;
 import ini.Ini;
 import ini.IniSection;
@@ -18,27 +19,39 @@ public class Controller {
     private int simulatorSteps;
 
     public void execute() {
-        this.loadEvent(this.fileInput);
-        this.simulator.execute(simulatorSteps,this.fileOutput);
+        try {
+            this.loadEvent(this.fileInput);
+            this.simulator.execute(simulatorSteps, this.fileOutput);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
-    private void loadEvent(InputStream inStream) {
+    public Controller(TrafficSimulator simulator, int simulatorSteps, InputStream fileInput,  OutputStream fileOutput) {
+        this.simulator = simulator;
+        this.fileOutput = fileOutput;
+        this.fileInput = fileInput;
+        this.simulatorSteps = simulatorSteps;
+    }
+
+    private void loadEvent(InputStream inStream) throws SimulationError{
         Ini ini;
         try {
             // lee el fichero y carga su atributo iniSections
             ini = new Ini(inStream);
         }
         catch (IOException e) {
-            throw new ErrorDeSimulacion("Error en la lectura de eventos: " + e);
+            throw new SimulationError("Error en la lectura de eventos: " + e);
         }
         // recorremos todas los elementos de iniSections para generar el evento
         // correspondiente
         for (IniSection sec : ini.getSections()) {
             // parseamos la sección para ver a que evento corresponde
             Event e = EventParser.EventParse(sec);
-            if (e != null) this.simulador.insertaEvento(e);
+            if (e != null) this.simulator.insertEvent(e);
             else
-                throw new ErrorDeSimulacion("Evento desconocido: " + sec.getTag());
+                throw new SimulationError("Evento desconocido: " + sec.getTag());
         }
     }
 
