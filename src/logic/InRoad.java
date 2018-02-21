@@ -16,4 +16,18 @@ public class InRoad {
         this.vehiclesQueue = new SortedArrayList<>(Comparator.comparingInt(Vehicle::getLocationActual));
         this.trafficLight = false;
     }
+
+    void setTrafficLight(boolean colour){
+        this.trafficLight = colour;
+    }
+
+    public void moveFirstVehicle(){
+        this.vehiclesQueue.get(0).moveNextRoad();
+        this.vehiclesQueue.remove(0);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

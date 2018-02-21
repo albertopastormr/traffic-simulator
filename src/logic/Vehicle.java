@@ -13,7 +13,7 @@ public class Vehicle extends SimulationObject {
     private int locationActual;
     private List<Junction> itinerary;
     private int breakdownTime;
-    private boolean destiny;
+    private boolean destination;
     private int timeBreak;
 
 
@@ -71,7 +71,7 @@ public class Vehicle extends SimulationObject {
     @Override
     public void completeSectionDetails(IniSection is) {
         // Por completar
-        is.setValue("location", this.destiny ? "arrived" : this.roadActual + ":" + this.getLocationActual());
+        is.setValue("location", this.destination ? "arrived" : this.roadActual + ":" + this.getLocationActual());
     }
 
     @Override
