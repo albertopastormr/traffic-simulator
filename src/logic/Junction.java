@@ -1,7 +1,10 @@
 package logic;
 
+import error.EventException;
 import ini.IniSection;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +19,9 @@ import java.util.Map;
 
     public Junction(String id) {
         super(id);
+        this.InRoads = new ArrayList<InRoad>();
+        this.mapInRoads = new HashMap<>();
+        this.OutRoads = new HashMap<>();
     }
 
 
@@ -37,10 +43,14 @@ import java.util.Map;
      public Road roadToJunction(Junction junction) {
         return this.OutRoads.get(junction);
     }
-    public void addRoadInToJunction(String idRoad, Road road) {
-        InRoad inRoad = new InRoad(road);
-        this.mapInRoads.put(idRoad, inRoad);
-        this.InRoads.add(inRoad);
+    public void addRoadInToJunction(String idRoad, Road road) throws EventException {
+        if(!mapInRoads.containsKey(idRoad)) {
+            InRoad inRoad = new InRoad(road);
+            this.mapInRoads.put(idRoad, inRoad);
+            this.InRoads.add(inRoad);
+        }
+        else
+            throw new EventException("Road " + "already exists in mapInRoads\n");
     }
     public void addRoadOutToJunction(Junction destination, Road road) {
         OutRoads.put(destination, road);
@@ -51,7 +61,6 @@ import java.util.Map;
     protected void updateTrafficLight(){
         InRoads.get(GreenTrafficLightIndex).setTrafficLight(false);
         InRoads.get(GreenTrafficLightIndex + 1).setTrafficLight(true);
-
         GreenTrafficLightIndex++;
     }
 

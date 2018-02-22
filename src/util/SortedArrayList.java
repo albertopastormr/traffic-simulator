@@ -22,11 +22,11 @@ public class SortedArrayList<E> extends ArrayList<E> {
             else if( cmp.compare(this.get(mid), e) > 0){
                 ini = mid;
             }
-            else // En este caso, es como contains() == true, por lo que no lo añade para evitar elementos duplicados
-                return false;
-
+            else // They have the same time so we place the element e next to the mid index
+                ini = end = mid + 1;
         }
-    return true;
+        this.add(ini, e);
+        return true;
     }
     @Override
     public boolean addAll(Collection<? extends E> c) {
@@ -42,18 +42,18 @@ public class SortedArrayList<E> extends ArrayList<E> {
     // Metodo sobrescrito para evitar el acceso a la lista con indice
     @Override
     public E set(int index, E element) {
-        throw new UnsupportedOperationException("SortedArrayList doesn't support index operations");
+        throw new UnsupportedOperationException("SortedArrayList doesn't support index operations\n");
     }
 
     // Metodo sobrescrito para evitar el acceso a la lista con indice
     @Override
     public void add(int index, E element) {
-        throw new UnsupportedOperationException("SortedArrayList doesn't support index operations");
+        throw new UnsupportedOperationException("SortedArrayList doesn't support index operations\n");
     }
 
     // Metodo sobrescrito para evitar el acceso a la lista con indice
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
-        throw new UnsupportedOperationException("SortedArrayList doesn't support index operations");
+        throw new UnsupportedOperationException("SortedArrayList doesn't support index operations\n");
     }
 }

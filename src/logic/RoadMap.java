@@ -1,6 +1,7 @@
 package logic;
 
 
+import error.EventException;
 import error.RoadMapException;
 
 import java.util.ArrayList;
@@ -18,7 +19,6 @@ public class RoadMap {
     private Map<String, Junction> junctionMap;
     private Map<String, Vehicle> vehicleMap;
 
-    // Por a;adir
 
     public RoadMap() {
         this.roads = new ArrayList<Road>();
@@ -31,7 +31,7 @@ public class RoadMap {
     }
 
     public void addJunction(String idJunction, Junction junction) throws RoadMapException {
-        if(! junctionMap.containsKey(idJunction)){ // Si el cruce no existe, lo inserta en junctions y junctionMap
+        if(! junctionMap.containsKey(idJunction)){ // if junction doesn't exist , it inserts it in junctionMap
             this.junctions.add(junction);
             this.junctionMap.put(idJunction, junction);
         }
@@ -49,12 +49,12 @@ public class RoadMap {
             throw new RoadMapException("The vehicle" + idVehicle + " found already exists in vehicleMap (duplicated vehicle)\n");
     }
 
-    public void addRoad(String idRoad, Junction origin, Road road, Junction destination) throws RoadMapException {
+    public void addRoad(String idRoad, Junction origin, Road road, Junction destination) throws RoadMapException, EventException {
         if(!roadMap.containsKey(idRoad)){
             this.roads.add(road);
             this.roadMap.put(idRoad, road);
-            origin.addRoadInToJunction(idRoad, road);
-            destination.addRoadOutToJunction(road.destination, road);
+            origin.addRoadOutToJunction(destination, road);
+            destination.addRoadInToJunction(idRoad, road);
         }
         else
             throw new RoadMapException("The road " + idRoad + " found already exists in the junctionMap (duplicated junction)\n");

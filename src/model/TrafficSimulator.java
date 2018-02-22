@@ -27,7 +27,7 @@ public class TrafficSimulator {
                 return Integer.compare(o1.getTime(), o2.getTime());
             }
         };
-        this.events = new SortedArrayList<>(cmp); // estructura ordenada por “tiempo”
+        this.events = new SortedArrayList<>(cmp); // Sorted by time
     }
 
     public void execute(int simulationStep, OutputStream fileOutput) throws SimulationError, IOException {
@@ -35,10 +35,17 @@ public class TrafficSimulator {
         int timeLimit = this.timeCount + simulationStep - 1;
         while (this.timeCount <= timeLimit) {
 
-            for(Event e : events){
-                if(e.getTime() == this.timeCount)
-                    e.execute(map);
+            int i = 0;
+            while(i < events.size()){
+                if(events.get(i).getTime() != this.timeCount) // events is sorted by time
+                    break;
+                else {
+                    events.get(i).execute(map);
+                    events.remove(i); // Once it has been executed, we removed it from the list of events
+                }
+                i++;
             }
+
             map.update();
             if(fileOutput != null) {
                 PrintStream printStream = new PrintStream(fileOutput);
@@ -46,10 +53,11 @@ public class TrafficSimulator {
             }
             else
                 throw new SimulationError("FileOutput unknown\n");
+            this.timeCount++;
         }
     }
     public void insertEvent(Event e){
-        if(e.getTime() >= this.timeCount)
+        if(e.getTime() >= this.timeCount) // The element e is inserted if it could be executed
             this.events.add(e);
     }
 }
