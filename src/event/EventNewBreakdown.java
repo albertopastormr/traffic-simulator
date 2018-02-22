@@ -7,20 +7,22 @@ import util.RoadParser;
 
 import java.util.List;
 
-public class EventNewJunction extends Event {
-    protected String id;
+public class EventNewBreakdown extends Event {
+    protected int duration;
+    protected String[] vehicles;
 
-    public EventNewJunction(int time, String id) {
+    public EventNewBreakdown(int time, int duration, String[] vehicles) {
         super(time);
-        this.id = id;
+        this.duration = duration;
+        this.vehicles = vehicles;
     }
     @Override
     public void execute(RoadMap map) throws RoadMapException {
-        Junction junction = new Junction(this.id);
-        map.addJunction(this.id, junction);
+
+
     }
     @Override
     public String toString() {
-        return time + id; // Por completar
+        return ""; // Por completar
     }
 }

@@ -159,8 +159,7 @@ public class IniSection {
 			return false;
 		IniSection other = (IniSection) obj;
 
-		// we require to have the same number of keys, we don't force it to be
-		// in the same order
+		// we require to have the same number of keys, we don't force it to be in the same order
 		if (this.getKeys().size() != other.getKeys().size()) {
 			return false;
 		}

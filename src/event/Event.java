@@ -1,6 +1,10 @@
 package event;
 
+import error.EventException;
+import error.NewEventException;
+import error.RoadMapException;
 import logic.RoadMap;
+
 
 public abstract class Event {
 
@@ -14,5 +18,5 @@ public abstract class Event {
         return time;
     }
 
-    public abstract void execute(RoadMap map);
+    public abstract void execute(RoadMap map) throws NewEventException, EventException, RoadMapException;
 }

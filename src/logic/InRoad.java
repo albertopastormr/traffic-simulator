@@ -1,5 +1,6 @@
 package logic;
 
+import error.EventException;
 import util.SortedArrayList;
 
 import java.util.Comparator;
@@ -9,7 +10,7 @@ public class InRoad {
 
     protected Road road;
     protected List<Vehicle> vehiclesQueue;
-    protected boolean trafficLight; // true=verde, false=rojo
+    protected boolean trafficLight; // true = green , false = red
 
     public InRoad(Road road) {
         this.road = road;
@@ -21,7 +22,7 @@ public class InRoad {
         this.trafficLight = colour;
     }
 
-    public void moveFirstVehicle(){
+    public void moveFirstVehicle() throws EventException {
         this.vehiclesQueue.get(0).moveNextRoad();
         this.vehiclesQueue.remove(0);
     }

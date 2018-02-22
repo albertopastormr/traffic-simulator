@@ -27,22 +27,24 @@ public class Road  extends SimulationObject {
         vehicleComparator = new Comparator<Vehicle>() {
             @Override
             public int compare(Vehicle o1, Vehicle o2) {
-                return o1.getLocationActual() - o2.getLocationActual();
+                return o2.getLocationActual() - o1.getLocationActual();
             }
         };
         vehicles = new SortedArrayList<Vehicle>(vehicleComparator);
     }
 
 
-    public void inVehicle(Vehicle vehicle){
+    public void inVehicle(Vehicle vehicle) throws EventException {
         if(!vehicles.contains(vehicle)){
             vehicles.add(vehicle);
             vehicles.sort(vehicleComparator);
         }
+        else
+            throw new EventException("Uncompleted add: vehicle" + vehicle.id + " already exist in road: " + this.id + "\n");
     }
     public void outVehicle(Vehicle vehicle) throws EventException {
         if(!vehicles.remove(vehicle))
-            throw new EventException("Uncompleted delete: vehicle" + vehicle.id + " does not exist in road " + this.id + "\n");
+            throw new EventException("Uncompleted delete: vehicle" + vehicle.id + " does not exist in road: " + this.id + "\n");
     }
     public void vehicleToJunction(Vehicle vehicle){
         this.destination.inVehicleToJunction(this.id , vehicle);
@@ -51,15 +53,32 @@ public class Road  extends SimulationObject {
 
     @Override
     public void completeSectionDetails(IniSection is) {
-
+        // Por completar
     }
 
     @Override
     public String getSectionName() {
-        return null;
+        return "road_report";
     }
 
     public void advance(){
+        int speed = calculateSpeed();
+        int obstacles = 0;
 
+        for (Vehicle v : this.vehicles) {
+            if(v.getBreakdownTime() > 0)
+                obstacles++;
+            v.setSpeedActual(speed/this.calculateMarkdownFactor(obstacles));
+            v.advance();
+        }
+        vehicles.sort(this.vehicleComparator);
+
+    }
+
+    protected int calculateSpeed(){
+        return (this.speedMax <= (this.speedMax/ (this.vehicles.size() < 1 ? 1 : this.vehicles.size())) ?  this.speedMax : (this.speedMax/ (this.vehicles.size() < 1 ? 1 : this.vehicles.size())));
+    }
+    protected int calculateMarkdownFactor(int obstacles){
+        return (obstacles == 0 ? 1 : 2);
     }
 }

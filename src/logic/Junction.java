@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
  public class Junction extends SimulationObject {
-    protected int GreenTrafficLightIndex; // It carries the index of the inRoad which has its traffic Light set to green
+    protected int greenTrafficLightIndex; // It carries the index of the inRoad which has its traffic Light set to green
 
     protected List<InRoad> InRoads;
 
@@ -22,12 +22,13 @@ import java.util.Map;
         this.InRoads = new ArrayList<InRoad>();
         this.mapInRoads = new HashMap<>();
         this.OutRoads = new HashMap<>();
+        this.greenTrafficLightIndex = 0;
     }
 
 
      @Override
      public void completeSectionDetails(IniSection is) {
-
+            // Por completar
      }
 
      @Override
@@ -36,8 +37,11 @@ import java.util.Map;
      }
 
      @Override
-     public void advance() {
-
+     public void advance() throws EventException {
+        if(!this.InRoads.isEmpty()){
+            this.InRoads.get(this.greenTrafficLightIndex).moveFirstVehicle();
+            this.updateTrafficLight();
+        }
      }
 
      public Road roadToJunction(Junction junction) {
@@ -59,9 +63,9 @@ import java.util.Map;
         mapInRoads.get(idRoad).vehiclesQueue.add(vehicle);
     }
     protected void updateTrafficLight(){
-        InRoads.get(GreenTrafficLightIndex).setTrafficLight(false);
-        InRoads.get(GreenTrafficLightIndex + 1).setTrafficLight(true);
-        GreenTrafficLightIndex++;
+        this.InRoads.get(this.greenTrafficLightIndex).setTrafficLight(false); // Setting actual traffic light index as red (false)
+        this.greenTrafficLightIndex = (this.greenTrafficLightIndex == this.InRoads.size() ? 0 : this.greenTrafficLightIndex++); // Updating index circulating around InRoads
+        this.InRoads.get( this.greenTrafficLightIndex ).setTrafficLight(true);
     }
 
 }

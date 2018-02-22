@@ -1,7 +1,11 @@
 package event;
 
+import error.EventException;
+import error.NewEventException;
+import error.RoadMapException;
 import logic.Junction;
 import logic.RoadMap;
+import logic.Vehicle;
 import util.RoadParser;
 
 import java.util.List;
@@ -18,10 +22,16 @@ public class EventNewVehicle extends Event {
         this.itinerary = itinerary;
     }
     @Override
-    public void execute(RoadMap map) {
+    public void execute(RoadMap map) throws NewEventException, EventException, RoadMapException {
+
         List<Junction> iti = RoadParser.JunctionListParse(this.itinerary,map);
-        // si iti es null o tiene menos de dos cruces lanzar excepción
-        // en otro caso crear el vehículo y añadirlo al mapa.
+
+        if(iti == null || iti.size() < 2)
+            throw new NewEventException("Itinerary for NewVehicle: " + this.id +" not valid\n");
+        else{
+            Vehicle vehicle = new Vehicle(this.id, this.speedMax, iti);
+            map.addVehicle(this.id, vehicle);
+        }
     }
     @Override
     public String toString() {

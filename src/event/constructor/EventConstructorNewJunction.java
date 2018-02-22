@@ -1,6 +1,7 @@
 package event.constructor;
 
 import event.Event;
+import event.EventNewJunction;
 import ini.IniSection;
 
 public class EventConstructorNewJunction extends EventConstructor {
@@ -20,10 +21,9 @@ public class EventConstructorNewJunction extends EventConstructor {
             return new EventNewJunction(
                     // extrae el valor del campo “time” en la sección
                     // 0 es el valor por defecto en caso de no especificar el tiempo
-                    EventConstructor.parseaIntNoNegativo(section, "time", 0),
+                    EventConstructor.parseIntNoNegative(section, "time", 0),
                     // extrae el valor del campo “id” de la sección
-                    EventConstructor.identificadorValido(section, "id")
-            );
+                    EventConstructor.validID(section, "id") );
     }
 
     @Override

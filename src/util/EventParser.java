@@ -10,16 +10,18 @@ public class EventParser {
             new EventConstructorNewJunction(),
             new EventConstructorNewRoad(),
             new EventConstructorNewVehicle(),
-            new EventConstructorCarBreakdown()
+            new EventConstructorBreakdown()
     };
-    // bucle de prueba y error
+
+
     public static Event EventParse(IniSection sec) {
+        // loop iterating EventConstructor parsing with a try-error method
         int i = 0;
         boolean cntinue = true;
         Event e = null;
         while (i < EventParser.events.length && cntinue) {
-            // ConstructorEventos contiene el método parse(sec)
-            e = EventParser.events[i].parser(sec);
+
+            e = EventParser.events[i].parser(sec); // Method parser() contained in EventConstructor
             if (e != null) cntinue = false;
             else i++;
         }

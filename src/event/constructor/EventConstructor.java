@@ -17,41 +17,37 @@ public abstract class EventConstructor {
 
     public abstract Event parser(IniSection section);
 
-    protected static String identificadorValido(IniSection seccion, String clave) {
-        String s = seccion.getValue(clave);
-        if (!esIdentificadorValido(s))
-            throw new IllegalArgumentException("El valor " + s + " para " + clave +
+    protected static String validID(IniSection section, String key) {
+        String s = section.getValue(key);
+        if (!isValidID(s))
+            throw new IllegalArgumentException("El valor " + s + " para " + key +
                     " no es un ID valido");
         else return s;
     }
 
-    // identificadores válidos
-    // sólo pueden contener letras, números y subrayados
-    private static boolean esIdentificadorValido(String id) {
+    // valid IDs can contain numbers, underscore or letters
+    private static boolean isValidID(String id) {
         return id != null && id.matches("[a-z0-9_]+");
     }
 
-    protected static int parseaInt(IniSection seccion, String clave) {
-        String v = seccion.getValue(clave);
+    protected static int parseInt(IniSection section, String key) {
+        String v = section.getValue(key);
         if (v == null)
-            throw new IllegalArgumentException("Valor inexistente para la clave: " +
-                    clave);
-        else return Integer.parseInt(seccion.getValue(clave));
+            throw new IllegalArgumentException("Nonexistent value for the key: " + key);
+        else
+            return Integer.parseInt(section.getValue(key));
     }
 
-    protected static int parseaInt(IniSection seccion,
-                                   String clave,
-                                   int valorPorDefecto) {
-        String v = seccion.getValue(clave);
-        return (v != null) ? Integer.parseInt(seccion.getValue(clave)) :
-                valorPorDefecto;
+    protected static int parseInt(IniSection section, String key, int defaultValue) {
+        String v = section.getValue(key);
+        return ( (v != null) ? Integer.parseInt(section.getValue(key)) : defaultValue );
     }
 
-    protected static int parseaIntNoNegativo(IniSection seccion, String clave, int valorPorDefecto) {
-        int i = EventConstructor.parseaInt(seccion, clave, valorPorDefecto);
+    protected static int parseIntNoNegative(IniSection section, String key, int defaultValue) {
+        int i = EventConstructor.parseInt(section, key, defaultValue);
         if (i < 0)
-            throw new IllegalArgumentException("El valor " + i + " para " + clave +
-                    " no es un ID valido");
-        else return i;
+            throw new IllegalArgumentException("Value " + i + " for " + key + " is not a valid ID\n");
+        else
+            return i;
     }
 }

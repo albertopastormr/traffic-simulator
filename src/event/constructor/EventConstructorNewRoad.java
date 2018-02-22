@@ -1,13 +1,14 @@
 package event.constructor;
 
 import event.Event;
+import event.EventNewRoad;
 import ini.IniSection;
 
 public class EventConstructorNewRoad extends EventConstructor {
 
     public EventConstructorNewRoad() {
         this.tag = "new_Road";
-        this.keys = new String[] { "time", "id" };
+        this.keys = new String[] { "time", "id", "max_speed", "length", "src", "dest" };
         this.defaultValues = new String[] { "", "", };
     }
 
@@ -20,10 +21,13 @@ public class EventConstructorNewRoad extends EventConstructor {
             return new EventNewRoad(
                     // extrae el valor del campo “time” en la sección
                     // 0 es el valor por defecto en caso de no especificar el tiempo
-                    EventConstructor.parseaIntNoNegativo(section, "time", 0),
+                    EventConstructor.parseIntNoNegative(section, "time", 0),
                     // extrae el valor del campo “id” de la sección
-                    EventConstructor.identificadorValido(section, "id")
-            );
+                    EventConstructor.validID(section, "id"),
+                    EventConstructor.parseIntNoNegative(section,"max_speed", 0),
+                    EventConstructor.parseIntNoNegative(section, "length", 0),
+                    section.getValue("src"),
+                    section.getValue("dest"));
     }
 
     @Override

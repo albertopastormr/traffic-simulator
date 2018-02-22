@@ -1,5 +1,6 @@
 package model;
 
+import error.EventException;
 import error.SimulationError;
 import event.Event;
 import logic.RoadMap;
@@ -30,7 +31,7 @@ public class TrafficSimulator {
         this.events = new SortedArrayList<>(cmp); // Sorted by time
     }
 
-    public void execute(int simulationStep, OutputStream fileOutput) throws SimulationError, IOException {
+    public void execute(int simulationStep, OutputStream fileOutput) throws SimulationError, IOException, EventException {
 
         int timeLimit = this.timeCount + simulationStep - 1;
         while (this.timeCount <= timeLimit) {
@@ -41,7 +42,7 @@ public class TrafficSimulator {
                     break;
                 else {
                     events.get(i).execute(map);
-                    events.remove(i); // Once it has been executed, we removed it from the list of events
+                    events.remove(i); // Once it has been executed, we remove it from the list of events
                 }
                 i++;
             }

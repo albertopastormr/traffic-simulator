@@ -1,13 +1,14 @@
 package event.constructor;
 
 import event.Event;
+import event.EventNewBreakdown;
 import ini.IniSection;
 
-public class EventConstructorCarBreakdown extends EventConstructor {
+public class EventConstructorBreakdown extends EventConstructor {
 
-    public EventConstructorCarBreakdown() {
-        this.tag = "new_CarBreakdown";
-        this.keys = new String[] { "time", "id" };
+    public EventConstructorBreakdown() {
+        this.tag = "make_vehicle_faulty";
+        this.keys = new String[] { "time", "duration", "vehicles" };
         this.defaultValues = new String[] { "", "", };
     }
 
@@ -17,12 +18,13 @@ public class EventConstructorCarBreakdown extends EventConstructor {
         if (!section.getTag().equals(this.tag) ||
                 section.getValue("type") != null) return null;
         else
-            return new EventCarBreakdown(
+            return new EventNewBreakdown(
                     // extrae el valor del campo “time” en la sección
                     // 0 es el valor por defecto en caso de no especificar el tiempo
-                    EventConstructor.parseaIntNoNegativo(section, "time", 0),
+                    EventConstructor.parseIntNoNegative(section, "time", 0),
                     // extrae el valor del campo “id” de la sección
-                    EventConstructor.identificadorValido(section, "id")
+                    EventConstructor.parseIntNoNegative(section,"duration", 0),
+                    section.getValue("vehicles").split(",")
             );
     }
 

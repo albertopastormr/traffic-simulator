@@ -16,7 +16,6 @@ public class Vehicle extends SimulationObject {
     private List<Junction> itinerary;
     private int breakdownTime;
     private boolean destination;
-    private int timeBreak;
     private boolean isAtJunction;
 
 
@@ -37,14 +36,10 @@ public class Vehicle extends SimulationObject {
         this.locationActual = 0;
         this.destination = false;
         this.breakdownTime = 0;
-        this.timeBreak = 0;
         this.kilometrage = 0;
         this.isAtJunction = false;
     }
 
-    public int getTimeBreak() {
-        return timeBreak;
-    }
 
     public int getLocationActual() {
         return this.locationActual;
@@ -68,22 +63,22 @@ public class Vehicle extends SimulationObject {
         if (this.breakdownTime > 0)
             this.breakdownTime--;
         else{
-            // Cambiar localizacion
             if(!this.isAtJunction){
-                this.locationActual++;
-                this.kilometrage++;
+                this.locationActual += this.speedActual;
+                this.kilometrage += this.speedActual;
                 if(this.locationActual >= this.roadActual.length){
+                    this.kilometrage = this.kilometrage - this.locationActual + this.roadActual.length;
                     this.locationActual = this.roadActual.length;
-                    // Actualizar el kilometraje para corregirlo
+                    this.roadActual.vehicleToJunction(this);
                     this.isAtJunction = true;
                 }
             }
         }
     }
 
-    public void moveNextRoad(){
+    public void moveNextRoad() throws EventException {
         if(this.roadActual != null){
-          this.roadActual.vehicles.remove(this);
+          this.roadActual.outVehicle(this);
           if(  this.roadActual.destination.id.equals(this.itinerary.get(this.itinerary.size() - 1).id) ){
             this.destination = true;
             this.roadActual = null;
@@ -91,22 +86,21 @@ public class Vehicle extends SimulationObject {
             this.locationActual = 0;
           }
           else{
+              int indexItineraryActualRoad = this.itinerary.indexOf(this.roadActual.destination);
+              Junction destinationJunctionOfNextRoad = this.itinerary.get(indexItineraryActualRoad + 1);
+              Road nextRoad = this.roadActual.destination.roadToJunction( destinationJunctionOfNextRoad );
 
+              if(nextRoad != null){
+                  nextRoad.inVehicle(this);
+                  this.roadActual = nextRoad;
+                  this.locationActual = 0;
+              }
+              else
+                  throw new EventException("Next road for vehicle" + this.id + " from road( " + this.roadActual.id + ")\n");
           }
         }
     }
 
-
-    public String generateReport(int time) {
-        return "[vehicle_report]\n" +
-                "id = " + this.id +
-                "\nkilometrage = " + kilometrage +
-                "\nspeedActual = " + speedActual +
-                "\ntime = " + time +
-                "\nlocationActual = " + locationActual +
-                "\nbreakdownTime = " + breakdownTime +
-                '}';
-    }
 
     @Override
     public void completeSectionDetails(IniSection is) {
@@ -119,5 +113,7 @@ public class Vehicle extends SimulationObject {
         return "vehicle_report";
     }
 
-
+    public int getBreakdownTime() {
+        return breakdownTime;
+    }
 }

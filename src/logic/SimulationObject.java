@@ -1,5 +1,6 @@
 package logic;
 
+import error.EventException;
 import ini.IniSection;
 
 public abstract class SimulationObject {
@@ -7,11 +8,11 @@ public abstract class SimulationObject {
     protected String id;
 
     public SimulationObject(String id) {
-        // Por completar
+        this.id = id;
     }
 
     public String getId() {
-        return null;
+        return this.id;
     }
 
     @Override
@@ -30,7 +31,7 @@ public abstract class SimulationObject {
     public abstract void completeSectionDetails(IniSection is);
     public abstract String getSectionName();
 
-    public abstract void advance();
+    public abstract void advance() throws EventException;
 
 
 }
