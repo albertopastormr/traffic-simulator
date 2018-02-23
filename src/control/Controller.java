@@ -24,7 +24,7 @@ public class Controller {
             this.simulator.execute(simulatorSteps, this.fileOutput);
         }
         catch (Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
