@@ -25,7 +25,7 @@ public class SortedArrayList<E> extends ArrayList<E> {
             else // They have the same time so we place the element e next to the mid index
                 ini = end = mid + 1;
         }
-        this.add(ini, e);
+        super.add(ini, e);
         return true;
     }
     @Override
