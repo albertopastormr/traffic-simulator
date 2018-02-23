@@ -1,8 +1,10 @@
 package event;
 
+import error.EventException;
 import error.RoadMapException;
 import logic.Junction;
 import logic.RoadMap;
+import logic.Vehicle;
 import util.RoadParser;
 
 import java.util.List;
@@ -17,9 +19,10 @@ public class EventNewBreakdown extends Event {
         this.vehicles = vehicles;
     }
     @Override
-    public void execute(RoadMap map) throws RoadMapException {
-
-
+    public void execute(RoadMap map) throws RoadMapException, EventException {
+        List<Vehicle> li = RoadParser.VehicleListParse(vehicles, map);
+        for(Vehicle v : li)
+            v.setBreakdownTime(duration);
     }
     @Override
     public String toString() {

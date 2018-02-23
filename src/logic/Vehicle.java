@@ -97,8 +97,25 @@ public class Vehicle extends SimulationObject {
               }
               else
                   throw new EventException("Next road for vehicle" + this.id + " from road( " + this.roadActual.id + ")\n");
+              this.isAtJunction = false;
           }
         }
+        else
+            throw new EventException("Can't move to next road vehicle " + this.id + "because its road it's null\n");
+    }
+
+    public void moveFirstRoad() throws EventException {
+        Junction origin = this.itinerary.get(0);
+        Junction destination = this.itinerary.get(1);
+        Road firstRoad = origin.roadToJunction(destination);
+        if(firstRoad != null){
+            firstRoad.inVehicle(this);
+            this.roadActual = firstRoad;
+            this.locationActual = 0;
+            this.kilometrage = 0;
+        }
+        else
+            throw new EventException("Can't initialize first road for vehicle " + this.id + "because there's no road connected between first vehicle's junctions\n");
     }
 
 

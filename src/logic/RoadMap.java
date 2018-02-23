@@ -43,7 +43,7 @@ public class RoadMap {
         if(!vehicleMap.containsKey(idVehicle)){
             this.vehicles.add(vehicle);
             this.vehicleMap.put(idVehicle, vehicle);
-            vehicle.moveNextRoad();
+            vehicle.moveFirstRoad();
         }
         else
             throw new RoadMapException("The vehicle" + idVehicle + " found already exists in vehicleMap (duplicated vehicle)\n");
