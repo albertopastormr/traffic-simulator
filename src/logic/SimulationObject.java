@@ -17,15 +17,15 @@ public abstract class SimulationObject {
 
     @Override
     public String toString() {
-        return null;
+        return this.id;
     }
 
     public String generateReport(int time) {
         IniSection is = new IniSection(this.getSectionName());
         is.setValue("id", this.id);
-        is.setValue("time", time);
+        is.setValue("time", time + 1);
         this.completeSectionDetails(is);
-        return is.toString();
+        return is.toString() + "\n";
     }
 
     public abstract void completeSectionDetails(IniSection is);

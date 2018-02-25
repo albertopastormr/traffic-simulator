@@ -87,7 +87,7 @@ public class RoadMap {
         if(junction != null)
             return junction;
         else
-            throw new RoadMapException("The junction " + id + "doesn't exist in junctionMap\n");
+            throw new RoadMapException("The junction " + id + " doesn't exist in junctionMap\n");
     }
 
     // returns a vehicle searched by its id in the map
@@ -105,6 +105,6 @@ public class RoadMap {
         if(road != null)
             return road;
         else
-            throw new RoadMapException("The road " + id + "doesn't exist in roadMap\n");
+            throw new RoadMapException("The road " + id + " doesn't exist in roadMap\n");
     }
 }

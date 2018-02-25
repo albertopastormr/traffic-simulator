@@ -28,7 +28,7 @@ import java.util.Map;
 
      @Override
      public void completeSectionDetails(IniSection is) {
-            // Por completar
+         is.setValue("queues", (this.InRoads.size() == 0 ? "" : this.InRoads ));
      }
 
      @Override
@@ -60,7 +60,7 @@ import java.util.Map;
         OutRoads.put(destination, road);
     }
     public void inVehicleToJunction(String idRoad, Vehicle vehicle){
-        mapInRoads.get(idRoad).vehiclesQueue.add(vehicle);
+        mapInRoads.get(idRoad).addVehicleToQueue(vehicle);
     }
     protected void updateTrafficLight(){
         this.InRoads.get(this.greenTrafficLightIndex).setTrafficLight(false); // Setting actual traffic light index as red (false)

@@ -113,6 +113,7 @@ public class Vehicle extends SimulationObject {
             this.roadActual = firstRoad;
             this.locationActual = 0;
             this.kilometrage = 0;
+            this.isAtJunction = false;
         }
         else
             throw new EventException("Can't initialize first road for vehicle " + this.id + "because there's no road connected between first vehicle's junctions\n");
@@ -121,7 +122,9 @@ public class Vehicle extends SimulationObject {
 
     @Override
     public void completeSectionDetails(IniSection is) {
-        // Por completar
+        is.setValue("speed", this.speedActual);
+        is.setValue("kilometrage", this.kilometrage);
+        is.setValue("faulty", this.breakdownTime );
         is.setValue("location", this.destination ? "arrived" : this.roadActual + ":" + this.getLocationActual());
     }
 
@@ -132,5 +135,10 @@ public class Vehicle extends SimulationObject {
 
     public int getBreakdownTime() {
         return this.breakdownTime;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + this.id + "," + this.locationActual + ")";
     }
 }

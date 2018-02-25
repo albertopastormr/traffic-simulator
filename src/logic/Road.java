@@ -53,7 +53,7 @@ public class Road  extends SimulationObject {
 
     @Override
     public void completeSectionDetails(IniSection is) {
-        // Por completar
+        is.setValue("vehicles", (this.vehicles.size() == 0 ? "" : this.vehicles));
     }
 
     @Override
@@ -65,7 +65,14 @@ public class Road  extends SimulationObject {
         int speed = calculateSpeed();
         int obstacles = 0;
 
-        for (Vehicle v : this.vehicles) {
+        /*for (Vehicle v : this.vehicles) { Bucle for-each cambiado por for convencional porque este lanzaba ConcurrentModificationException
+            if(v.getBreakdownTime() > 0)
+                obstacles++;
+            v.setSpeedActual(speed/this.calculateMarkdownFactor(obstacles));
+            v.advance();
+        }*/
+        for(int i = 0; i < this.vehicles.size(); i++){
+            Vehicle v = this.vehicles.get(i);
             if(v.getBreakdownTime() > 0)
                 obstacles++;
             v.setSpeedActual(speed/this.calculateMarkdownFactor(obstacles));

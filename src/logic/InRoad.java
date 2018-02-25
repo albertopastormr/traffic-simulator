@@ -14,7 +14,7 @@ public class InRoad {
 
     public InRoad(Road road) {
         this.road = road;
-        this.vehiclesQueue = road.vehicles;
+        this.vehiclesQueue = new SortedArrayList<>(Comparator.comparing(Vehicle::getLocationActual));
         this.trafficLight = false;
     }
 
@@ -38,6 +38,11 @@ public class InRoad {
 
     @Override
     public String toString() {
-        return super.toString();
+        String s = "(" + this.road.getId() +","+ (this.trafficLight ? "green" : "red") + ",";
+        s += "[";
+        for(Vehicle v : vehiclesQueue)
+            s += v.getId();
+        s += "])";
+        return s;
     }
 }
