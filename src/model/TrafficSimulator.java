@@ -40,11 +40,11 @@ public class TrafficSimulator {
 
             int i = 0, end =events.size();
             while(i < end){
-                if(events.get(i).getTime() != this.timeCount) // events is sorted by time
+                if(events.get(0).getTime() != this.timeCount) // events is sorted by time
                     break;
                 else {
-                    events.get(i).execute(map);
-                    events.remove(i); // Once it has been executed, we remove it from the list of events
+                    events.get(0).execute(map);
+                    events.remove(0); // Once it has been executed, we remove it from the list of events
                 }
                 i++;
             }

@@ -18,17 +18,6 @@ public class SortedArrayList<E> extends ArrayList<E> {
             i++;
         } // Pendiente revision
 
-        /*while(ini< end)  { // Binary search
-            mid = (ini + end)/2;
-            if( cmp.compare( this.get(mid), e) < 0){
-                end = mid;
-            }
-            else if( cmp.compare(this.get(mid), e) > 0){
-                ini = mid;
-            }
-            else // They have the same time so we place the element e next to the mid index
-                ini = end = mid + 1;
-        } */
         super.add(i, e);
         return true;
     }

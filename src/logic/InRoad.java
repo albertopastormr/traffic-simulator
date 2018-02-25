@@ -14,7 +14,7 @@ public class InRoad {
 
     public InRoad(Road road) {
         this.road = road;
-        this.vehiclesQueue = new SortedArrayList<>(Comparator.comparingInt(Vehicle::getLocationActual));
+        this.vehiclesQueue = road.vehicles;
         this.trafficLight = false;
     }
 
@@ -22,9 +22,18 @@ public class InRoad {
         this.trafficLight = colour;
     }
 
+    public void addVehicleToQueue(Vehicle vehicle){
+        this.vehiclesQueue.add(vehicle);
+    }
+
     public void moveFirstVehicle() throws EventException {
-        this.vehiclesQueue.get(0).moveNextRoad();
-        this.vehiclesQueue.remove(0);
+        if(vehiclesQueue.size() > 0)
+            this.vehiclesQueue.get(0).moveNextRoad();
+    }
+
+    private void copyVehiclesQueueFromRoad(Road road){
+        for(Vehicle v : road.vehicles)
+            this.addVehicleToQueue(v);
     }
 
     @Override

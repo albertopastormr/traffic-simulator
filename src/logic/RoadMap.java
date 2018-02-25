@@ -74,9 +74,8 @@ public class RoadMap {
     }
     public void update() throws EventException {
 
-        for (Junction j:junctions) // Calls advance() for every junction
+        for (Junction j : junctions) // Calls advance() for every junction
             j.advance();
-
         for(Road r : roads) // Calls advance() for every road
             r.advance();
 

@@ -33,7 +33,7 @@ import java.util.Map;
 
      @Override
      public String getSectionName() {
-         return null;
+         return "junction_report";
      }
 
      @Override
