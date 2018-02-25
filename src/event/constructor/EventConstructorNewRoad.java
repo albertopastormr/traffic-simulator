@@ -7,7 +7,7 @@ import ini.IniSection;
 public class EventConstructorNewRoad extends EventConstructor {
 
     public EventConstructorNewRoad() {
-        this.tag = "new_Road";
+        this.tag = "new_road";
         this.keys = new String[] { "time", "id", "max_speed", "length", "src", "dest" };
         this.defaultValues = new String[] { "", "", };
     }

@@ -7,7 +7,7 @@ import ini.IniSection;
 public class EventConstructorNewVehicle extends EventConstructor {
 
     public EventConstructorNewVehicle() {
-        this.tag = "new_Vehicle";
+        this.tag = "new_vehicle";
         this.keys = new String[] { "time", "id" , "max_speed", "itinerary"};
         this.defaultValues = new String[] { "", "", };
     }
@@ -29,5 +29,5 @@ public class EventConstructorNewVehicle extends EventConstructor {
     }
 
     @Override
-    public String toString() { return "New Vehicle"; }
+    public String toString() { return "New Vehicle"; } // Por completar
 }

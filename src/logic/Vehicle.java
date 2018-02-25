@@ -131,6 +131,6 @@ public class Vehicle extends SimulationObject {
     }
 
     public int getBreakdownTime() {
-        return breakdownTime;
+        return this.breakdownTime;
     }
 }

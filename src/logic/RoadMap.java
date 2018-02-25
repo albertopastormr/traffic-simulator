@@ -97,7 +97,7 @@ public class RoadMap {
         if(vehicle != null)
             return vehicle;
         else
-            throw new RoadMapException("The vehicle " + id + "doesn't exist in vehicleMap\n");
+            throw new RoadMapException("The vehicle " + id + " doesn't exist in vehicleMap\n");
     }
 
     // returns a road searched by its id in the map

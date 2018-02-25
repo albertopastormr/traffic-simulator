@@ -38,8 +38,8 @@ public class TrafficSimulator {
         int timeLimit = this.timeCount + simulationStep - 1;
         while (this.timeCount <= timeLimit) {
 
-            int i = 0;
-            while(i < events.size()){
+            int i = 0, end =events.size();
+            while(i < end){
                 if(events.get(i).getTime() != this.timeCount) // events is sorted by time
                     break;
                 else {

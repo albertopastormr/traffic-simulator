@@ -12,9 +12,13 @@ public class SortedArrayList<E> extends ArrayList<E> {
     }
     @Override
     public boolean add(E e) {
-        int ini = 0, end = this.size(), mid;
+        int i = 0, end = this.size();
 
-        while(ini< end)  {
+        while(i < end && cmp.compare(this.get(i), e) <= 0){
+            i++;
+        } // Pendiente revision
+
+        /*while(ini< end)  { // Binary search
             mid = (ini + end)/2;
             if( cmp.compare( this.get(mid), e) < 0){
                 end = mid;
@@ -24,8 +28,8 @@ public class SortedArrayList<E> extends ArrayList<E> {
             }
             else // They have the same time so we place the element e next to the mid index
                 ini = end = mid + 1;
-        }
-        super.add(ini, e);
+        } */
+        super.add(i, e);
         return true;
     }
     @Override
