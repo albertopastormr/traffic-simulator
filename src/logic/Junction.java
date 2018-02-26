@@ -44,8 +44,11 @@ import java.util.Map;
         }
      }
 
-     public Road roadToJunction(Junction junction) {
-        return this.OutRoads.get(junction);
+     public Road roadToJunction(Junction junction) throws EventException {
+        if(this.OutRoads.containsKey(junction))
+            return this.OutRoads.get(junction);
+        else
+            throw new EventException("There is not a road that connects junction " + this.id  + " to junction " + junction.id + "\n");
     }
     public void addRoadInToJunction(String idRoad, Road road) throws EventException {
         if(!mapInRoads.containsKey(idRoad)) {

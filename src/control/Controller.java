@@ -50,7 +50,8 @@ public class Controller {
         for (IniSection sec : ini.getSections()) {
             // parseamos la sección para ver a que evento corresponde
             Event e = EventParser.EventParse(sec);
-            if (e != null) this.simulator.insertEvent(e);
+            if (e != null)
+                this.simulator.insertEvent(e);
             else
                 throw new SimulationError("Evento desconocido: " + sec.getTag());
         }
