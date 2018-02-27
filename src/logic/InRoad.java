@@ -27,8 +27,10 @@ public class InRoad {
     }
 
     public void moveFirstVehicle() throws EventException {
-        if(vehiclesQueue.size() > 0)
+        if(vehiclesQueue.size() > 0) {
             this.vehiclesQueue.get(0).moveNextRoad();
+            this.vehiclesQueue.remove(0);
+        }
     }
 
     private void copyVehiclesQueueFromRoad(Road road){

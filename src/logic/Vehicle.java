@@ -79,7 +79,7 @@ public class Vehicle extends SimulationObject {
     public void moveNextRoad() throws EventException {
         if(this.roadActual != null){
           this.roadActual.outVehicle(this);
-          if(  this.roadActual.destination.id.equals(this.itinerary.get(this.itinerary.size() - 1).id) ){
+          if(  !this.destination &&  this.roadActual.destination.id.equals(this.itinerary.get(this.itinerary.size() - 1).id)  ){
             this.destination = true;
             this.roadActual = null;
             this.speedActual = 0;

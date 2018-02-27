@@ -53,7 +53,14 @@ public class Road  extends SimulationObject {
 
     @Override
     public void completeSectionDetails(IniSection is) {
-        is.setValue("vehicles", (this.vehicles.size() == 0 ? "" : this.vehicles));
+        if(this.vehicles.size() == 0)
+            is.setValue("queues", "");
+        else{
+            String s = "";
+            for(int i = 0; i < this.vehicles.size(); i++)
+                s += "," +  this.vehicles.get(i).toString();
+            is.setValue("vehicles", s);
+        }
     }
 
     @Override
@@ -75,10 +82,11 @@ public class Road  extends SimulationObject {
             Vehicle v = this.vehicles.get(i);
             if(v.getBreakdownTime() > 0)
                 obstacles++;
-            v.setSpeedActual(speed/this.calculateMarkdownFactor(obstacles));
+            if(v.getBreakdownTime() == 0) // Este condicional podria dar error
+                v.setSpeedActual(speed/this.calculateMarkdownFactor(obstacles));
             v.advance();
         }
-        vehicles.sort(this.vehicleComparator);
+        this.vehicles.sort(this.vehicleComparator);
 
     }
 

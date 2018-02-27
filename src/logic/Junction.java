@@ -28,7 +28,14 @@ import java.util.Map;
 
      @Override
      public void completeSectionDetails(IniSection is) {
-         is.setValue("queues", (this.InRoads.size() == 0 ? "" : this.InRoads ));
+        if(this.InRoads.size() == 0)
+            is.setValue("queues",  "");
+        else{
+            String s = this.InRoads.get(0).toString();
+            for(int i = 1; i < this.InRoads.size(); i++)
+                s += "," + this.InRoads.get(i).toString();
+            is.setValue("queues", s);
+        }
      }
 
      @Override
@@ -67,7 +74,7 @@ import java.util.Map;
     }
     protected void updateTrafficLight(){
         this.InRoads.get(this.greenTrafficLightIndex).setTrafficLight(false); // Setting actual traffic light index as red (false)
-        this.greenTrafficLightIndex = (this.greenTrafficLightIndex == this.InRoads.size() ? 0 : this.greenTrafficLightIndex++); // Updating index circulating around InRoads
+        this.greenTrafficLightIndex = ((this.greenTrafficLightIndex + 1) % this.InRoads.size()); // Updating index circulating around InRoads
         this.InRoads.get( this.greenTrafficLightIndex ).setTrafficLight(true);
     }
 
