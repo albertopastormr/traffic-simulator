@@ -54,10 +54,11 @@ public class Road  extends SimulationObject {
     @Override
     public void completeSectionDetails(IniSection is) {
         if(this.vehicles.size() == 0)
-            is.setValue("queues", "");
+            is.setValue("vehicles", "");
         else{
             String s = "";
-            for(int i = 0; i < this.vehicles.size(); i++)
+            s += this.vehicles.get(0);
+            for(int i = 1; i < this.vehicles.size(); i++)
                 s += "," +  this.vehicles.get(i).toString();
             is.setValue("vehicles", s);
         }

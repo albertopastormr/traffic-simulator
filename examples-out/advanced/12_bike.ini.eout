@@ -61,7 +61,7 @@ vehicles = (b1,5)
 [vehicle_report]
 id = b1
 time = 3
-speed = 5
+speed = 0
 kilometrage = 5
 faulty = 2
 location = (r1,5)
@@ -87,7 +87,7 @@ vehicles = (b1,5)
 [vehicle_report]
 id = b1
 time = 4
-speed = 5
+speed = 0
 kilometrage = 5
 faulty = 1
 location = (r1,5)
@@ -113,7 +113,7 @@ vehicles = (b1,5)
 [vehicle_report]
 id = b1
 time = 5
-speed = 5
+speed = 0
 kilometrage = 5
 faulty = 0
 location = (r1,5)

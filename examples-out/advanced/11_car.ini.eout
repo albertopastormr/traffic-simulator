@@ -39,7 +39,7 @@ speed = 5
 kilometrage = 5
 faulty = 0
 location = (r1,5)
-type = bike
+type = car
 
 # ******* step 2 *******
 
@@ -65,7 +65,7 @@ speed = 5
 kilometrage = 10
 faulty = 0
 location = (r1,10)
-type = bike
+type = car
 
 # ******* step 3 *******
 
@@ -91,7 +91,7 @@ speed = 5
 kilometrage = 15
 faulty = 0
 location = (r1,15)
-type = bike
+type = car
 
 # ******* step 4 *******
 
@@ -108,16 +108,16 @@ queues = (r1,green,[])
 [road_report]
 id = r1
 time = 5
-vehicles = (v2,20)
+vehicles = (v2,15)
 
 [vehicle_report]
 id = v2
 time = 5
 speed = 5
-kilometrage = 20
-faulty = 0
-location = (r1,20)
-type = bike
+kilometrage = 15
+faulty = 1
+location = (r1,15)
+type = car
 
 # ******* step 5 *******
 
@@ -134,16 +134,16 @@ queues = (r1,green,[])
 [road_report]
 id = r1
 time = 6
-vehicles = (v2,25)
+vehicles = (v2,15)
 
 [vehicle_report]
 id = v2
 time = 6
 speed = 5
-kilometrage = 25
+kilometrage = 15
 faulty = 0
-location = (r1,25)
-type = bike
+location = (r1,15)
+type = car
 
 # ******* step 6 *******
 
@@ -160,16 +160,16 @@ queues = (r1,green,[])
 [road_report]
 id = r1
 time = 7
-vehicles = (v2,30)
+vehicles = (v2,20)
 
 [vehicle_report]
 id = v2
 time = 7
 speed = 5
-kilometrage = 30
+kilometrage = 20
 faulty = 0
-location = (r1,30)
-type = bike
+location = (r1,20)
+type = car
 
 # ******* step 7 *******
 
@@ -186,16 +186,16 @@ queues = (r1,green,[])
 [road_report]
 id = r1
 time = 8
-vehicles = (v2,35)
+vehicles = (v2,25)
 
 [vehicle_report]
 id = v2
 time = 8
 speed = 5
-kilometrage = 35
+kilometrage = 25
 faulty = 0
-location = (r1,35)
-type = bike
+location = (r1,25)
+type = car
 
 # ******* step 8 *******
 
@@ -212,16 +212,16 @@ queues = (r1,green,[])
 [road_report]
 id = r1
 time = 9
-vehicles = (v2,40)
+vehicles = (v2,30)
 
 [vehicle_report]
 id = v2
 time = 9
 speed = 5
-kilometrage = 40
+kilometrage = 30
 faulty = 0
-location = (r1,40)
-type = bike
+location = (r1,30)
+type = car
 
 # ******* step 9 *******
 
@@ -238,14 +238,14 @@ queues = (r1,green,[])
 [road_report]
 id = r1
 time = 10
-vehicles = (v2,45)
+vehicles = (v2,35)
 
 [vehicle_report]
 id = v2
 time = 10
 speed = 5
-kilometrage = 45
+kilometrage = 35
 faulty = 0
-location = (r1,45)
-type = bike
+location = (r1,35)
+type = car
 

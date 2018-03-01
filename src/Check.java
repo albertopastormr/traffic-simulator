@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 public class Check {
-	
+
 	/**
 	 * This method run the simulator on all files that ends with .ini if the given
 	 * path, and compares that output to the expected output. It assumes that for
@@ -15,6 +15,8 @@ public class Check {
 	 * 
 	 * @throws IOException
 	 */
+
+
 	private static void test(String path) throws IOException {
 
 		File dir = new File(path);
@@ -24,6 +26,8 @@ public class Check {
 				return name.endsWith(".ini");
 			}
 		});
+
+		System.out.println(files.length);
 
 		for (File file : files) {
 			test(file.getAbsolutePath(), file.getAbsolutePath() + ".out", file.getAbsolutePath() + ".eout");
@@ -38,11 +42,10 @@ public class Check {
 				+ (equalOutput ? "OK!" : ("distinto a la salida esperada +'" + expectedOutFile + "'")));
 	}
 
-	
-	
 
-	public static void main(String[] args) throws IOException, InvocationTargetException, InterruptedException {		
-		test("resources/examples/event/basic");
+	public static void main(String[] args) throws IOException, InvocationTargetException, InterruptedException {
+		test("examples-out/basic");
 	}
 
 }
+

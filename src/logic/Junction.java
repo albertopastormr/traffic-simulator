@@ -22,7 +22,7 @@ import java.util.Map;
         this.InRoads = new ArrayList<InRoad>();
         this.mapInRoads = new HashMap<>();
         this.OutRoads = new HashMap<>();
-        this.greenTrafficLightIndex = 0;
+        this.greenTrafficLightIndex = -1;
     }
 
 
@@ -46,8 +46,15 @@ import java.util.Map;
      @Override
      public void advance() throws EventException {
         if(!this.InRoads.isEmpty()){
-            this.InRoads.get(this.greenTrafficLightIndex).moveFirstVehicle();
-            this.updateTrafficLight();
+            if(this.greenTrafficLightIndex == -1){
+                this.greenTrafficLightIndex = 0;
+                this.InRoads.get(this.greenTrafficLightIndex).setTrafficLight(true);
+            }
+            else{
+                this.InRoads.get(this.greenTrafficLightIndex).moveFirstVehicle();
+                this.updateTrafficLight();
+
+            }
         }
      }
 

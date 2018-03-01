@@ -46,10 +46,15 @@ public class Vehicle extends SimulationObject {
     }
 
     public void setSpeedActual(int speedActual) {
-        if (speedActual > this.speedMax)
-            this.speedActual = this.speedMax;
-        else
-            this.speedActual = speedActual;
+        if(this.breakdownTime > 0)
+            this.speedActual = 0;
+        else{
+            if (speedActual > this.speedMax)
+                this.speedActual = this.speedMax;
+            else
+                this.speedActual = speedActual;
+        }
+
     }
 
     public void setBreakdownTime(int breakdownTime) {
@@ -57,6 +62,7 @@ public class Vehicle extends SimulationObject {
             this.breakdownTime += breakdownTime;
         else
             this.breakdownTime = breakdownTime;
+        this.speedActual = 0;
     }
 
     public void advance(){
@@ -125,7 +131,7 @@ public class Vehicle extends SimulationObject {
         is.setValue("speed", this.speedActual);
         is.setValue("kilometrage", this.kilometrage);
         is.setValue("faulty", this.breakdownTime );
-        is.setValue("location", this.destination ? "arrived" : this.roadActual + ":" + this.getLocationActual());
+        is.setValue("location", this.destination ? "arrived" : "(" + this.roadActual + "," + this.getLocationActual() + ")");
     }
 
     @Override

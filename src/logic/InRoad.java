@@ -42,8 +42,12 @@ public class InRoad {
     public String toString() {
         String s = "(" + this.road.getId() +","+ (this.trafficLight ? "green" : "red") + ",";
         s += "[";
-        for(Vehicle v : vehiclesQueue)
-            s += v.getId();
+        if(this.vehiclesQueue.size() > 0) {
+            s += this.vehiclesQueue.get(0).getId();
+            for (int i = 1; i < this.vehiclesQueue.size(); i++) {
+                s += "," + this.vehiclesQueue.get(i).getId();
+            }
+        }
         s += "])";
         return s;
     }

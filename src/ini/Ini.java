@@ -179,6 +179,9 @@ public class Ini {
 
 		for (int i = 0; i < this.getSections().size(); i++) {
 			if (!this.getSections().get(i).equals(other.getSections().get(i))) {
+				System.out.println(i);
+				System.out.println(this.getSections().get(i));
+				System.out.println(other.getSections().get(i));
 				return false;
 			}
 		}
