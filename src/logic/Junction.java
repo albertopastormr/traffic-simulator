@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
- public class Junction extends SimulationObject {
+ public class Junction extends GenericJunction {
     protected int greenTrafficLightIndex; // It carries the index of the inRoad which has its traffic Light set to green
 
     protected List<InRoad> InRoads;

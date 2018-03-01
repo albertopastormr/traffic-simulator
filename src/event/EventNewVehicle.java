@@ -3,6 +3,7 @@ package event;
 import error.EventException;
 import error.NewEventException;
 import error.RoadMapException;
+import logic.GenericJunction;
 import logic.Junction;
 import logic.RoadMap;
 import logic.Vehicle;
@@ -24,17 +25,20 @@ public class EventNewVehicle extends Event {
     @Override
     public void execute(RoadMap map) throws NewEventException, EventException, RoadMapException {
 
-        List<Junction> iti = RoadParser.JunctionListParse(this.itinerary,map);
+        List<GenericJunction<?>> iti = RoadParser.JunctionListParse(this.itinerary,map);
 
         if(iti == null || iti.size() < 2)
             throw new NewEventException("Itinerary for NewVehicle: " + this.id +" not valid\n");
         else{
-            Vehicle vehicle = new Vehicle(this.id, this.speedMax, iti);
-            map.addVehicle(this.id, vehicle);
+            map.addVehicle(this.id, this.createVehicle(iti));
         }
+    }
+
+    protected Vehicle createVehicle(List<GenericJunction<?>> itinerary) throws EventException {
+        return new Vehicle(this.id, this.speedMax, itinerary);
     }
     @Override
     public String toString() {
-        return time + id + speedMax + itinerary; // Por completar
+        return "New Vehicle"; // Por completar
     }
 }

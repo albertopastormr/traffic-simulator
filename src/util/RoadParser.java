@@ -1,7 +1,7 @@
 package util;
 
 import error.RoadMapException;
-import logic.Junction;
+import logic.GenericJunction;
 import logic.RoadMap;
 import logic.Vehicle;
 
@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoadParser {
-    public static List<Junction> JunctionListParse(String[] itinerary, RoadMap map) throws RoadMapException {
-        List<Junction> li = new ArrayList<>();
+    public static List<GenericJunction<?>> JunctionListParse(String[] itinerary, RoadMap map) throws RoadMapException {
+        List<GenericJunction<?> > li = new ArrayList<>();
         for(String s : itinerary){
             li.add(map.getJunction(s));
         }

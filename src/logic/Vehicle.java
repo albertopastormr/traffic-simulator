@@ -8,18 +8,18 @@ import java.util.List;
 
 public class Vehicle extends SimulationObject {
 
-    private int kilometrage;
-    private int speedMax;
-    private int speedActual;
-    private Road roadActual;
-    private int locationActual;
-    private List<Junction> itinerary;
-    private int breakdownTime;
-    private boolean destination;
-    private boolean isAtJunction;
+    protected int kilometrage;
+    protected int speedMax;
+    protected int speedActual;
+    protected Road roadActual;
+    protected int locationActual;
+    protected List<GenericJunction<?>> itinerary;
+    protected int breakdownTime;
+    protected boolean destination;
+    protected boolean isAtJunction;
 
 
-    public Vehicle(String id, int speedMax, List<Junction> itinerary) throws EventException {
+    public Vehicle(String id, int speedMax, List<GenericJunction<?>> itinerary) throws EventException {
         super(id);
         if(speedMax >= 0)
             this.speedMax = speedMax;
@@ -87,7 +87,7 @@ public class Vehicle extends SimulationObject {
           }
           else{
               int indexItineraryActualRoad = this.itinerary.indexOf(this.roadActual.destination);
-              Junction destinationJunctionOfNextRoad = this.itinerary.get(indexItineraryActualRoad + 1);
+              GenericJunction<?> destinationJunctionOfNextRoad = this.itinerary.get(indexItineraryActualRoad + 1);
               Road nextRoad = this.roadActual.destination.roadToJunction( destinationJunctionOfNextRoad );
 
               if(nextRoad != null){
@@ -105,8 +105,8 @@ public class Vehicle extends SimulationObject {
     }
 
     public void moveFirstRoad() throws EventException {
-        Junction origin = this.itinerary.get(0);
-        Junction destination = this.itinerary.get(1);
+        GenericJunction<?> origin = this.itinerary.get(0);
+        GenericJunction<?> destination = this.itinerary.get(1);
         Road firstRoad = origin.roadToJunction(destination);
         if(firstRoad != null){
             firstRoad.inVehicle(this);

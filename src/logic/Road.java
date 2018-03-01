@@ -11,13 +11,13 @@ public class Road  extends SimulationObject {
 
     protected int length;
     protected int speedMax;
-    protected Junction origin;
-    protected Junction destination;
+    protected GenericJunction<?> origin;
+    protected GenericJunction<?> destination;
     protected List<Vehicle> vehicles;
 
     protected Comparator<Vehicle> vehicleComparator;
 
-    public Road(String id,  int length, int maxSpeed, Junction source, Junction destination) {
+    public Road(String id,  int length, int maxSpeed, GenericJunction<?> source, GenericJunction<?> destination) {
         super(id);
         this.length = length;
         this.speedMax = maxSpeed;
@@ -91,7 +91,8 @@ public class Road  extends SimulationObject {
     }
 
     protected int calculateSpeed(){
-        return (this.speedMax <= (this.speedMax/ (this.vehicles.size() < 1 ? 1 : this.vehicles.size())) ?  this.speedMax : (this.speedMax/ (this.vehicles.size() < 1 ? 1 : this.vehicles.size())));
+        int newPossibleSpeed = (this.speedMax/ (this.vehicles.size() < 1 ? 1 : this.vehicles.size()));
+        return (this.speedMax <= newPossibleSpeed ?  this.speedMax : newPossibleSpeed);
     }
     protected int calculateMarkdownFactor(int obstacles){
         return (obstacles == 0 ? 1 : 2);

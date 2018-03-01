@@ -1,6 +1,7 @@
 package event;
 
 import error.RoadMapException;
+import logic.GenericJunction;
 import logic.Junction;
 import logic.RoadMap;
 import util.RoadParser;
@@ -16,9 +17,13 @@ public class EventNewJunction extends Event {
     }
     @Override
     public void execute(RoadMap map) throws RoadMapException {
-        Junction junction = new Junction(this.id);
-        map.addJunction(this.id, junction);
+        map.addJunction(this.id, this.createJunction());
     }
+
+    protected GenericJunction<?> createJunction(){
+        return new Junction(this.id);
+    }
+
     @Override
     public String toString() {
         return time + id; // Por completar

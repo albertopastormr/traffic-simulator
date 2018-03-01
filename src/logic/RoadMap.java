@@ -11,26 +11,26 @@ import java.util.Map;
 
 public class RoadMap {
     private List<Road> roads;
-    private List<Junction> junctions;
+    private List<GenericJunction<?>> junctions;
     private List<Vehicle> vehicles;
 
     // Structures for a easier search
     private Map<String, Road> roadMap;
-    private Map<String, Junction> junctionMap;
+    private Map<String, GenericJunction<?>> junctionMap;
     private Map<String, Vehicle> vehicleMap;
 
 
     public RoadMap() {
         this.roads = new ArrayList<Road>();
-        this.junctions = new ArrayList<Junction>();
+        this.junctions = new ArrayList<GenericJunction<?>>();
         this.vehicles = new ArrayList<Vehicle>();
 
         this.roadMap = new HashMap<String, Road>();
-        this.junctionMap = new HashMap<String, Junction>();
+        this.junctionMap = new HashMap<String, GenericJunction<?>>();
         this.vehicleMap = new HashMap<String, Vehicle>();
     }
 
-    public void addJunction(String idJunction, Junction junction) throws RoadMapException {
+    public void addJunction(String idJunction, GenericJunction<?> junction) throws RoadMapException {
         if(! junctionMap.containsKey(idJunction)){ // if junction doesn't exist , it inserts it in junctionMap
             this.junctions.add(junction);
             this.junctionMap.put(idJunction, junction);
@@ -49,7 +49,7 @@ public class RoadMap {
             throw new RoadMapException("The vehicle" + idVehicle + " found already exists in vehicleMap (duplicated vehicle)\n");
     }
 
-    public void addRoad(String idRoad, Junction origin, Road road, Junction destination) throws RoadMapException, EventException {
+    public void addRoad(String idRoad, GenericJunction<?> origin, Road road, GenericJunction<?> destination) throws RoadMapException, EventException {
         if(!roadMap.containsKey(idRoad)){
             this.roads.add(road);
             this.roadMap.put(idRoad, road);
@@ -63,7 +63,7 @@ public class RoadMap {
     public String generateReport(int time) {
         String report = "";
 
-        for(Junction j : junctions)
+        for(GenericJunction<?> j : junctions)
             report += j.generateReport(time);
         for(Road r : roads)
             report += r.generateReport(time);
@@ -76,14 +76,14 @@ public class RoadMap {
 
         for(Road r : roads) // Calls advance() for every road
             r.advance();
-        for (Junction j : junctions) // Calls advance() for every junction
+        for (GenericJunction<?> j : junctions) // Calls advance() for every junction
             j.advance();
 
     }
 
     // returns a junction searched by its id in the map
-    public Junction getJunction(String id) throws RoadMapException {
-        Junction junction = this.junctionMap.get(id);
+    public GenericJunction<?> getJunction(String id) throws RoadMapException {
+        GenericJunction<?> junction = this.junctionMap.get(id);
         if(junction != null)
             return junction;
         else
