@@ -16,7 +16,7 @@ public class EventConstructorNewFreeway extends EventConstructor {
     public Event parser(IniSection section) {
 
         if (!section.getTag().equals(this.tag) ||
-                section.getValue("type") != null) return null;
+                !section.getValue("type").equals("lanes")) return null;
         else
             return new EventNewFreeway(
                     // extrae el valor del campo “time” en la sección

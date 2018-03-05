@@ -142,7 +142,7 @@ public class Main {
 		
 		//Main.ParseaArgumentos(args);
 		//Main.iniciaModoEstandar();
-		Main.executeFiles("examples-out/basic");
+		Main.executeFiles("examples-out/advanced");
 	
 	}
 

@@ -13,9 +13,8 @@ public class Freeway extends Road {
 
     @Override
     public void completeSectionDetails(IniSection is) {
-        is.setValue("type", "lanes");
-        is.setValue("lanes", this.numLanes);
         super.completeSectionDetails(is);
+        is.setValue("type", "lanes");
     }
 
     @Override

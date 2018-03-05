@@ -88,7 +88,6 @@ public class Road  extends SimulationObject {
             v.advance();
         }
         this.vehicles.sort(this.vehicleComparator);
-
     }
 
     protected int calculateSpeed(){

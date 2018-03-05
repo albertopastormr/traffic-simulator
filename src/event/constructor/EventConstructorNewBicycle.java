@@ -16,7 +16,7 @@ public class EventConstructorNewBicycle extends EventConstructor {
     public Event parser(IniSection section) {
 
         if (!section.getTag().equals(this.tag) ||
-                section.getValue("type") != null) return null;
+                !section.getValue("type").equals("bike")) return null;
         else
             return new EventNewBicycle(
                     // extrae el valor del campo “time” en la sección

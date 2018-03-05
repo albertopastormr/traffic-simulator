@@ -16,7 +16,7 @@ public class EventConstructorNewPath extends EventConstructor {
     public Event parser(IniSection section) {
 
         if (!section.getTag().equals(this.tag) ||
-                section.getValue("type") != null) return null;
+                !section.getValue("type").equals("dirt")) return null;
         else
             return new EventNewPath(
                     // extrae el valor del campo “time” en la sección

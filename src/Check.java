@@ -44,7 +44,7 @@ public class Check {
 
 
 	public static void main(String[] args) throws IOException, InvocationTargetException, InterruptedException {
-		test("examples-out/basic");
+		test("examples-out/advanced");
 	}
 
 }

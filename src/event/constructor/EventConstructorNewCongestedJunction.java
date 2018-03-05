@@ -16,7 +16,7 @@ public class EventConstructorNewCongestedJunction extends EventConstructor {
     public Event parser(IniSection section) {
 
         if (!section.getTag().equals(this.tag) ||
-                section.getValue("type") != null) return null;
+                !section.getValue("type").equals("mc")) return null;
         else
             return new EventNewCongestedJunction(
                     // extrae el valor del campo “time” en la sección
