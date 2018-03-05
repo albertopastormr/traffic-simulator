@@ -1,10 +1,5 @@
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -112,6 +107,30 @@ public class Main {
 		System.out.println("Done!");
 	}
 
+	private static void executeFiles(String path) throws IOException {
+
+		File dir = new File(path);
+
+		if ( !dir.exists() ) {
+			throw new FileNotFoundException(path);
+		}
+
+		File[] files = dir.listFiles(new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String name) {
+				return name.endsWith(".ini");
+			}
+		});
+
+		for (File file : files) {
+			Main.ficheroEntrada = file.getAbsolutePath();
+			Main.ficheroSalida = file.getAbsolutePath() + ".out";
+			Main.timeLimit = 10;
+			Main.iniciaModoEstandar();
+		}
+
+	}
+
 	public static void main(String[] args) throws IOException {
 
 		// example command lines:
@@ -121,8 +140,9 @@ public class Main {
 		// --help
 		//
 		
-		Main.ParseaArgumentos(args);
-		Main.iniciaModoEstandar();
+		//Main.ParseaArgumentos(args);
+		//Main.iniciaModoEstandar();
+		Main.executeFiles("examples-out/basic");
 	
 	}
 
