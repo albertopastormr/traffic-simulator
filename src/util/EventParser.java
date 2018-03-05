@@ -10,7 +10,13 @@ public class EventParser {
             new EventConstructorNewJunction(),
             new EventConstructorNewRoad(),
             new EventConstructorNewVehicle(),
-            new EventConstructorBreakdown()
+            new EventConstructorBreakdown(),
+            new EventConstructorNewBicycle(),
+            new EventConstructorNewCar(),
+            new EventConstructorNewCongestedJunction(),
+            new EventConstructorNewFreeway(),
+            new EventConstructorNewPath(),
+            new EventConstructorNewRoundabout()
     };
 
 

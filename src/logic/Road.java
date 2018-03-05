@@ -91,7 +91,7 @@ public class Road  extends SimulationObject {
     }
 
     protected int calculateSpeed(){
-        int newPossibleSpeed = (this.speedMax/ (this.vehicles.size() < 1 ? 1 : this.vehicles.size()));
+        int newPossibleSpeed = (this.speedMax/ (this.vehicles.size() < 1 ? 1 : this.vehicles.size())) + 1;
         return (this.speedMax <= newPossibleSpeed ?  this.speedMax : newPossibleSpeed);
     }
     protected int calculateMarkdownFactor(int obstacles){

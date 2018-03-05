@@ -22,11 +22,11 @@ public class InRoad {
         this.trafficLight = colour;
     }
 
-    public void addVehicleToQueue(Vehicle vehicle){
+    void addVehicleToQueue(Vehicle vehicle){
         this.vehiclesQueue.add(vehicle);
     }
 
-    public void moveFirstVehicle() throws EventException {
+    void moveFirstVehicle() throws EventException {
         if(vehiclesQueue.size() > 0) {
             this.vehiclesQueue.get(0).moveNextRoad();
             this.vehiclesQueue.remove(0);

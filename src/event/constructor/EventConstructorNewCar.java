@@ -15,8 +15,8 @@ public class EventConstructorNewCar extends EventConstructor {
     @Override
     public Event parser(IniSection section) {
 
-        if (!section.getTag().equals(this.tag) ||
-                section.getValue("type") != null) return null;
+        if (!section.getTag().equals(this.tag) || section.getValue("type") != null)
+            return null;
         else
             return new EventNewCar(
                     // extrae el valor del campo “time” en la sección
