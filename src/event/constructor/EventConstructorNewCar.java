@@ -25,7 +25,11 @@ public class EventConstructorNewCar extends EventConstructor {
                     // extrae el valor del campo “id” de la sección
                     EventConstructor.validID(section, "id"),
                     EventConstructor.parseIntNoNegative(section, "max_speed", 0),
-                    section.getValue("itinerary").split(",") );
+                    section.getValue("itinerary").split(","),
+                    EventConstructor.parseIntNoNegative(section, "resistance", 0),
+                    Double.parseDouble(section.getValue("fault_probability")),
+                    EventConstructor.parseIntNoNegative(section, "max_fault_duration" , 0),
+                    Long.parseLong(section.getValue("seed")) );
     }
 
     @Override

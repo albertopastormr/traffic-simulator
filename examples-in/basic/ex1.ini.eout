@@ -28,7 +28,7 @@ queues = (r4,green,[])
 [road_report]
 id = r1
 time = 1
-vehicles = (v1,20),(v3,20)
+vehicles = (v1,20)
 
 [road_report]
 id = r2
@@ -38,7 +38,7 @@ vehicles =
 [road_report]
 id = r3
 time = 1
-vehicles = (v2,20),(v4,20)
+vehicles = (v2,11),(v3,11)
 
 [road_report]
 id = r4
@@ -56,26 +56,18 @@ location = (r1,20)
 [vehicle_report]
 id = v2
 time = 1
-speed = 20
-kilometrage = 20
+speed = 11
+kilometrage = 11
 faulty = 0
-location = (r3,20)
+location = (r3,11)
 
 [vehicle_report]
 id = v3
 time = 1
-speed = 20
-kilometrage = 20
+speed = 11
+kilometrage = 11
 faulty = 0
-location = (r1,20)
-
-[vehicle_report]
-id = v4
-time = 1
-speed = 20
-kilometrage = 20
-faulty = 0
-location = (r3,20)
+location = (r3,11)
 
 # ******* step 1 *******
 
@@ -107,7 +99,7 @@ queues = (r4,green,[])
 [road_report]
 id = r1
 time = 2
-vehicles = (v1,40),(v3,40)
+vehicles = (v1,40)
 
 [road_report]
 id = r2
@@ -117,7 +109,7 @@ vehicles =
 [road_report]
 id = r3
 time = 2
-vehicles = (v2,40),(v4,40)
+vehicles = (v2,22),(v3,22)
 
 [road_report]
 id = r4
@@ -135,26 +127,18 @@ location = (r1,40)
 [vehicle_report]
 id = v2
 time = 2
-speed = 20
-kilometrage = 40
+speed = 11
+kilometrage = 22
 faulty = 0
-location = (r3,40)
+location = (r3,22)
 
 [vehicle_report]
 id = v3
 time = 2
-speed = 20
-kilometrage = 40
+speed = 11
+kilometrage = 22
 faulty = 0
-location = (r1,40)
-
-[vehicle_report]
-id = v4
-time = 2
-speed = 20
-kilometrage = 40
-faulty = 0
-location = (r3,40)
+location = (r3,22)
 
 # ******* step 2 *******
 
@@ -166,7 +150,7 @@ queues =
 [junction_report]
 id = j2
 time = 3
-queues = (r1,green,[v1,v3]),(r3,red,[v4])
+queues = (r1,green,[]),(r3,red,[])
 
 [junction_report]
 id = j3
@@ -186,7 +170,7 @@ queues = (r4,green,[])
 [road_report]
 id = r1
 time = 3
-vehicles = (v1,50),(v3,50)
+vehicles = (v1,40)
 
 [road_report]
 id = r2
@@ -196,44 +180,36 @@ vehicles =
 [road_report]
 id = r3
 time = 3
-vehicles = (v4,50)
+vehicles = (v2,33),(v3,33)
 
 [road_report]
 id = r4
 time = 3
-vehicles = (v2,0)
+vehicles = 
 
 [vehicle_report]
 id = v1
 time = 3
-speed = 20
-kilometrage = 50
-faulty = 0
-location = (r1,50)
+speed = 0
+kilometrage = 40
+faulty = 2
+location = (r1,40)
 
 [vehicle_report]
 id = v2
 time = 3
-speed = 20
-kilometrage = 50
+speed = 11
+kilometrage = 33
 faulty = 0
-location = (r4,0)
+location = (r3,33)
 
 [vehicle_report]
 id = v3
 time = 3
-speed = 20
-kilometrage = 50
+speed = 11
+kilometrage = 33
 faulty = 0
-location = (r1,50)
-
-[vehicle_report]
-id = v4
-time = 3
-speed = 20
-kilometrage = 50
-faulty = 0
-location = (r3,50)
+location = (r3,33)
 
 # ******* step 3 *******
 
@@ -245,7 +221,7 @@ queues =
 [junction_report]
 id = j2
 time = 4
-queues = (r1,red,[v3]),(r3,green,[v4])
+queues = (r1,red,[]),(r3,green,[])
 
 [junction_report]
 id = j3
@@ -265,54 +241,46 @@ queues = (r4,green,[])
 [road_report]
 id = r1
 time = 4
-vehicles = (v3,50)
+vehicles = (v1,40)
 
 [road_report]
 id = r2
 time = 4
-vehicles = (v1,0)
+vehicles = 
 
 [road_report]
 id = r3
 time = 4
-vehicles = (v4,50)
+vehicles = (v2,44),(v3,44)
 
 [road_report]
 id = r4
 time = 4
-vehicles = (v2,20)
+vehicles = 
 
 [vehicle_report]
 id = v1
 time = 4
-speed = 20
-kilometrage = 50
-faulty = 0
-location = (r2,0)
+speed = 0
+kilometrage = 40
+faulty = 1
+location = (r1,40)
 
 [vehicle_report]
 id = v2
 time = 4
-speed = 20
-kilometrage = 70
+speed = 11
+kilometrage = 44
 faulty = 0
-location = (r4,20)
+location = (r3,44)
 
 [vehicle_report]
 id = v3
 time = 4
-speed = 20
-kilometrage = 50
+speed = 11
+kilometrage = 44
 faulty = 0
-location = (r1,50)
-
-[vehicle_report]
-id = v4
-time = 4
-speed = 20
-kilometrage = 50
-faulty = 0
-location = (r3,50)
+location = (r3,44)
 
 # ******* step 4 *******
 
@@ -324,7 +292,7 @@ queues =
 [junction_report]
 id = j2
 time = 5
-queues = (r1,green,[v3]),(r3,red,[])
+queues = (r1,green,[]),(r3,red,[])
 
 [junction_report]
 id = j3
@@ -344,54 +312,46 @@ queues = (r4,green,[])
 [road_report]
 id = r1
 time = 5
-vehicles = (v3,50)
+vehicles = (v1,40)
 
 [road_report]
 id = r2
 time = 5
-vehicles = (v1,20)
+vehicles = 
 
 [road_report]
 id = r3
 time = 5
-vehicles = 
+vehicles = (v2,55),(v3,55)
 
 [road_report]
 id = r4
 time = 5
-vehicles = (v2,40),(v4,0)
+vehicles = 
 
 [vehicle_report]
 id = v1
 time = 5
-speed = 20
-kilometrage = 70
+speed = 0
+kilometrage = 40
 faulty = 0
-location = (r2,20)
+location = (r1,40)
 
 [vehicle_report]
 id = v2
 time = 5
-speed = 20
-kilometrage = 90
+speed = 11
+kilometrage = 55
 faulty = 0
-location = (r4,40)
+location = (r3,55)
 
 [vehicle_report]
 id = v3
 time = 5
-speed = 20
-kilometrage = 50
+speed = 11
+kilometrage = 55
 faulty = 0
-location = (r1,50)
-
-[vehicle_report]
-id = v4
-time = 5
-speed = 20
-kilometrage = 50
-faulty = 0
-location = (r4,0)
+location = (r3,55)
 
 # ******* step 5 *******
 
@@ -423,54 +383,46 @@ queues = (r4,green,[])
 [road_report]
 id = r1
 time = 6
-vehicles = 
+vehicles = (v1,60)
 
 [road_report]
 id = r2
 time = 6
-vehicles = (v1,40),(v3,0)
+vehicles = 
 
 [road_report]
 id = r3
 time = 6
-vehicles = 
+vehicles = (v2,66),(v3,66)
 
 [road_report]
 id = r4
 time = 6
-vehicles = (v4,20)
+vehicles = 
 
 [vehicle_report]
 id = v1
 time = 6
 speed = 20
-kilometrage = 90
+kilometrage = 60
 faulty = 0
-location = (r2,40)
+location = (r1,60)
 
 [vehicle_report]
 id = v2
 time = 6
-speed = 0
-kilometrage = 100
+speed = 11
+kilometrage = 66
 faulty = 0
-location = arrived
+location = (r3,66)
 
 [vehicle_report]
 id = v3
 time = 6
-speed = 20
-kilometrage = 50
+speed = 11
+kilometrage = 66
 faulty = 0
-location = (r2,0)
-
-[vehicle_report]
-id = v4
-time = 6
-speed = 20
-kilometrage = 70
-faulty = 0
-location = (r4,20)
+location = (r3,66)
 
 # ******* step 6 *******
 
@@ -502,54 +454,46 @@ queues = (r4,green,[])
 [road_report]
 id = r1
 time = 7
-vehicles = 
+vehicles = (v1,80)
 
 [road_report]
 id = r2
 time = 7
-vehicles = (v3,20)
+vehicles = 
 
 [road_report]
 id = r3
 time = 7
-vehicles = 
+vehicles = (v2,77),(v3,77)
 
 [road_report]
 id = r4
 time = 7
-vehicles = (v4,40)
+vehicles = 
 
 [vehicle_report]
 id = v1
 time = 7
-speed = 0
-kilometrage = 100
+speed = 20
+kilometrage = 80
 faulty = 0
-location = arrived
+location = (r1,80)
 
 [vehicle_report]
 id = v2
 time = 7
-speed = 0
-kilometrage = 100
+speed = 11
+kilometrage = 77
 faulty = 0
-location = arrived
+location = (r3,77)
 
 [vehicle_report]
 id = v3
 time = 7
-speed = 20
-kilometrage = 70
+speed = 11
+kilometrage = 77
 faulty = 0
-location = (r2,20)
-
-[vehicle_report]
-id = v4
-time = 7
-speed = 20
-kilometrage = 90
-faulty = 0
-location = (r4,40)
+location = (r3,77)
 
 # ******* step 7 *******
 
@@ -586,12 +530,12 @@ vehicles =
 [road_report]
 id = r2
 time = 8
-vehicles = (v3,40)
+vehicles = (v1,0)
 
 [road_report]
 id = r3
 time = 8
-vehicles = 
+vehicles = (v2,88),(v3,88)
 
 [road_report]
 id = r4
@@ -601,34 +545,26 @@ vehicles =
 [vehicle_report]
 id = v1
 time = 8
-speed = 0
+speed = 20
 kilometrage = 100
 faulty = 0
-location = arrived
+location = (r2,0)
 
 [vehicle_report]
 id = v2
 time = 8
-speed = 0
-kilometrage = 100
+speed = 11
+kilometrage = 88
 faulty = 0
-location = arrived
+location = (r3,88)
 
 [vehicle_report]
 id = v3
 time = 8
-speed = 20
-kilometrage = 90
+speed = 11
+kilometrage = 88
 faulty = 0
-location = (r2,40)
-
-[vehicle_report]
-id = v4
-time = 8
-speed = 0
-kilometrage = 100
-faulty = 0
-location = arrived
+location = (r3,88)
 
 # ******* step 8 *******
 
@@ -665,12 +601,12 @@ vehicles =
 [road_report]
 id = r2
 time = 9
-vehicles = 
+vehicles = (v1,20)
 
 [road_report]
 id = r3
 time = 9
-vehicles = 
+vehicles = (v2,99),(v3,99)
 
 [road_report]
 id = r4
@@ -680,34 +616,26 @@ vehicles =
 [vehicle_report]
 id = v1
 time = 9
-speed = 0
-kilometrage = 100
+speed = 20
+kilometrage = 120
 faulty = 0
-location = arrived
+location = (r2,20)
 
 [vehicle_report]
 id = v2
 time = 9
-speed = 0
-kilometrage = 100
+speed = 11
+kilometrage = 99
 faulty = 0
-location = arrived
+location = (r3,99)
 
 [vehicle_report]
 id = v3
 time = 9
-speed = 0
-kilometrage = 100
+speed = 11
+kilometrage = 99
 faulty = 0
-location = arrived
-
-[vehicle_report]
-id = v4
-time = 9
-speed = 0
-kilometrage = 100
-faulty = 0
-location = arrived
+location = (r3,99)
 
 # ******* step 9 *******
 
@@ -719,7 +647,7 @@ queues =
 [junction_report]
 id = j2
 time = 10
-queues = (r1,red,[]),(r3,green,[])
+queues = (r1,red,[]),(r3,green,[v2,v3])
 
 [junction_report]
 id = j3
@@ -744,12 +672,12 @@ vehicles =
 [road_report]
 id = r2
 time = 10
-vehicles = 
+vehicles = (v1,40)
 
 [road_report]
 id = r3
 time = 10
-vehicles = 
+vehicles = (v2,100),(v3,100)
 
 [road_report]
 id = r4
@@ -759,32 +687,24 @@ vehicles =
 [vehicle_report]
 id = v1
 time = 10
-speed = 0
-kilometrage = 100
+speed = 20
+kilometrage = 140
 faulty = 0
-location = arrived
+location = (r2,40)
 
 [vehicle_report]
 id = v2
 time = 10
-speed = 0
+speed = 11
 kilometrage = 100
 faulty = 0
-location = arrived
+location = (r3,100)
 
 [vehicle_report]
 id = v3
 time = 10
-speed = 0
+speed = 11
 kilometrage = 100
 faulty = 0
-location = arrived
-
-[vehicle_report]
-id = v4
-time = 10
-speed = 0
-kilometrage = 100
-faulty = 0
-location = arrived
+location = (r3,100)
 

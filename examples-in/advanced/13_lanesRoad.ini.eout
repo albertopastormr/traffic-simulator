@@ -8,12 +8,13 @@ queues =
 [junction_report]
 id = j2
 time = 1
-queues = (r1,green,[])
+queues = (lanes1,green,[])
 
 [road_report]
-id = r1
+id = lanes1
 time = 1
 vehicles = (v1,11),(v2,11)
+type = lanes
 
 [vehicle_report]
 id = v1
@@ -21,7 +22,7 @@ time = 1
 speed = 11
 kilometrage = 11
 faulty = 0
-location = (r1,11)
+location = (lanes1,11)
 
 [vehicle_report]
 id = v2
@@ -29,7 +30,7 @@ time = 1
 speed = 11
 kilometrage = 11
 faulty = 0
-location = (r1,11)
+location = (lanes1,11)
 
 # ******* step 1 *******
 
@@ -41,12 +42,13 @@ queues =
 [junction_report]
 id = j2
 time = 2
-queues = (r1,green,[])
+queues = (lanes1,green,[])
 
 [road_report]
-id = r1
+id = lanes1
 time = 2
 vehicles = (v1,22),(v2,22)
+type = lanes
 
 [vehicle_report]
 id = v1
@@ -54,7 +56,7 @@ time = 2
 speed = 11
 kilometrage = 22
 faulty = 0
-location = (r1,22)
+location = (lanes1,22)
 
 [vehicle_report]
 id = v2
@@ -62,7 +64,7 @@ time = 2
 speed = 11
 kilometrage = 22
 faulty = 0
-location = (r1,22)
+location = (lanes1,22)
 
 # ******* step 2 *******
 
@@ -74,28 +76,29 @@ queues =
 [junction_report]
 id = j2
 time = 3
-queues = (r1,green,[])
+queues = (lanes1,green,[])
 
 [road_report]
-id = r1
+id = lanes1
 time = 3
-vehicles = (v2,27),(v1,22)
+vehicles = (v1,33),(v2,33)
+type = lanes
 
 [vehicle_report]
 id = v1
 time = 3
-speed = 0
-kilometrage = 22
-faulty = 2
-location = (r1,22)
+speed = 11
+kilometrage = 33
+faulty = 0
+location = (lanes1,33)
 
 [vehicle_report]
 id = v2
 time = 3
-speed = 5
-kilometrage = 27
+speed = 11
+kilometrage = 33
 faulty = 0
-location = (r1,27)
+location = (lanes1,33)
 
 # ******* step 3 *******
 
@@ -107,28 +110,29 @@ queues =
 [junction_report]
 id = j2
 time = 4
-queues = (r1,green,[])
+queues = (lanes1,green,[])
 
 [road_report]
-id = r1
+id = lanes1
 time = 4
-vehicles = (v2,38),(v1,22)
+vehicles = (v1,44),(v2,44)
+type = lanes
 
 [vehicle_report]
 id = v1
 time = 4
-speed = 0
-kilometrage = 22
-faulty = 1
-location = (r1,22)
+speed = 11
+kilometrage = 44
+faulty = 0
+location = (lanes1,44)
 
 [vehicle_report]
 id = v2
 time = 4
 speed = 11
-kilometrage = 38
+kilometrage = 44
 faulty = 0
-location = (r1,38)
+location = (lanes1,44)
 
 # ******* step 4 *******
 
@@ -140,28 +144,29 @@ queues =
 [junction_report]
 id = j2
 time = 5
-queues = (r1,green,[])
+queues = (lanes1,green,[])
 
 [road_report]
-id = r1
+id = lanes1
 time = 5
-vehicles = (v2,49),(v1,22)
+vehicles = (v1,55),(v2,55)
+type = lanes
 
 [vehicle_report]
 id = v1
 time = 5
-speed = 0
-kilometrage = 22
+speed = 11
+kilometrage = 55
 faulty = 0
-location = (r1,22)
+location = (lanes1,55)
 
 [vehicle_report]
 id = v2
 time = 5
 speed = 11
-kilometrage = 49
+kilometrage = 55
 faulty = 0
-location = (r1,49)
+location = (lanes1,55)
 
 # ******* step 5 *******
 
@@ -173,28 +178,29 @@ queues =
 [junction_report]
 id = j2
 time = 6
-queues = (r1,green,[])
+queues = (lanes1,green,[])
 
 [road_report]
-id = r1
+id = lanes1
 time = 6
-vehicles = (v2,60),(v1,33)
+vehicles = (v1,66),(v2,66)
+type = lanes
 
 [vehicle_report]
 id = v1
 time = 6
 speed = 11
-kilometrage = 33
+kilometrage = 66
 faulty = 0
-location = (r1,33)
+location = (lanes1,66)
 
 [vehicle_report]
 id = v2
 time = 6
 speed = 11
-kilometrage = 60
+kilometrage = 66
 faulty = 0
-location = (r1,60)
+location = (lanes1,66)
 
 # ******* step 6 *******
 
@@ -206,28 +212,29 @@ queues =
 [junction_report]
 id = j2
 time = 7
-queues = (r1,green,[])
+queues = (lanes1,green,[])
 
 [road_report]
-id = r1
+id = lanes1
 time = 7
-vehicles = (v2,71),(v1,44)
+vehicles = (v1,77),(v2,77)
+type = lanes
 
 [vehicle_report]
 id = v1
 time = 7
 speed = 11
-kilometrage = 44
+kilometrage = 77
 faulty = 0
-location = (r1,44)
+location = (lanes1,77)
 
 [vehicle_report]
 id = v2
 time = 7
 speed = 11
-kilometrage = 71
+kilometrage = 77
 faulty = 0
-location = (r1,71)
+location = (lanes1,77)
 
 # ******* step 7 *******
 
@@ -239,28 +246,29 @@ queues =
 [junction_report]
 id = j2
 time = 8
-queues = (r1,green,[])
+queues = (lanes1,green,[])
 
 [road_report]
-id = r1
+id = lanes1
 time = 8
-vehicles = (v2,82),(v1,55)
+vehicles = (v1,88),(v2,88)
+type = lanes
 
 [vehicle_report]
 id = v1
 time = 8
 speed = 11
-kilometrage = 55
+kilometrage = 88
 faulty = 0
-location = (r1,55)
+location = (lanes1,88)
 
 [vehicle_report]
 id = v2
 time = 8
 speed = 11
-kilometrage = 82
+kilometrage = 88
 faulty = 0
-location = (r1,82)
+location = (lanes1,88)
 
 # ******* step 8 *******
 
@@ -272,28 +280,29 @@ queues =
 [junction_report]
 id = j2
 time = 9
-queues = (r1,green,[])
+queues = (lanes1,green,[])
 
 [road_report]
-id = r1
+id = lanes1
 time = 9
-vehicles = (v2,93),(v1,66)
+vehicles = (v1,99),(v2,99)
+type = lanes
 
 [vehicle_report]
 id = v1
 time = 9
 speed = 11
-kilometrage = 66
+kilometrage = 99
 faulty = 0
-location = (r1,66)
+location = (lanes1,99)
 
 [vehicle_report]
 id = v2
 time = 9
 speed = 11
-kilometrage = 93
+kilometrage = 99
 faulty = 0
-location = (r1,93)
+location = (lanes1,99)
 
 # ******* step 9 *******
 
@@ -305,26 +314,27 @@ queues =
 [junction_report]
 id = j2
 time = 10
-queues = (r1,green,[])
+queues = (lanes1,green,[v2])
 
 [road_report]
-id = r1
+id = lanes1
 time = 10
-vehicles = (v1,77)
+vehicles = (v2,100)
+type = lanes
 
 [vehicle_report]
 id = v1
-time = 10
-speed = 11
-kilometrage = 77
-faulty = 0
-location = (r1,77)
-
-[vehicle_report]
-id = v2
 time = 10
 speed = 0
 kilometrage = 100
 faulty = 0
 location = arrived
+
+[vehicle_report]
+id = v2
+time = 10
+speed = 11
+kilometrage = 100
+faulty = 0
+location = (lanes1,100)
 

@@ -1,0 +1,430 @@
+# ******* step 0 *******
+
+[junction_report]
+id = j2
+time = 1
+queues = (r3,green,[])
+
+[junction_report]
+id = j4
+time = 1
+queues = 
+
+[junction_report]
+id = j5
+time = 1
+queues = (r4,green,[])
+
+[road_report]
+id = r3
+time = 1
+vehicles = (v2,20),(v4,20)
+
+[road_report]
+id = r4
+time = 1
+vehicles = 
+
+[vehicle_report]
+id = v2
+time = 1
+speed = 20
+kilometrage = 20
+faulty = 0
+location = (r3,20)
+
+[vehicle_report]
+id = v4
+time = 1
+speed = 20
+kilometrage = 20
+faulty = 0
+location = (r3,20)
+
+# ******* step 1 *******
+
+[junction_report]
+id = j2
+time = 2
+queues = (r3,green,[])
+
+[junction_report]
+id = j4
+time = 2
+queues = 
+
+[junction_report]
+id = j5
+time = 2
+queues = (r4,green,[])
+
+[road_report]
+id = r3
+time = 2
+vehicles = (v2,40),(v4,40)
+
+[road_report]
+id = r4
+time = 2
+vehicles = 
+
+[vehicle_report]
+id = v2
+time = 2
+speed = 20
+kilometrage = 40
+faulty = 0
+location = (r3,40)
+
+[vehicle_report]
+id = v4
+time = 2
+speed = 20
+kilometrage = 40
+faulty = 0
+location = (r3,40)
+
+# ******* step 2 *******
+
+[junction_report]
+id = j2
+time = 3
+queues = (r3,green,[v4])
+
+[junction_report]
+id = j4
+time = 3
+queues = 
+
+[junction_report]
+id = j5
+time = 3
+queues = (r4,green,[])
+
+[road_report]
+id = r3
+time = 3
+vehicles = (v4,50)
+
+[road_report]
+id = r4
+time = 3
+vehicles = (v2,0)
+
+[vehicle_report]
+id = v2
+time = 3
+speed = 20
+kilometrage = 50
+faulty = 0
+location = (r4,0)
+
+[vehicle_report]
+id = v4
+time = 3
+speed = 20
+kilometrage = 50
+faulty = 0
+location = (r3,50)
+
+# ******* step 3 *******
+
+[junction_report]
+id = j2
+time = 4
+queues = (r3,green,[])
+
+[junction_report]
+id = j4
+time = 4
+queues = 
+
+[junction_report]
+id = j5
+time = 4
+queues = (r4,green,[])
+
+[road_report]
+id = r3
+time = 4
+vehicles = 
+
+[road_report]
+id = r4
+time = 4
+vehicles = (v2,20),(v4,0)
+
+[vehicle_report]
+id = v2
+time = 4
+speed = 20
+kilometrage = 70
+faulty = 0
+location = (r4,20)
+
+[vehicle_report]
+id = v4
+time = 4
+speed = 20
+kilometrage = 50
+faulty = 0
+location = (r4,0)
+
+# ******* step 4 *******
+
+[junction_report]
+id = j2
+time = 5
+queues = (r3,green,[])
+
+[junction_report]
+id = j4
+time = 5
+queues = 
+
+[junction_report]
+id = j5
+time = 5
+queues = (r4,green,[])
+
+[road_report]
+id = r3
+time = 5
+vehicles = 
+
+[road_report]
+id = r4
+time = 5
+vehicles = (v2,40),(v4,20)
+
+[vehicle_report]
+id = v2
+time = 5
+speed = 20
+kilometrage = 90
+faulty = 0
+location = (r4,40)
+
+[vehicle_report]
+id = v4
+time = 5
+speed = 20
+kilometrage = 70
+faulty = 0
+location = (r4,20)
+
+# ******* step 5 *******
+
+[junction_report]
+id = j2
+time = 6
+queues = (r3,green,[])
+
+[junction_report]
+id = j4
+time = 6
+queues = 
+
+[junction_report]
+id = j5
+time = 6
+queues = (r4,green,[])
+
+[road_report]
+id = r3
+time = 6
+vehicles = 
+
+[road_report]
+id = r4
+time = 6
+vehicles = (v4,40)
+
+[vehicle_report]
+id = v2
+time = 6
+speed = 0
+kilometrage = 100
+faulty = 0
+location = arrived
+
+[vehicle_report]
+id = v4
+time = 6
+speed = 20
+kilometrage = 90
+faulty = 0
+location = (r4,40)
+
+# ******* step 6 *******
+
+[junction_report]
+id = j2
+time = 7
+queues = (r3,green,[])
+
+[junction_report]
+id = j4
+time = 7
+queues = 
+
+[junction_report]
+id = j5
+time = 7
+queues = (r4,green,[])
+
+[road_report]
+id = r3
+time = 7
+vehicles = 
+
+[road_report]
+id = r4
+time = 7
+vehicles = 
+
+[vehicle_report]
+id = v2
+time = 7
+speed = 0
+kilometrage = 100
+faulty = 0
+location = arrived
+
+[vehicle_report]
+id = v4
+time = 7
+speed = 0
+kilometrage = 100
+faulty = 0
+location = arrived
+
+# ******* step 7 *******
+
+[junction_report]
+id = j2
+time = 8
+queues = (r3,green,[])
+
+[junction_report]
+id = j4
+time = 8
+queues = 
+
+[junction_report]
+id = j5
+time = 8
+queues = (r4,green,[])
+
+[road_report]
+id = r3
+time = 8
+vehicles = 
+
+[road_report]
+id = r4
+time = 8
+vehicles = 
+
+[vehicle_report]
+id = v2
+time = 8
+speed = 0
+kilometrage = 100
+faulty = 0
+location = arrived
+
+[vehicle_report]
+id = v4
+time = 8
+speed = 0
+kilometrage = 100
+faulty = 0
+location = arrived
+
+# ******* step 8 *******
+
+[junction_report]
+id = j2
+time = 9
+queues = (r3,green,[])
+
+[junction_report]
+id = j4
+time = 9
+queues = 
+
+[junction_report]
+id = j5
+time = 9
+queues = (r4,green,[])
+
+[road_report]
+id = r3
+time = 9
+vehicles = 
+
+[road_report]
+id = r4
+time = 9
+vehicles = 
+
+[vehicle_report]
+id = v2
+time = 9
+speed = 0
+kilometrage = 100
+faulty = 0
+location = arrived
+
+[vehicle_report]
+id = v4
+time = 9
+speed = 0
+kilometrage = 100
+faulty = 0
+location = arrived
+
+# ******* step 9 *******
+
+[junction_report]
+id = j2
+time = 10
+queues = (r3,green,[])
+
+[junction_report]
+id = j4
+time = 10
+queues = 
+
+[junction_report]
+id = j5
+time = 10
+queues = (r4,green,[])
+
+[road_report]
+id = r3
+time = 10
+vehicles = 
+
+[road_report]
+id = r4
+time = 10
+vehicles = 
+
+[vehicle_report]
+id = v2
+time = 10
+speed = 0
+kilometrage = 100
+faulty = 0
+location = arrived
+
+[vehicle_report]
+id = v4
+time = 10
+speed = 0
+kilometrage = 100
+faulty = 0
+location = arrived
+
