@@ -38,7 +38,11 @@ vehicles =
 [road_report]
 id = r3
 time = 1
+<<<<<<< HEAD
 vehicles = (v2,11),(v3,11)
+=======
+vehicles = (v2,10),(v3,10)
+>>>>>>> master
 
 [road_report]
 id = r4
@@ -56,18 +60,32 @@ location = (r1,20)
 [vehicle_report]
 id = v2
 time = 1
+<<<<<<< HEAD
 speed = 11
 kilometrage = 11
 faulty = 0
 location = (r3,11)
+=======
+speed = 10
+kilometrage = 10
+faulty = 0
+location = (r3,10)
+>>>>>>> master
 
 [vehicle_report]
 id = v3
 time = 1
+<<<<<<< HEAD
 speed = 11
 kilometrage = 11
 faulty = 0
 location = (r3,11)
+=======
+speed = 10
+kilometrage = 10
+faulty = 0
+location = (r3,10)
+>>>>>>> master
 
 # ******* step 1 *******
 
@@ -109,7 +127,11 @@ vehicles =
 [road_report]
 id = r3
 time = 2
+<<<<<<< HEAD
 vehicles = (v2,22),(v3,22)
+=======
+vehicles = (v2,20),(v3,20)
+>>>>>>> master
 
 [road_report]
 id = r4
@@ -127,18 +149,32 @@ location = (r1,40)
 [vehicle_report]
 id = v2
 time = 2
+<<<<<<< HEAD
 speed = 11
 kilometrage = 22
 faulty = 0
 location = (r3,22)
+=======
+speed = 10
+kilometrage = 20
+faulty = 0
+location = (r3,20)
+>>>>>>> master
 
 [vehicle_report]
 id = v3
 time = 2
+<<<<<<< HEAD
 speed = 11
 kilometrage = 22
 faulty = 0
 location = (r3,22)
+=======
+speed = 10
+kilometrage = 20
+faulty = 0
+location = (r3,20)
+>>>>>>> master
 
 # ******* step 2 *******
 
@@ -180,7 +216,11 @@ vehicles =
 [road_report]
 id = r3
 time = 3
+<<<<<<< HEAD
 vehicles = (v2,33),(v3,33)
+=======
+vehicles = (v2,30),(v3,30)
+>>>>>>> master
 
 [road_report]
 id = r4
@@ -198,18 +238,32 @@ location = (r1,40)
 [vehicle_report]
 id = v2
 time = 3
+<<<<<<< HEAD
 speed = 11
 kilometrage = 33
 faulty = 0
 location = (r3,33)
+=======
+speed = 10
+kilometrage = 30
+faulty = 0
+location = (r3,30)
+>>>>>>> master
 
 [vehicle_report]
 id = v3
 time = 3
+<<<<<<< HEAD
 speed = 11
 kilometrage = 33
 faulty = 0
 location = (r3,33)
+=======
+speed = 10
+kilometrage = 30
+faulty = 0
+location = (r3,30)
+>>>>>>> master
 
 # ******* step 3 *******
 
@@ -251,7 +305,11 @@ vehicles =
 [road_report]
 id = r3
 time = 4
+<<<<<<< HEAD
 vehicles = (v2,44),(v3,44)
+=======
+vehicles = (v2,40),(v3,40)
+>>>>>>> master
 
 [road_report]
 id = r4
@@ -269,18 +327,32 @@ location = (r1,40)
 [vehicle_report]
 id = v2
 time = 4
+<<<<<<< HEAD
 speed = 11
 kilometrage = 44
 faulty = 0
 location = (r3,44)
+=======
+speed = 10
+kilometrage = 40
+faulty = 0
+location = (r3,40)
+>>>>>>> master
 
 [vehicle_report]
 id = v3
 time = 4
+<<<<<<< HEAD
 speed = 11
 kilometrage = 44
 faulty = 0
 location = (r3,44)
+=======
+speed = 10
+kilometrage = 40
+faulty = 0
+location = (r3,40)
+>>>>>>> master
 
 # ******* step 4 *******
 
@@ -322,7 +394,11 @@ vehicles =
 [road_report]
 id = r3
 time = 5
+<<<<<<< HEAD
 vehicles = (v2,55),(v3,55)
+=======
+vehicles = (v2,50),(v3,50)
+>>>>>>> master
 
 [road_report]
 id = r4
@@ -340,18 +416,32 @@ location = (r1,40)
 [vehicle_report]
 id = v2
 time = 5
+<<<<<<< HEAD
 speed = 11
 kilometrage = 55
 faulty = 0
 location = (r3,55)
+=======
+speed = 10
+kilometrage = 50
+faulty = 0
+location = (r3,50)
+>>>>>>> master
 
 [vehicle_report]
 id = v3
 time = 5
+<<<<<<< HEAD
 speed = 11
 kilometrage = 55
 faulty = 0
 location = (r3,55)
+=======
+speed = 10
+kilometrage = 50
+faulty = 0
+location = (r3,50)
+>>>>>>> master
 
 # ******* step 5 *******
 
@@ -393,7 +483,11 @@ vehicles =
 [road_report]
 id = r3
 time = 6
+<<<<<<< HEAD
 vehicles = (v2,66),(v3,66)
+=======
+vehicles = (v2,60),(v3,60)
+>>>>>>> master
 
 [road_report]
 id = r4
@@ -411,18 +505,32 @@ location = (r1,60)
 [vehicle_report]
 id = v2
 time = 6
+<<<<<<< HEAD
 speed = 11
 kilometrage = 66
 faulty = 0
 location = (r3,66)
+=======
+speed = 10
+kilometrage = 60
+faulty = 0
+location = (r3,60)
+>>>>>>> master
 
 [vehicle_report]
 id = v3
 time = 6
+<<<<<<< HEAD
 speed = 11
 kilometrage = 66
 faulty = 0
 location = (r3,66)
+=======
+speed = 10
+kilometrage = 60
+faulty = 0
+location = (r3,60)
+>>>>>>> master
 
 # ******* step 6 *******
 
@@ -464,7 +572,11 @@ vehicles =
 [road_report]
 id = r3
 time = 7
+<<<<<<< HEAD
 vehicles = (v2,77),(v3,77)
+=======
+vehicles = (v2,70),(v3,70)
+>>>>>>> master
 
 [road_report]
 id = r4
@@ -482,18 +594,32 @@ location = (r1,80)
 [vehicle_report]
 id = v2
 time = 7
+<<<<<<< HEAD
 speed = 11
 kilometrage = 77
 faulty = 0
 location = (r3,77)
+=======
+speed = 10
+kilometrage = 70
+faulty = 0
+location = (r3,70)
+>>>>>>> master
 
 [vehicle_report]
 id = v3
 time = 7
+<<<<<<< HEAD
 speed = 11
 kilometrage = 77
 faulty = 0
 location = (r3,77)
+=======
+speed = 10
+kilometrage = 70
+faulty = 0
+location = (r3,70)
+>>>>>>> master
 
 # ******* step 7 *******
 
@@ -535,7 +661,11 @@ vehicles = (v1,0)
 [road_report]
 id = r3
 time = 8
+<<<<<<< HEAD
 vehicles = (v2,88),(v3,88)
+=======
+vehicles = (v2,80),(v3,80)
+>>>>>>> master
 
 [road_report]
 id = r4
@@ -553,18 +683,32 @@ location = (r2,0)
 [vehicle_report]
 id = v2
 time = 8
+<<<<<<< HEAD
 speed = 11
 kilometrage = 88
 faulty = 0
 location = (r3,88)
+=======
+speed = 10
+kilometrage = 80
+faulty = 0
+location = (r3,80)
+>>>>>>> master
 
 [vehicle_report]
 id = v3
 time = 8
+<<<<<<< HEAD
 speed = 11
 kilometrage = 88
 faulty = 0
 location = (r3,88)
+=======
+speed = 10
+kilometrage = 80
+faulty = 0
+location = (r3,80)
+>>>>>>> master
 
 # ******* step 8 *******
 
@@ -606,7 +750,11 @@ vehicles = (v1,20)
 [road_report]
 id = r3
 time = 9
+<<<<<<< HEAD
 vehicles = (v2,99),(v3,99)
+=======
+vehicles = (v2,90),(v3,90)
+>>>>>>> master
 
 [road_report]
 id = r4
@@ -624,18 +772,32 @@ location = (r2,20)
 [vehicle_report]
 id = v2
 time = 9
+<<<<<<< HEAD
 speed = 11
 kilometrage = 99
 faulty = 0
 location = (r3,99)
+=======
+speed = 10
+kilometrage = 90
+faulty = 0
+location = (r3,90)
+>>>>>>> master
 
 [vehicle_report]
 id = v3
 time = 9
+<<<<<<< HEAD
 speed = 11
 kilometrage = 99
 faulty = 0
 location = (r3,99)
+=======
+speed = 10
+kilometrage = 90
+faulty = 0
+location = (r3,90)
+>>>>>>> master
 
 # ******* step 9 *******
 
@@ -695,7 +857,11 @@ location = (r2,40)
 [vehicle_report]
 id = v2
 time = 10
+<<<<<<< HEAD
 speed = 11
+=======
+speed = 10
+>>>>>>> master
 kilometrage = 100
 faulty = 0
 location = (r3,100)
@@ -703,7 +869,11 @@ location = (r3,100)
 [vehicle_report]
 id = v3
 time = 10
+<<<<<<< HEAD
 speed = 11
+=======
+speed = 10
+>>>>>>> master
 kilometrage = 100
 faulty = 0
 location = (r3,100)

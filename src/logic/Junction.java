@@ -1,13 +1,13 @@
 package logic;
 
 
- public class Junction extends GenericJunction<InRoad> {
+public class Junction extends GenericJunction<InRoad> {
 
      public Junction(String id) {
          super(id);
      }
 
-     @Override
+   @Override
      protected InRoad createInRoad(Road road) {
          return new InRoad(road);
      }

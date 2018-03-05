@@ -85,7 +85,11 @@ vehicles = (v2,27),(v1,22)
 id = v1
 time = 3
 speed = 0
+<<<<<<< HEAD
 kilometrage = 22
+=======
+kilometrage = 20
+>>>>>>> master
 faulty = 2
 location = (r1,22)
 
@@ -118,7 +122,11 @@ vehicles = (v2,38),(v1,22)
 id = v1
 time = 4
 speed = 0
+<<<<<<< HEAD
 kilometrage = 22
+=======
+kilometrage = 20
+>>>>>>> master
 faulty = 1
 location = (r1,22)
 
@@ -151,7 +159,11 @@ vehicles = (v2,49),(v1,22)
 id = v1
 time = 5
 speed = 0
+<<<<<<< HEAD
 kilometrage = 22
+=======
+kilometrage = 20
+>>>>>>> master
 faulty = 0
 location = (r1,22)
 
