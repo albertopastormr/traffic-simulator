@@ -145,7 +145,7 @@ public class Main {
 		
 		//Main.ParseaArgumentos(args);
 		//Main.iniciaModoEstandar();
-		Main.executeFiles("examples-out/advanced");
+		Main.executeFiles("examples-out/err");
 	
 	}
 

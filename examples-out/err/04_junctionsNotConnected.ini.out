@@ -1,0 +1,28 @@
+[junction_report]
+id = j1
+time = 1
+queues = 
+
+[junction_report]
+id = j2
+time = 1
+queues = (r2,green,[])
+
+[junction_report]
+id = j3
+time = 1
+queues = 
+
+[road_report]
+id = r2
+time = 1
+vehicles = (v1,20)
+
+[vehicle_report]
+id = v1
+time = 1
+speed = 20
+kilometrage = 20
+faulty = 0
+location = (r2,20)
+
