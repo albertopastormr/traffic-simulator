@@ -42,6 +42,8 @@ public class CongestedJunction extends GenericJunction<InRoadInterval> {
         }
     }
     private int indexOfMaxVehiclesqueueSize(int indexNotValid){
+        if(this.InRoads.size() <= 1)
+            return 0;
         int maxSize = 0, indexMaxQueueSize = -1;
         for (int i = 0; i < this.InRoads.size(); i++){
             if(this.InRoads.get(i).vehiclesQueue.size() > maxSize && i != indexNotValid){

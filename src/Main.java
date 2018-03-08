@@ -18,7 +18,7 @@ public class Main {
 	private static Integer timeLimit = null;
 	private static String ficheroEntrada = null;
 	private static String ficheroSalida = null;
-
+	private static String directoryPath = null;
 	
 	private static void ParseaArgumentos(String[] args) {
 
@@ -31,10 +31,11 @@ public class Main {
 		CommandLineParser parser = new DefaultParser();
 		try {
 			CommandLine linea = parser.parse(opcionesLineaComandos, args);
-			parseaOpcionHELP(linea, opcionesLineaComandos);
-			parseaOpcionFicheroIN(linea);
-			parseaOpcionFicheroOUT(linea);
-			parseaOpcionSTEPS(linea);
+			parseHelpOption(linea, opcionesLineaComandos);
+			parseDirectoryOption(linea);
+			parseInputOption(linea);
+			parseOutputOption(linea);
+			parseStepsOption(linea);
 
 			// if there are some remaining arguments, then something wrong is
 			// provided in the command line!
@@ -56,19 +57,19 @@ public class Main {
 
 	private static Options construyeOpciones() {
 		Options opcionesLineacomandos = new Options();
-
-		opcionesLineacomandos.addOption(Option.builder("h").longOpt("help").desc("Muestra la ayuda.").build());
-		opcionesLineacomandos.addOption(Option.builder("i").longOpt("input").hasArg().desc("Fichero de entrada de eventos.").build());
+		opcionesLineacomandos.addOption(Option.builder("d").longOpt("directory").hasArg().desc("Launchs every valid .ini found in a given directory (path)").build());
+		opcionesLineacomandos.addOption(Option.builder("h").longOpt("help").desc("Shows every command's description").build());
+		opcionesLineacomandos.addOption(Option.builder("i").longOpt("input").hasArg().desc("Events single input file should follow this option").build());
 		opcionesLineacomandos.addOption(
-				Option.builder("o").longOpt("output").hasArg().desc("Fichero de salida, donde se escriben los informes.").build());
+				Option.builder("o").longOpt("output").hasArg().desc("Output file where the reports are written (console by default)").build());
 		opcionesLineacomandos.addOption(Option.builder("t").longOpt("ticks").hasArg()
-				.desc("Pasos que ejecuta el simulador en su bucle principal (el valor por defecto es " + Main.timeLimitPorDefecto + ").")
+				.desc("Number of simulation steps should follow this option (default ticks number: " + Main.timeLimitPorDefecto + ").")
 				.build());
 
 		return opcionesLineacomandos;
 	}
 
-	private static void parseaOpcionHELP(CommandLine linea, Options opcionesLineaComandos) {
+	private static void parseHelpOption(CommandLine linea, Options opcionesLineaComandos) {
 		if (linea.hasOption("h")) {
 			HelpFormatter formatter = new HelpFormatter();
 			formatter.printHelp(Main.class.getCanonicalName(), opcionesLineaComandos, true);
@@ -76,19 +77,18 @@ public class Main {
 		}
 	}
 
-	private static void parseaOpcionFicheroIN(CommandLine linea) throws error.ParseException {
+	private static void parseInputOption(CommandLine linea) throws error.ParseException {
 		Main.ficheroEntrada = linea.getOptionValue("i");
 		if (Main.ficheroEntrada == null) {
-			throw new error.ParseException("El fichero de eventos no existe");
+			throw new error.ParseException("Input file doesn't exist\n");
 		}
 	}
 
-	private static void parseaOpcionFicheroOUT(CommandLine linea) throws error.ParseException {
+	private static void parseOutputOption(CommandLine linea) throws error.ParseException {
 		Main.ficheroSalida = linea.getOptionValue("o");
 	}
 
-	private static void parseaOpcionSTEPS(CommandLine linea) throws error.ParseException {
-		String t = linea.getOptionValue("t", Main.timeLimitPorDefecto.toString());
+	private static void parseStepsOption(CommandLine linea) throws error.ParseException { String t = linea.getOptionValue("t", Main.timeLimitPorDefecto.toString());
 		try {
 			Main.timeLimit = Integer.parseInt(t);
 			assert (Main.timeLimit < 0);
@@ -96,7 +96,11 @@ public class Main {
 			throw new error.ParseException("Valor invalido para el limite de tiempo: " + t);
 		}
 	}
-
+	private static void parseDirectoryOption(CommandLine linea)throws error.ParseException {
+		Main.directoryPath = linea.getOptionValue('d');
+		if(Main.directoryPath == null)
+			throw new error.ParseException("Directory path doesn't exist\n");
+	}
 	private static void iniciaModoEstandar() throws IOException {
 		InputStream is = new FileInputStream(new File(Main.ficheroEntrada));
 		OutputStream os = Main.ficheroSalida == null ? System.out : new FileOutputStream(new File(Main.ficheroSalida));
@@ -106,7 +110,6 @@ public class Main {
 		is.close();
 		System.out.println("Done!");
 	}
-
 	private static void executeFiles(String path) throws IOException {
 
 		File dir = new File(path);
