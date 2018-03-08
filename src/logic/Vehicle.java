@@ -97,9 +97,9 @@ public class Vehicle extends SimulationObject {
               Road nextRoad = this.roadActual.destination.roadToJunction( destinationJunctionOfNextRoad );
 
               if(nextRoad != null){
+                  this.locationActual = 0;
                   nextRoad.inVehicle(this);
                   this.roadActual = nextRoad;
-                  this.locationActual = 0;
               }
               else
                   throw new EventException("Next road for vehicle " + this.id + " from road( " + this.roadActual.id + ")\n");
