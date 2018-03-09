@@ -25,14 +25,14 @@ queues = (lanes2,green,[])
 [road_report]
 id = lanes1
 time = 1
-vehicles = (v1,6),(v2,6),(v3,6),(v4,6)
+state = (v1,6),(v2,6),(v3,6),(v4,6)
 type = lanes
 
 [road_report]
 id = lanes2
 time = 1
 type = dirt
-vehicles = (v5,20),(v6,20)
+state = (v5,20),(v6,20)
 
 [vehicle_report]
 id = v1
@@ -109,14 +109,14 @@ queues = (lanes2,green,[])
 [road_report]
 id = lanes1
 time = 2
-vehicles = (v1,12),(v2,12),(v3,12),(v4,12)
+state = (v1,12),(v2,12),(v3,12),(v4,12)
 type = lanes
 
 [road_report]
 id = lanes2
 time = 2
 type = dirt
-vehicles = (v5,40),(v6,40)
+state = (v5,40),(v6,40)
 
 [vehicle_report]
 id = v1
@@ -193,14 +193,14 @@ queues = (lanes2,green,[])
 [road_report]
 id = lanes1
 time = 3
-vehicles = (v1,18),(v2,18),(v3,18),(v4,18)
+state = (v1,18),(v2,18),(v3,18),(v4,18)
 type = lanes
 
 [road_report]
 id = lanes2
 time = 3
 type = dirt
-vehicles = (v5,60),(v6,60)
+state = (v5,60),(v6,60)
 
 [vehicle_report]
 id = v1
@@ -277,14 +277,14 @@ queues = (lanes2,green,[])
 [road_report]
 id = lanes1
 time = 4
-vehicles = (v1,24),(v2,24),(v3,24),(v4,24)
+state = (v1,24),(v2,24),(v3,24),(v4,24)
 type = lanes
 
 [road_report]
 id = lanes2
 time = 4
 type = dirt
-vehicles = (v5,80),(v6,80)
+state = (v5,80),(v6,80)
 
 [vehicle_report]
 id = v1
@@ -361,14 +361,14 @@ queues = (lanes2,green,[])
 [road_report]
 id = lanes1
 time = 5
-vehicles = (v1,30),(v2,30),(v3,30),(v4,30)
+state = (v1,30),(v2,30),(v3,30),(v4,30)
 type = lanes
 
 [road_report]
 id = lanes2
 time = 5
 type = dirt
-vehicles = (v5,100),(v6,100)
+state = (v5,100),(v6,100)
 
 [vehicle_report]
 id = v1
@@ -445,14 +445,14 @@ queues = (lanes2,green,[])
 [road_report]
 id = lanes1
 time = 6
-vehicles = (v1,36),(v2,36),(v3,36),(v4,36)
+state = (v1,36),(v2,36),(v3,36),(v4,36)
 type = lanes
 
 [road_report]
 id = lanes2
 time = 6
 type = dirt
-vehicles = (v5,120),(v6,120)
+state = (v5,120),(v6,120)
 
 [vehicle_report]
 id = v1
@@ -529,14 +529,14 @@ queues = (lanes2,green,[])
 [road_report]
 id = lanes1
 time = 7
-vehicles = (v1,42),(v2,42),(v3,42),(v4,42)
+state = (v1,42),(v2,42),(v3,42),(v4,42)
 type = lanes
 
 [road_report]
 id = lanes2
 time = 7
 type = dirt
-vehicles = (v5,140),(v6,140)
+state = (v5,140),(v6,140)
 
 [vehicle_report]
 id = v1
@@ -613,14 +613,14 @@ queues = (lanes2,green,[])
 [road_report]
 id = lanes1
 time = 8
-vehicles = (v1,48),(v2,48),(v3,48),(v4,48)
+state = (v1,48),(v2,48),(v3,48),(v4,48)
 type = lanes
 
 [road_report]
 id = lanes2
 time = 8
 type = dirt
-vehicles = (v5,160),(v6,160)
+state = (v5,160),(v6,160)
 
 [vehicle_report]
 id = v1
@@ -697,14 +697,14 @@ queues = (lanes2,green,[])
 [road_report]
 id = lanes1
 time = 9
-vehicles = (v1,54),(v2,54),(v3,54),(v4,54)
+state = (v1,54),(v2,54),(v3,54),(v4,54)
 type = lanes
 
 [road_report]
 id = lanes2
 time = 9
 type = dirt
-vehicles = (v5,180),(v6,180)
+state = (v5,180),(v6,180)
 
 [vehicle_report]
 id = v1
@@ -781,14 +781,14 @@ queues = (lanes2,green,[])
 [road_report]
 id = lanes1
 time = 10
-vehicles = (v1,60),(v2,60),(v3,60),(v4,60)
+state = (v1,60),(v2,60),(v3,60),(v4,60)
 type = lanes
 
 [road_report]
 id = lanes2
 time = 10
 type = dirt
-vehicles = (v5,200),(v6,200)
+state = (v5,200),(v6,200)
 
 [vehicle_report]
 id = v1

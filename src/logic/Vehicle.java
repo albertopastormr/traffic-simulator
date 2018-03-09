@@ -75,10 +75,13 @@ public class Vehicle extends SimulationObject {
                 if(this.locationActual >= this.roadActual.length){
                     this.kilometrage = this.kilometrage - this.locationActual + this.roadActual.length;
                     this.locationActual = this.roadActual.length;
+                    this.speedActual = 0;
                     this.roadActual.vehicleToJunction(this);
                     this.isAtJunction = true;
                 }
             }
+            else
+                this.speedActual = 0;
         }
     }
 
@@ -97,6 +100,7 @@ public class Vehicle extends SimulationObject {
               Road nextRoad = this.roadActual.destination.roadToJunction( destinationJunctionOfNextRoad );
 
               if(nextRoad != null){
+                  this.speedActual = 0;
                   this.locationActual = 0;
                   nextRoad.inVehicle(this);
                   this.roadActual = nextRoad;

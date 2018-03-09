@@ -54,13 +54,13 @@ public class Road  extends SimulationObject {
     @Override
     public void completeSectionDetails(IniSection is) {
         if(this.vehicles.size() == 0)
-            is.setValue("vehicles", "");
+            is.setValue("state", "");
         else{
             String s = "";
             s += this.vehicles.get(0);
             for(int i = 1; i < this.vehicles.size(); i++)
                 s += "," +  this.vehicles.get(i).toString();
-            is.setValue("vehicles", s);
+            is.setValue("state", s);
         }
     }
 
@@ -73,17 +73,11 @@ public class Road  extends SimulationObject {
         int speed = calculateSpeed();
         int obstacles = 0;
 
-        /*for (Vehicle v : this.vehicles) { Bucle for-each cambiado por for convencional porque este lanzaba ConcurrentModificationException
-            if(v.getBreakdownTime() > 0)
-                obstacles++;
-            v.setSpeedActual(speed/this.calculateMarkdownFactor(obstacles));
-            v.advance();
-        }*/
         for(int i = 0; i < this.vehicles.size(); i++){
             Vehicle v = this.vehicles.get(i);
             if(v.getBreakdownTime() > 0)
                 obstacles++;
-            if(v.getBreakdownTime() == 0) // Este condicional podria dar error
+            if(v.getBreakdownTime() == 0)
                 v.setSpeedActual(speed/this.calculateMarkdownFactor(obstacles));
             v.advance();
         }

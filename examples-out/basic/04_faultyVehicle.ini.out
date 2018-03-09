@@ -11,7 +11,7 @@ queues = (r1,green,[])
 [road_report]
 id = r1
 time = 1
-vehicles = (v1,20)
+state = (v1,20)
 
 [vehicle_report]
 id = v1
@@ -34,7 +34,7 @@ queues = (r1,green,[])
 [road_report]
 id = r1
 time = 2
-vehicles = (v1,40)
+state = (v1,40)
 
 [vehicle_report]
 id = v1
@@ -57,7 +57,7 @@ queues = (r1,green,[])
 [road_report]
 id = r1
 time = 3
-vehicles = (v1,40)
+state = (v1,40)
 
 [vehicle_report]
 id = v1
@@ -80,7 +80,7 @@ queues = (r1,green,[])
 [road_report]
 id = r1
 time = 4
-vehicles = (v1,40)
+state = (v1,40)
 
 [vehicle_report]
 id = v1
@@ -103,7 +103,7 @@ queues = (r1,green,[])
 [road_report]
 id = r1
 time = 5
-vehicles = (v1,40)
+state = (v1,40)
 
 [vehicle_report]
 id = v1
@@ -126,7 +126,7 @@ queues = (r1,green,[])
 [road_report]
 id = r1
 time = 6
-vehicles = (v1,60)
+state = (v1,60)
 
 [vehicle_report]
 id = v1
@@ -149,7 +149,7 @@ queues = (r1,green,[])
 [road_report]
 id = r1
 time = 7
-vehicles = (v1,80)
+state = (v1,80)
 
 [vehicle_report]
 id = v1
@@ -172,7 +172,7 @@ queues = (r1,green,[])
 [road_report]
 id = r1
 time = 8
-vehicles = 
+state = 
 
 [vehicle_report]
 id = v1
@@ -195,7 +195,7 @@ queues = (r1,green,[])
 [road_report]
 id = r1
 time = 9
-vehicles = 
+state = 
 
 [vehicle_report]
 id = v1
@@ -218,7 +218,7 @@ queues = (r1,green,[])
 [road_report]
 id = r1
 time = 10
-vehicles = 
+state = 
 
 [vehicle_report]
 id = v1
