@@ -1,6 +1,7 @@
 
 import java.io.*;
 
+import error.ParseException;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -24,7 +25,10 @@ public class Main {
 	private static String commands = null;
 	private static Options opcionesLineaComandos = null;
 
-	private static void ParseaArgumentos(String[] args) {
+	private static void ParseaArgumentos(String[] args) throws ParseException {
+
+		if(args.length == 0)
+			throw new ParseException("Main received no arguments\n");
 
 		// define the valid command line options
 		//
@@ -186,9 +190,13 @@ public class Main {
 		// -i resources/examples/event/advanced/ex1.ini
 		// --help
 		//
-		
-		Main.ParseaArgumentos(args);
-		Main.execute();
+		try {
+			Main.ParseaArgumentos(args);
+			Main.execute();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 }
