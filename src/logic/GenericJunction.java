@@ -12,9 +12,9 @@ abstract public class GenericJunction<T extends InRoad> extends SimulationObject
 
     protected int greenTrafficLightIndex; // It carries the index of the inRoad which has its traffic Light set to green
 
-    protected List<InRoad> InRoads;
+    protected List<T> InRoads;
 
-    protected Map<String, InRoad> mapInRoads;
+    protected Map<String, T> mapInRoads;
 
     protected Map<GenericJunction<?>, Road> OutRoads;
 
@@ -67,7 +67,7 @@ abstract public class GenericJunction<T extends InRoad> extends SimulationObject
 
     public void addRoadInToJunction(String idRoad, Road road) throws EventException {
         if(!mapInRoads.containsKey(idRoad)) {
-            InRoad  inRoad = createInRoad(road);
+            T  inRoad = createInRoad(road);
             this.mapInRoads.put(idRoad, inRoad);
             this.InRoads.add(inRoad);
         }

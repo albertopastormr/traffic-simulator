@@ -14,6 +14,7 @@ public class InRoadInterval extends InRoad {
         this.timeInterval = timeInterval;
         this.fullUsage = false;
         this.usedByVehicle = false;
+        this.timeUnitsUsed = 0;
     }
 
     @Override
@@ -56,5 +57,19 @@ public class InRoadInterval extends InRoad {
 
     public void setUsedByVehicle(boolean usedByVehicle) {
         this.usedByVehicle = usedByVehicle;
+    }
+
+    @Override
+    public String toString() {
+        String s = "(" + this.road.getId() +","+ (this.trafficLight ? "green:" + String.valueOf(this.timeInterval - this.timeUnitsUsed) : "red") + ",";
+        s += "[";
+        if(this.vehiclesQueue.size() > 0) {
+            s += this.vehiclesQueue.get(0).getId();
+            for (int i = 1; i < this.vehiclesQueue.size(); i++) {
+                s += "," + this.vehiclesQueue.get(i).getId();
+            }
+        }
+        s += "])";
+        return s;
     }
 }
