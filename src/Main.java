@@ -148,6 +148,8 @@ public class Main {
 			}
 		});
 
+		System.out.println("Number of files found to execute: " + files.length);
+
 		for (File file : files) {
 			Main.ficheroEntrada = file.getAbsolutePath();
 			Main.ficheroSalida = file.getAbsolutePath() + ".out";

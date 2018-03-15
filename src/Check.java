@@ -27,7 +27,7 @@ public class Check {
 			}
 		});
 
-		System.out.println(files.length);
+		System.out.println("Number of files found to test: " + files.length);
 
 		for (File file : files) {
 			test(file.getAbsolutePath(), file.getAbsolutePath() + ".out", file.getAbsolutePath() + ".eout");
