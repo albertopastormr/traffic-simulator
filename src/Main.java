@@ -153,7 +153,6 @@ public class Main {
 		for (File file : files) {
 			Main.ficheroEntrada = file.getAbsolutePath();
 			Main.ficheroSalida = file.getAbsolutePath() + ".out";
-			Main.timeLimit = 10;
 			Main.iniciaModoEstandar();
 		}
 

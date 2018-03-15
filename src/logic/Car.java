@@ -12,7 +12,7 @@ public class Car extends Vehicle {
     protected int kmResistance;
     protected int maxDurationBreakdown;
     protected double probabilityBreakdown;
-    protected Random randomNum;
+    private Random randomNum;
 
     public Car(String id, int speedMax, int kmResistance, double probabilityBreakdown, long seed, int maxDurationBreakdown, List<GenericJunction<?>> itinerary) throws EventException {
         super(id, speedMax, itinerary);
@@ -29,7 +29,7 @@ public class Car extends Vehicle {
             this.speedActual = 0;
         }
         else{
-            if(this.kilometrage >= this.kmResistance && this.randomNum.nextDouble() < probabilityBreakdown)
+            if(this.kilometrage - this.kmLastBreakdown >= this.kmResistance && this.randomNum.nextDouble() < probabilityBreakdown)
                 this.setBreakdownTime(this.randomNum.nextInt(this.maxDurationBreakdown) + 1);
         }
         super.advance();
