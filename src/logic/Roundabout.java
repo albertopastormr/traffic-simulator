@@ -30,13 +30,16 @@ public class Roundabout extends GenericJunction<InRoadInterval> {
             InRoadInterval actualGreenLightRoad = (InRoadInterval) this.InRoads.get(this.greenTrafficLightIndex);
             if(actualGreenLightRoad.consumedTime()){
                 actualGreenLightRoad.setTrafficLight(false);
-                actualGreenLightRoad.setTimeUnitsUsed(0);
+
                 if(actualGreenLightRoad.getFullUsage())
                     actualGreenLightRoad.setTimeInterval(Math.min(actualGreenLightRoad.getTimeInterval() + 1,this.maxValueInterval));
                 else{
                     if(!actualGreenLightRoad.getUsedByVehicle())
                         actualGreenLightRoad.setTimeInterval(Math.max(actualGreenLightRoad.getTimeInterval() - 1, this.minValueInterval));
                 }
+                actualGreenLightRoad.setTimeUnitsUsed(0);
+                actualGreenLightRoad.setUsedByVehicle(false);
+                actualGreenLightRoad.setFullUsage(true);
                 this.greenTrafficLightIndex = ((this.greenTrafficLightIndex + 1) % this.InRoads.size());
                 InRoadInterval nextGreenLightRoad = (InRoadInterval) this.InRoads.get(this.greenTrafficLightIndex);
                 nextGreenLightRoad.setTrafficLight(true);

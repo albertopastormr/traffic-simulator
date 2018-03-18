@@ -17,6 +17,7 @@ public class Vehicle extends SimulationObject {
     protected int breakdownTime;
     protected boolean destination;
     protected boolean isAtJunction;
+    protected int indexActualJunction;
 
 
     public Vehicle(String id, int speedMax, List<GenericJunction<?>> itinerary) throws EventException {
@@ -38,6 +39,7 @@ public class Vehicle extends SimulationObject {
         this.breakdownTime = 0;
         this.kilometrage = 0;
         this.isAtJunction = false;
+        this.indexActualJunction = 0;
     }
 
 
@@ -88,18 +90,18 @@ public class Vehicle extends SimulationObject {
     public void moveNextRoad() throws EventException {
         if(this.roadActual != null){
           this.roadActual.outVehicle(this);
-          if(  !this.destination &&  this.roadActual.destination.id.equals(this.itinerary.get(this.itinerary.size() - 1).id)  ){
+          if(  !this.destination && this.indexActualJunction  + 2 == this.itinerary.size()){
             this.destination = true;
             this.roadActual = null;
             this.speedActual = 0;
             this.locationActual = 0;
           }
           else{
-              int indexItineraryActualRoad = this.itinerary.indexOf(this.roadActual.destination);
-              GenericJunction<?> destinationJunctionOfNextRoad = this.itinerary.get(indexItineraryActualRoad + 1);
+              GenericJunction<?> destinationJunctionOfNextRoad = this.itinerary.get(this.indexActualJunction + 2);
               Road nextRoad = this.roadActual.destination.roadToJunction( destinationJunctionOfNextRoad );
 
               if(nextRoad != null){
+                  this.indexActualJunction++;
                   this.speedActual = 0;
                   this.locationActual = 0;
                   nextRoad.inVehicle(this);
@@ -120,6 +122,7 @@ public class Vehicle extends SimulationObject {
         Road firstRoad = origin.roadToJunction(destination);
         if(firstRoad != null){
             firstRoad.inVehicle(this);
+            this.indexActualJunction = 0;
             this.roadActual = firstRoad;
             this.locationActual = 0;
             this.kilometrage = 0;

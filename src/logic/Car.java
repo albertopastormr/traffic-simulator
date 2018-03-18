@@ -29,7 +29,7 @@ public class Car extends Vehicle {
             this.speedActual = 0;
         }
         else{
-            if(this.kilometrage - this.kmLastBreakdown >= this.kmResistance && this.randomNum.nextDouble() < probabilityBreakdown)
+            if(this.kilometrage - this.kmLastBreakdown > this.kmResistance && this.randomNum.nextDouble() < probabilityBreakdown)
                 this.setBreakdownTime(this.randomNum.nextInt(this.maxDurationBreakdown) + 1);
         }
         super.advance();
