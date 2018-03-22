@@ -24,6 +24,8 @@ public class Main {
 	private static String testPath = null;
 	private static String commands = null;
 	private static Options opcionesLineaComandos = null;
+	private static String mode = "batch";
+
 
 	private static void ParseaArgumentos(String[] args) throws ParseException {
 
@@ -38,20 +40,21 @@ public class Main {
 		//
 		CommandLineParser parser = new DefaultParser();
 		try {
-			CommandLine linea = parser.parse(opcionesLineaComandos, args);
+			CommandLine line = parser.parse(opcionesLineaComandos, args);
 			commands = "";
-			parseHelpOption(linea);
-			parseDirectoryOption(linea);
-			parseTestOption(linea);
-			parseInputOption(linea);
-			parseOutputOption(linea);
-			parseStepsOption(linea);
-			parseCheckOption(linea);
+			parseHelpOption(line);
+			parseDirectoryOption(line);
+			parseTestOption(line);
+			parseInputOption(line);
+			parseOutputOption(line);
+			parseStepsOption(line);
+			parseCheckOption(line);
+			parseModeOption(line);
 
 			// if there are some remaining arguments, then something wrong is
 			// provided in the command line!
 			//
-			String[] resto = linea.getArgs();
+			String[] resto = line.getArgs();
 			if (resto.length > 0) {
 				String error = "Illegal arguments:";
 				for (String o : resto)
@@ -67,60 +70,68 @@ public class Main {
 	}
 
 	private static Options construyeOpciones() {
-		Options opcionesLineacomandos = new Options();
-		opcionesLineacomandos.addOption(Option.builder("d").longOpt("directory").hasArg().desc("Launchs every valid .ini found in a given directory (path)").build());
-		opcionesLineacomandos.addOption(Option.builder("h").longOpt("help").desc("Shows every command's description").build());
-		opcionesLineacomandos.addOption(Option.builder("i").longOpt("input").hasArg().desc("Events single input file should follow this option").build());
-		opcionesLineacomandos.addOption(Option.builder("t").longOpt("test").hasArg().desc("Test every file from the directory path given").build());
-		opcionesLineacomandos.addOption(Option.builder("c").longOpt("check").hasArg().desc("Check every file from the directory path given").build());
-		opcionesLineacomandos.addOption(Option.builder("o").longOpt("output").hasArg().desc("Output file where the reports are written (console by default)").build());
-		opcionesLineacomandos.addOption(Option.builder("s").longOpt("steps").hasArg().desc("Number of simulation steps should follow this option (default ticks number: " + Main.timeLimitPorDefecto + ").").build());
+		Options commandLine = new Options();
+		commandLine.addOption(Option.builder("d").longOpt("directory").hasArg().desc("Launchs every valid .ini found in a given directory (path)").build());
+		commandLine.addOption(Option.builder("h").longOpt("help").desc("Shows every command's description").build());
+		commandLine.addOption(Option.builder("i").longOpt("input").hasArg().desc("Events single input file should follow this option").build());
+		commandLine.addOption(Option.builder("t").longOpt("test").hasArg().desc("Test every file from the directory path given").build());
+		commandLine.addOption(Option.builder("c").longOpt("check").hasArg().desc("Check every file from the directory path given").build());
+		commandLine.addOption(Option.builder("o").longOpt("output").hasArg().desc("Output file where the reports are written (console by default)").build());
+		commandLine.addOption(Option.builder("s").longOpt("steps").hasArg().desc("Number of simulation steps should follow this option (default ticks number: " + Main.timeLimitPorDefecto + ").").build());
+		commandLine.addOption(Option.builder("m").longOpt("mode").hasArg().desc("Graphic mode to be executed should follow this option (batch by default").build());
 
-		return opcionesLineacomandos;
+		return commandLine;
 	}
 
-	private static void parseHelpOption(CommandLine linea) {
-		if (linea.hasOption("h")) {
+	private static void parseHelpOption(CommandLine line) {
+		if (line.hasOption("h")) {
 			commands += "h";
 		}
 	}
 
-	private static void parseInputOption(CommandLine linea) throws error.ParseException {
-		Main.ficheroEntrada = linea.getOptionValue("i");
+	private static void parseInputOption(CommandLine line) throws error.ParseException {
+		Main.ficheroEntrada = line.getOptionValue("i");
 		if(Main.ficheroEntrada != null)
 			commands += "f";
 	}
 
-	private static void parseOutputOption(CommandLine linea) throws error.ParseException {
-		Main.ficheroSalida = linea.getOptionValue("o");
+	private static void parseOutputOption(CommandLine line) throws error.ParseException {
+		Main.ficheroSalida = line.getOptionValue("o");
 		if(Main.ficheroSalida != null)
 			commands += "o";
 	}
 
-	private static void parseStepsOption(CommandLine linea) throws error.ParseException { String t = linea.getOptionValue("s", Main.timeLimitPorDefecto.toString());
+	private static void parseStepsOption(CommandLine line) throws error.ParseException { String t = line.getOptionValue("s", Main.timeLimitPorDefecto.toString());
 		try {
 			Main.timeLimit = Integer.parseInt(t);
 			assert (Main.timeLimit < 0);
-			if(linea.hasOption("s"))
+			if(line.hasOption("s"))
 				commands += "s";
 		} catch (Exception e) {
 			throw new error.ParseException("Valor invalido para el limite de tiempo: " + t);
 		}
 	}
-	private static void parseDirectoryOption(CommandLine linea)throws error.ParseException {
-		Main.directoryPath = linea.getOptionValue("d");
+	private static void parseDirectoryOption(CommandLine line)throws error.ParseException {
+		Main.directoryPath = line.getOptionValue("d");
 		if(Main.directoryPath != null)
 			commands += "d";
 	}
-	private static void parseTestOption(CommandLine linea) throws error.ParseException{
-		Main.testPath = linea.getOptionValue("t");
+	private static void parseTestOption(CommandLine line) throws error.ParseException{
+		Main.testPath = line.getOptionValue("t");
 		if(Main.testPath != null)
 			commands += "t";
 	}
-	private static void parseCheckOption(CommandLine linea) throws error.ParseException{
-		Main.checkPath = linea.getOptionValue("c");
+	private static void parseCheckOption(CommandLine line) throws error.ParseException{
+		Main.checkPath = line.getOptionValue("c");
 		if(Main.checkPath != null)
 			commands += "c";
+	}
+
+	private static void parseModeOption(CommandLine line) {
+		if (line.hasOption("m")) {
+			mode = line.getOptionValue("m");
+			commands += "m";
+		}
 	}
 
 
@@ -159,11 +170,31 @@ public class Main {
 	}
 	private static  void execute() throws IOException {
 		switch (Main.commands){
-			case "f": case"fo": case"fs": case"fos":{
-				Main.iniciaModoEstandar();
+			case "f": case"fo": case"fs": case"fos":case "fm": case"fmo": case"fms": case"fmos": case"fom": case"fsm": case"foms": case"fmso":{
+				switch(mode){
+					case"batch":{
+						Main.iniciaModoEstandar();
+					} break;
+					case"gui":{
+					// modo gui
+					} break;
+					default:{
+						System.out.println("mode argument not valid");
+					}
+				}
 			} break;
 			case "d": case"ds":{
-				Main.executeFiles(Main.directoryPath);
+				switch(mode){
+					case"batch":{
+						Main.executeFiles(Main.directoryPath);
+					} break;
+					case"gui":{
+						// modo gui
+					} break;
+					default:{
+						System.out.println("mode argument not valid");
+					}
+				}
 			} break;
 			case "t": case"ts":{
 				Main.executeFiles(Main.testPath);
