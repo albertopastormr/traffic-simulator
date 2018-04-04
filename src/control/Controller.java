@@ -1,11 +1,15 @@
 package control;
 
+import error.EventException;
+import error.NewEventException;
+import error.RoadMapException;
 import error.SimulationError;
 import event.Event;
 import ini.Ini;
 import ini.IniSection;
 import model.TrafficSimulator;
 import util.EventParser;
+import view.ObserverTrafficSimulator;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,6 +31,16 @@ public class Controller {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
+    }
+    public void execute(int simulationSteps){
+        try {
+            this.simulator.execute(simulationSteps, this.fileOutput);
+        } catch (SimulationError | RoadMapException | NewEventException | EventException | IOException error) {
+            error.printStackTrace();
+        }
+    }
+    public void reset(){
+        this.simulator.reset();
     }
 
     public Controller(TrafficSimulator simulator, int simulatorSteps, InputStream fileInput,  OutputStream fileOutput) {
@@ -55,6 +69,13 @@ public class Controller {
             else
                 throw new SimulationError("Evento desconocido: " + sec.getTag());
         }
+    }
+
+    public void addObserver(ObserverTrafficSimulator obs){
+        this.simulator.addObserver(obs);
+    }
+    public void removeObserver(ObserverTrafficSimulator obs){
+        this.simulator.removeObserver(obs);
     }
 
 }

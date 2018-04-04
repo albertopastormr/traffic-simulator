@@ -7,18 +7,22 @@ import error.SimulationError;
 import event.Event;
 import logic.RoadMap;
 import util.SortedArrayList;
+import view.Observer;
+import view.ObserverTrafficSimulator;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class TrafficSimulator {
+public class TrafficSimulator implements Observer<ObserverTrafficSimulator> {
 
     private RoadMap map;
     private List<Event> events;
     private int timeCount;
+    private List<ObserverTrafficSimulator> observers;
 
     public TrafficSimulator() {
         this.map = new RoadMap();
@@ -31,6 +35,7 @@ public class TrafficSimulator {
             }
         };
         this.events = new SortedArrayList<>(cmp); // Sorted by time
+        this.observers = new ArrayList<>();
     }
 
     public void execute(int simulationStep, OutputStream fileOutput) throws SimulationError, IOException, EventException, NewEventException, RoadMapException {
@@ -59,9 +64,58 @@ public class TrafficSimulator {
             this.timeCount++;
         }
     }
-    public void insertEvent(Event e){
-        if(e.getTime() >= this.timeCount) // The element e is inserted if it could be executed
-            this.events.add(e);
+    public void reset(){
+        this.map = new RoadMap();
+        this.timeCount = 0;
+        Comparator<Event> cmp = new Comparator<Event>() {
+
+            @Override
+            public int compare(Event o1, Event o2) {
+                return Integer.compare(o1.getTime(), o2.getTime());
+            }
+        };
+        this.events = new SortedArrayList<>(cmp); // Sorted by time
+        for(ObserverTrafficSimulator obs : this.observers)
+            obs.reset(this.timeCount, this.map, this.events);
+    }
+    public void insertEvent(Event e) throws SimulationError {
+        if(e != null){
+            if(e.getTime() >= this.timeCount) { // The element e is inserted if it could be executed
+                this.events.add(e);
+                this.notifyNewEvent();
+            }
+            else{
+                SimulationError err = new SimulationError("ERROR: insertEvent() did not work");
+                this.notifyError(err);
+                throw err;
+            }
+        }
+        else{
+            SimulationError err = new SimulationError("ERROR: insertEvent() did not work");
+            this.notifyError(err);
+            throw err;
+        }
+
+    }
+
+    private void notifyNewEvent(){
+        for(ObserverTrafficSimulator obs : this.observers)
+            obs.addEvent(this.timeCount, this.map, this.events);
+    }
+    private void notifyError(SimulationError error){
+        for(ObserverTrafficSimulator obs : this.observers)
+            obs.simulatorError(this.timeCount, this.map, this.events, error);
+    }
+    @Override
+    public void addObserver(ObserverTrafficSimulator o) {
+        if(o != null && !this.observers.contains(o))
+            this.observers.add(o);
+    }
+
+    @Override
+    public void removeObserver(ObserverTrafficSimulator o) {
+        if(o != null && this.observers.contains(o))
+            this.observers.remove(o);
     }
 }
 

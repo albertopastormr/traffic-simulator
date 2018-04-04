@@ -1,4 +1,5 @@
 
+import java.awt.*;
 import java.io.*;
 
 import error.ParseException;
@@ -10,6 +11,9 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import control.Controller;
 import model.TrafficSimulator;
+import view.MainWindow;
+
+import javax.swing.*;
 
 
 public class Main {
@@ -23,18 +27,17 @@ public class Main {
 	private static String checkPath = null;
 	private static String testPath = null;
 	private static String commands = null;
-	private static Options opcionesLineaComandos = null;
 	private static String mode = "batch";
 
 
-	private static void ParseaArgumentos(String[] args) throws ParseException {
+	private static void ParseArguments(String[] args) throws ParseException {
 
 		if(args.length == 0)
 			throw new ParseException("Main received no arguments\n");
 
 		// define the valid command line options
 		//
-		Options opcionesLineaComandos = Main.construyeOpciones();
+		Options opcionesLineaComandos = Main.buildOptions();
 
 		// parse the command line as provided in args
 		//
@@ -69,7 +72,7 @@ public class Main {
 
 	}
 
-	private static Options construyeOpciones() {
+	private static Options buildOptions() {
 		Options commandLine = new Options();
 		commandLine.addOption(Option.builder("d").longOpt("directory").hasArg().desc("Launchs every valid .ini found in a given directory (path)").build());
 		commandLine.addOption(Option.builder("h").longOpt("help").desc("Shows every command's description").build());
@@ -92,7 +95,7 @@ public class Main {
 	private static void parseInputOption(CommandLine line) throws error.ParseException {
 		Main.ficheroEntrada = line.getOptionValue("i");
 		if(Main.ficheroEntrada != null)
-			commands += "f";
+			commands += "i";
 	}
 
 	private static void parseOutputOption(CommandLine line) throws error.ParseException {
@@ -135,7 +138,7 @@ public class Main {
 	}
 
 
-	private static void iniciaModoEstandar() throws IOException {
+	private static void initStandardMode() throws IOException {
 		InputStream is = new FileInputStream(new File(Main.ficheroEntrada));
 		OutputStream os = Main.ficheroSalida == null ? System.out : new FileOutputStream(new File(Main.ficheroSalida));
 		TrafficSimulator sim = new TrafficSimulator();
@@ -143,6 +146,17 @@ public class Main {
 		ctrl.execute();
 		is.close();
 		System.out.println("File " + Main.ficheroEntrada + " has been executed !\n");
+	}
+	private static void initGraphicMode() throws IOException{
+		TrafficSimulator simulator = new TrafficSimulator();
+		OutputStream outputStream = (Main.ficheroSalida == null ? System.out : new FileOutputStream(new File(Main.ficheroSalida)));
+		Controller controller = new Controller(simulator, Main.timeLimit, null, outputStream);
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				new MainWindow(Main.ficheroEntrada, controller);
+			}
+		});
 	}
 	private static void executeFiles(String path) throws IOException {
 
@@ -164,19 +178,19 @@ public class Main {
 		for (File file : files) {
 			Main.ficheroEntrada = file.getAbsolutePath();
 			Main.ficheroSalida = file.getAbsolutePath() + ".out";
-			Main.iniciaModoEstandar();
+			Main.initStandardMode();
 		}
 
 	}
 	private static  void execute() throws IOException {
 		switch (Main.commands){
-			case "f": case"fo": case"fs": case"fos":case "fm": case"fmo": case"fms": case"fmos": case"fom": case"fsm": case"foms": case"fmso":{
+			case "i": case"io": case"is": case"ios":case "im": case"imo": case"ims": case"imos": case"iom": case"ism": case"ioms": case"imso":{
 				switch(mode){
 					case"batch":{
-						Main.iniciaModoEstandar();
+						Main.initStandardMode();
 					} break;
 					case"gui":{
-					// modo gui
+						Main.initGraphicMode();
 					} break;
 					default:{
 						System.out.println("mode argument not valid");
@@ -223,7 +237,7 @@ public class Main {
 		// --help
 		//
 		try {
-			Main.ParseaArgumentos(args);
+			Main.ParseArguments(args);
 			Main.execute();
 		}
 		catch(Exception e){
