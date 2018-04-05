@@ -9,7 +9,7 @@ public class EventConstructorNewJunction extends EventConstructor {
     public EventConstructorNewJunction() {
         this.tag = "new_junction";
         this.keys = new String[] { "time", "id" };
-        this.defaultValues = new String[] { "", "", };
+        this.defaultValues = new String[] { "", "" };
     }
 
     @Override

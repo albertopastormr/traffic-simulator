@@ -8,8 +8,8 @@ public class EventConstructorNewFreeway extends EventConstructor {
 
     public EventConstructorNewFreeway() {
         this.tag = "new_road";
-        this.keys = new String[] { "time", "id", "max_speed", "length", "src", "dest" };
-        this.defaultValues = new String[] { "", "", };
+        this.keys = new String[] { "time", "id", "type", "max_speed", "length", "src", "dest","lanes"};
+        this.defaultValues = new String[] { "", "", "lanes", "","","","",""};
     }
 
     @Override

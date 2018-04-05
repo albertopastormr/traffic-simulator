@@ -24,13 +24,13 @@ public class Road  extends SimulationObject {
         this.origin = source;
         this.destination = destination;
 
-        vehicleComparator = new Comparator<Vehicle>() {
+        this.vehicleComparator = new Comparator<Vehicle>() {
             @Override
             public int compare(Vehicle o1, Vehicle o2) {
                 return o2.getLocationActual() - o1.getLocationActual();
             }
         };
-        vehicles = new SortedArrayList<Vehicle>(vehicleComparator);
+        this.vehicles = new SortedArrayList<Vehicle>(vehicleComparator);
     }
 
 
@@ -90,5 +90,21 @@ public class Road  extends SimulationObject {
     }
     protected int calculateMarkdownFactor(int obstacles){
         return (obstacles == 0 ? 1 : 2);
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public GenericJunction<?> getOrigin() {
+        return origin;
+    }
+
+    public GenericJunction<?> getDestination() {
+        return destination;
+    }
+
+    public List<Vehicle> getVehicles() {
+        return vehicles;
     }
 }

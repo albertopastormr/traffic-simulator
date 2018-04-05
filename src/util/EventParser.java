@@ -19,6 +19,9 @@ public class EventParser {
             new EventConstructorNewRoundabout()
     };
 
+    public static EventConstructor[] getEvents() {
+        return events;
+    }
 
     public static Event EventParse(IniSection sec) {
         // loop iterating EventConstructor parsing with a try-error method

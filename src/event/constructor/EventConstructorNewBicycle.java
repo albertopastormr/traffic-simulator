@@ -8,8 +8,8 @@ public class EventConstructorNewBicycle extends EventConstructor {
 
     public EventConstructorNewBicycle() {
         this.tag = "new_vehicle";
-        this.keys = new String[] { "time", "id" , "max_speed", "itinerary"};
-        this.defaultValues = new String[] { "", "", };
+        this.keys = new String[] { "time", "id" , "type", "max_speed", "itinerary"};
+        this.defaultValues = new String[] { "", "","bicycle", "", ""};
     }
 
     @Override
@@ -29,5 +29,5 @@ public class EventConstructorNewBicycle extends EventConstructor {
     }
 
     @Override
-    public String toString() { return "New Bicycle"; } // Por completar
+    public String toString() { return "New Bicycle"; }
 }

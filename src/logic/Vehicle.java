@@ -150,6 +150,15 @@ public class Vehicle extends SimulationObject {
         return this.breakdownTime;
     }
 
+    public Road getRoadActual() {
+        return roadActual;
+    }
+
+    public boolean isDestination() {
+        return destination;
+    }
+
+
     @Override
     public String toString() {
         return "(" + this.id + "," + this.locationActual + ")";

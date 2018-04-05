@@ -2,11 +2,9 @@ package view;
 
 import control.Controller;
 import error.SimulationError;
+import event.Event;
 import javafx.scene.control.ToolBar;
-import logic.GenericJunction;
-import logic.Road;
-import logic.RoadMap;
-import logic.Vehicle;
+import logic.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -36,7 +34,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     private MapComponent mapComponent;
 
     // STATUS BAR (INFO AT THE BOTTON OF THE WINDOW)
-    private ToolBarPanel panelToolbar;
+    private StatusBarPanel panelStatusBar;
 
     // INFERIOR PANEL
     static private final String[] columnIdVehicle = {"ID", "Road", "Location", "Speed", "Km.", "Breakdown Time", "Itinerary"};
@@ -45,7 +43,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 
     private TablePanel<Vehicle> panelVehicles;
     private TablePanel<Road> panelRoads;
-    private TablePanel<GenericJunction> panelJunctions;
+    private TablePanel<GenericJunction<?>> panelJunctions;
 
     // REPORT DIALOG
     private ReportsDialog reportsDialog;
@@ -153,7 +151,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
         // No es observador
         this.panelEventsEditor = new EventsEditorPanel(this.actualFile.getName(), text, true,this);
         // Es observador
-        this.panelEventsQueue = new TablePanel<event.Event>("Events Queue: ", new EventsModelTable(MainWindow.columnIdEvents, this.controller));
+        this.panelEventsQueue = new TablePanel<Event>("Events Queue: ", new EventsTableModel(MainWindow.columnIdEvents, this.controller));
         // Es observador
         this.panelReports = new ReportsPanel("Reports: ", false,this.controller);
         topPanel.add(this.panelEventsEditor);
@@ -162,7 +160,27 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
         centralPanel.add(topPanel);
     }
     private void createBottomPanel(JPanel centralPanel){
-
+        JPanel bottomPanel = new JPanel(), tablesPanel = new JPanel(), graphicPanel = new JPanel();
+        bottomPanel.setLayout(new BoxLayout(centralPanel, BoxLayout.X_AXIS));
+        tablesPanel.setLayout(new GridLayout(3, 1));
+        graphicPanel.setLayout(new GridLayout(1,1));
+        // Es observador
+        this.panelVehicles = new TablePanel<Vehicle>("Vehicles", new VehiclesTableModel(MainWindow.columnIdVehicle, this.controller));
+        // Es observador
+        this.panelRoads = new TablePanel<Road>("Roads", new RoadsTableModel(MainWindow.columnIdRoad, this.controller));
+        // Es observador
+        this.panelJunctions = new TablePanel<GenericJunction<?>>("Junctions", new JunctionsTableModel(MainWindow.columnIdJunction, this.controller));
+        tablesPanel.add(this.panelVehicles);
+        tablesPanel.add(this.panelRoads);
+        tablesPanel.add(this.panelJunctions);
+        // Mapa para los graficos ( dibujo )
+        this.mapComponent = new MapComponent(this.controller);
+        // Este mapComponent se inserta en el panel inferior
+		// Es observador
+        graphicPanel.add(new JScrollPane(this.mapComponent, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+        bottomPanel.add(tablesPanel);
+        bottomPanel.add(graphicPanel);
+        centralPanel.add(bottomPanel);
     }
     private void createMainPanel(){
         JPanel mainPanel = new JPanel();
@@ -170,25 +188,42 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 
     }
 
+    public void loadFile(){
+    	int returnValue = this.fileChooser.showOpenDialog(null);
+    	if(returnValue == JFileChooser.APPROVE_OPTION){
+    		File file = this.fileChooser.getSelectedFile();
+    		try{
+    			String str = readFile(file);
+    			this.controller.reset();
+    			this.actualFile = file;
+    			this.panelEventsEditor.setText(s);
+    			this.panelEventsEditor.setBorder(this.actualFile.getName());
+    			this.panelStatusBar.setMessage("File " + file.getName() + " of events loaded into the editor");
+			}
+			catch (FileNotFoundException e){
+    			this.showErrorDialog("ERROR: file read did not work " + e.getMessage());
+			}
+		}
+	}
 
     @Override
     public void simulatorError(int time, RoadMap map, List<event.Event> event, SimulationError e) {
-
+		// PENDIENTE
     }
 
     @Override
     public void advance(int time, RoadMap map, List<event.Event> event) {
-
+		// PENDIENTE
     }
 
     @Override
     public void addEvent(int time, RoadMap map, List<event.Event> event) {
-
+		// PENDIENTE
     }
 
     @Override
     public void reset(int time, RoadMap map, List<event.Event> event) {
-
+		// PENDIENTE
     }
 
     public void showErrorDialog(String str){

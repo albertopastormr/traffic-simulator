@@ -50,7 +50,7 @@ public class Controller {
         this.simulatorSteps = simulatorSteps;
     }
 
-    private void loadEvent(InputStream inStream) throws SimulationError{
+    public void loadEvent(InputStream inStream) throws SimulationError{
         Ini ini;
         try {
             // lee el fichero y carga su atributo iniSections

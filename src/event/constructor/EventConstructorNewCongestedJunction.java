@@ -8,8 +8,8 @@ public class EventConstructorNewCongestedJunction extends EventConstructor {
 
     public EventConstructorNewCongestedJunction() {
         this.tag = "new_junction";
-        this.keys = new String[] { "time", "id" };
-        this.defaultValues = new String[] { "", "", };
+        this.keys = new String[] { "time", "id", "type" };
+        this.defaultValues = new String[] { "", "", "mc"};
     }
 
     @Override
@@ -27,5 +27,5 @@ public class EventConstructorNewCongestedJunction extends EventConstructor {
     }
 
     @Override
-    public String toString() { return "New CongestedJunction"; }
+    public String toString() { return "New Congested Junction"; }
 }

@@ -50,4 +50,8 @@ public abstract class EventConstructor {
         else
             return i;
     }
+
+    public String template(){
+    	return "";
+	}
 }

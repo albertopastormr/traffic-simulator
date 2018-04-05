@@ -12,12 +12,12 @@ public interface ObserverTrafficSimulator {
     void simulatorError(int time, RoadMap map, List<Event> event, SimulationError e);
 
     // notifica el avance de los objetos de simulación
-    void advance(int time, RoadMap map, List<Event> event);
+    void advance(int time, RoadMap map, List<Event> events);
 
     // notifica que se ha generado un nuevo evento
-    void addEvent(int time, RoadMap map, List<Event> event);
+    void addEvent(int time, RoadMap map, List<Event> events);
 
     // notifica que la simulación se ha reiniciado
-    void reset(int time, RoadMap map, List<Event> event);
+    void reset(int time, RoadMap map, List<Event> events);
 
 }

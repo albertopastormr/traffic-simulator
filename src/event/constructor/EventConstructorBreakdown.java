@@ -9,7 +9,7 @@ public class EventConstructorBreakdown extends EventConstructor {
     public EventConstructorBreakdown() {
         this.tag = "make_vehicle_faulty";
         this.keys = new String[] { "time", "duration", "vehicles" };
-        this.defaultValues = new String[] { "", "", };
+        this.defaultValues = new String[] { "", "", ""};
     }
 
     @Override
@@ -29,5 +29,5 @@ public class EventConstructorBreakdown extends EventConstructor {
     }
 
     @Override
-    public String toString() { return "New CarBreakdown"; }
+    public String toString() { return "New Vehicle Breakdown"; }
 }

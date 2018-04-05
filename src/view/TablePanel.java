@@ -9,7 +9,7 @@ public class TablePanel<T> extends JPanel {
 
     public TablePanel(String borderId, TableModel<T> model){
         this.setLayout(new GridLayout(1,1));
-        this.setBorder(BorderFactory.);
+        this.setBorder(MainWindow.defaultBorder);
         this.model = model;
         JTable table = new JTable(this.model);
         this.add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
