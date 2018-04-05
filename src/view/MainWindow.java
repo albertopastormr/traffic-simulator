@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public class MainWindow extends JFrame implements ObserverTrafficSimulator {
@@ -139,21 +140,36 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
         centralPanel.setLayout(new GridLayout(2,1));
         return centralPanel;
     }
-    private JPanel createTopPanel(JPanel centralPanel){
+    private void createTopPanel(JPanel centralPanel){
         JPanel topPanel = new JPanel();
-
-        return topPanel;
+        String text = "";
+        try{
+            text = this.readFile(this.actualFile);
+        }catch(FileNotFoundException e){
+            this.actualFile = null;
+            this.showErrorDialog("ERROR: file read did not work " + e.getMessage());
+        }
+        topPanel.setLayout(new BoxLayout( centralPanel, BoxLayout.X_AXIS)); // pendiente revision
+        // No es observador
+        this.panelEventsEditor = new EventsEditorPanel(this.actualFile.getName(), text, true,this);
+        // Es observador
+        this.panelEventsQueue = new TablePanel<event.Event>("Events Queue: ", new EventsModelTable(MainWindow.columnIdEvents, this.controller));
+        // Es observador
+        this.panelReports = new ReportsPanel("Reports: ", false,this.controller);
+        topPanel.add(this.panelEventsEditor);
+        topPanel.add(this.panelEventsQueue);
+        topPanel.add(this.panelReports);
+        centralPanel.add(topPanel);
     }
-    private JPanel createBottomPanel(JPanel centralPanel){
-        JPanel bottomPanel = new JPanel();
+    private void createBottomPanel(JPanel centralPanel){
 
-        return bottomPanel;
     }
-    private JPanel createMainPanel(){
+    private void createMainPanel(){
         JPanel mainPanel = new JPanel();
 
-        return mainPanel;
+
     }
+
 
     @Override
     public void simulatorError(int time, RoadMap map, List<event.Event> event, SimulationError e) {
@@ -173,5 +189,9 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     @Override
     public void reset(int time, RoadMap map, List<event.Event> event) {
 
+    }
+
+    public void showErrorDialog(String str){
+        JOptionPane.showMessageDialog(this,str);
     }
 }
