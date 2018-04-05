@@ -30,4 +30,6 @@ public abstract class TextAreaPanel extends JPanel {
     public void insert(String value){
         this.textArea.insert(value, this.textArea.getCaretPosition());
     }
-}
+    public void setText(String text){
+        this.textArea.setText(text);
+    }}

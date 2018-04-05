@@ -1,6 +1,6 @@
 package view;
 
-import java.awt.*;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -10,7 +10,7 @@ public class EventsEditorPanel extends TextAreaPanel {
         super(title, editable);
         this.setText(text);
 
-        PopupMenu popUp = new PopupMenu(mainWindow);
+        PopUpMenu popUp = new PopUpMenu(mainWindow);
         this.textArea.add(popUp);
         this.textArea.addMouseListener(new MouseListener() {
             @Override
@@ -40,7 +40,5 @@ public class EventsEditorPanel extends TextAreaPanel {
             }
         });
     }
-    public void setText(String text){
-        this.textArea.setText(text);
-    }
+
 }

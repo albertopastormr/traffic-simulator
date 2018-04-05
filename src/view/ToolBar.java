@@ -39,7 +39,7 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.reset();
-				byte[] content = mainWindow.getEventsEditorText().getBytes;
+				byte[] content = mainWindow.getEventsEditorText().getBytes();
 				try {
 					controller.loadEvent(new ByteArrayInputStream(content));
 				} catch (SimulationError simulationError) {

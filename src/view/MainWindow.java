@@ -3,7 +3,6 @@ package view;
 import control.Controller;
 import error.SimulationError;
 import event.Event;
-import javafx.scene.control.ToolBar;
 import logic.*;
 
 import javax.swing.*;
@@ -103,7 +102,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 
         // BARRA ESTADO INFERIOR
         // (contiene una JLabel param mostrar el estado del simulador)
-        this.addStatusBar;
+        this.addStatusBar();
 
         // PANEL QUE CONTIENE EL RESTO DE COMPONENTES
         // (Lo dividimos en dos paneles (superior e inferior))
@@ -182,9 +181,10 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
         bottomPanel.add(graphicPanel);
         centralPanel.add(bottomPanel);
     }
-    private void createMainPanel(){
+    private JPanel createMainPanel(){
         JPanel mainPanel = new JPanel();
 
+        // PENDIENTE
 
     }
 
@@ -196,7 +196,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     			String str = readFile(file);
     			this.controller.reset();
     			this.actualFile = file;
-    			this.panelEventsEditor.setText(s);
+    			this.panelEventsEditor.setText(str);
     			this.panelEventsEditor.setBorder(this.actualFile.getName());
     			this.panelStatusBar.setMessage("File " + file.getName() + " of events loaded into the editor");
 			}
@@ -223,10 +223,49 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 
     @Override
     public void reset(int time, RoadMap map, List<event.Event> event) {
-		// PENDIENTE
+		this.panelEventsEditor.clear();
+		// PENDIENTE LLAMADA A RESET O CLEAR PARA ALGUNOS DE LOS PANELES
     }
 
     public void showErrorDialog(String str){
         JOptionPane.showMessageDialog(this,str);
     }
+
+    public String readFile(File file){
+    	// PENDIENTE
+	}
+	public void saveFile(){
+    	// PENDIENTE
+	}
+	public void saveReports(){
+		// PENDIENTE
+	}
+	public void exit(){
+		// PENDIENTE
+	}
+	public void generateReports(){
+		// PENDIENTE
+	}
+	public void clear(){
+		// PENDIENTE
+	}
+	public int getSteps(){
+		// PENDIENTE
+	}
+	public String getEventsEditorText(){
+		// PENDIENTE
+	}
+	public void setMessage(String str){
+		// PENDIENTE
+	}
+
+	private void addStatusBar(){
+		this.panelStatusBar = new StatusBarPanel("Welcome to the Traffic Simulator !", this.controller);
+	}
+	private void addToolBar(JPanel panel){
+		this.toolBar = new ToolBar(this, this.controller);
+	}
+	public void insert(String str){
+		this.panelEventsEditor.insert(str);
+	}
 }
