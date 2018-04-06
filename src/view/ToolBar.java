@@ -51,7 +51,7 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
 		this.add(checkInButton);
 
 		// SPINNER
-		this.add( new JLabel(" Pasos: "));
+		this.add( new JLabel(" Steps: "));
 		this.steps = new JSpinner(new SpinnerNumberModel(5,1,1000,1));
 		this.steps.setToolTipText("steps to execute: 1-1000");
 		this.steps.setMaximumSize(new Dimension(70, 70));
@@ -60,7 +60,7 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
 		this.add(steps);
 
 		// TIME
-		this.add(new JLabel(" Tiempo: "));
+		this.add(new JLabel(" Time: "));
 		this.time = new JTextField("0", 5);
 		this.time.setToolTipText("Actual Time");
 		this.time.setMaximumSize(new Dimension(70, 70));

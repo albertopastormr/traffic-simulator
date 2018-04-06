@@ -32,4 +32,6 @@ public abstract class TextAreaPanel extends JPanel {
     }
     public void setText(String text){
         this.textArea.setText(text);
-    }}
+    }
+    public String getText(){return this.textArea.getText();}
+}

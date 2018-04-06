@@ -53,8 +53,7 @@ public class MenuBar extends JMenuBar {
 		saveReports.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK)); // Podria fallar InputEvent, cambiado sobre pdf ayuda
 		saveReports.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				mainWindow.saveReports();
+			public void actionPerformed(ActionEvent e) { mainWindow.saveReports();
 			}
 		});
 		// EXIT

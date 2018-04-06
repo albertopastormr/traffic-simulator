@@ -12,7 +12,10 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
+import java.util.Scanner;
 
 public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 
@@ -231,29 +234,48 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
         JOptionPane.showMessageDialog(this,str);
     }
 
-    public String readFile(File file){
-    	// PENDIENTE
+    public String readFile(File file) throws FileNotFoundException {
+		String s = "";
+		s = new Scanner(file).useDelimiter("\\A").next();
+		return s;
 	}
 	public void saveFile(){
-    	// PENDIENTE
+		int returnVal = fileChooser.showSaveDialog(null);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			File file = fileChooser.getSelectedFile();
+			writeFile(file, this.panelEventsEditor.getText());
+		}
+	}
+	public static void writeFile(File file, String content) {
+		try {
+			PrintWriter pw = new PrintWriter(file);
+			pw.print(content);
+			pw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	public void saveReports(){
-		// PENDIENTE
+		int returnVal = fileChooser.showSaveDialog(null);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			File file = fileChooser.getSelectedFile();
+			writeFile(file, this.panelReports.getText());
+		}
 	}
 	public void exit(){
-		// PENDIENTE
+		System.exit(0);
 	}
 	public void generateReports(){
 		// PENDIENTE
 	}
 	public void clear(){
-		// PENDIENTE
+
 	}
 	public int getSteps(){
-		// PENDIENTE
+		return this.
 	}
 	public String getEventsEditorText(){
-		// PENDIENTE
+		return this.panelEventsEditor.getText();
 	}
 	public void setMessage(String str){
 		// PENDIENTE
