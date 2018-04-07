@@ -1,5 +1,6 @@
 package view;
 
+import error.SimulationError;
 import event.constructor.EventConstructor;
 import util.EventParser;
 
@@ -20,7 +21,11 @@ public class PopUpMenu extends JPopupMenu{
 			menuItem.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					mainWindow.insert(eventConstructor.template() + System.lineSeparator());
+					try {
+						mainWindow.insertAtEventsEditor(eventConstructor.template() + System.lineSeparator());
+					} catch (SimulationError simulationError) {
+						simulationError.printStackTrace();
+					}
 				}
 			});
 			templates.add(menuItem);

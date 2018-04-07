@@ -1,5 +1,7 @@
 package event.constructor;
 
+import error.ParseException;
+import error.SimulationError;
 import event.Event;
 import ini.IniSection;
 
@@ -51,7 +53,12 @@ public abstract class EventConstructor {
             return i;
     }
 
-    public String template(){
-    	return "";
+    public String template() throws SimulationError {
+        if(keys.length != defaultValues.length)
+            throw new SimulationError("keys array does not have the same length as defaultValues array at EventConstructor.template()");
+        String str = "";
+    	for (int i = 0; i < keys.length; i++)
+    	    str += keys[i] + " = " + defaultValues[i];
+    	return str;
 	}
 }

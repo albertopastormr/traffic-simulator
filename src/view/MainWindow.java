@@ -67,37 +67,37 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
         this.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {
-
+				// empty, its not necessary to be implemented
             }
 
             @Override
             public void windowClosing(WindowEvent e) {
-                // pendiente
+                exit();
             }
 
             @Override
             public void windowClosed(WindowEvent e) {
-
+				// empty, its not necessary to be implemented
             }
 
             @Override
             public void windowIconified(WindowEvent e) {
-
+				// empty, its not necessary to be implemented
             }
 
             @Override
             public void windowDeiconified(WindowEvent e) {
-
+				// empty, its not necessary to be implemented
             }
 
             @Override
             public void windowActivated(WindowEvent e) {
-
+				// empty, its not necessary to be implemented
             }
 
             @Override
             public void windowDeactivated(WindowEvent e) {
-
+				// empty, its not necessary to be implemented
             }
         });
         JPanel mainPanel = this.createMainPanel();
@@ -188,7 +188,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
         JPanel mainPanel = new JPanel();
 
         // PENDIENTE
-
+		return mainPanel;
     }
 
     public void loadFile(){
@@ -211,23 +211,29 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 
     @Override
     public void simulatorError(int time, RoadMap map, List<event.Event> event, SimulationError e) {
-		// PENDIENTE
+		this.panelStatusBar.setMessage("Simulation error at time " + time + "!");
+		e.printStackTrace();
     }
 
     @Override
     public void advance(int time, RoadMap map, List<event.Event> event) {
-		// PENDIENTE
+		// Advance no observadores
+		this.panelStatusBar.setMessage("New event with time " + time);
+
     }
 
     @Override
     public void addEvent(int time, RoadMap map, List<event.Event> event) {
-		// PENDIENTE
+		// AddEvent no observadores
+		this.panelStatusBar.setMessage("New event with time " + time);
     }
 
     @Override
     public void reset(int time, RoadMap map, List<event.Event> event) {
+    	// Reset no observadores
+		this.actualFile = null;
 		this.panelEventsEditor.clear();
-		// PENDIENTE LLAMADA A RESET O CLEAR PARA ALGUNOS DE LOS PANELES
+		this.panelStatusBar.setMessage("Reset done!");
     }
 
     public void showErrorDialog(String str){
@@ -235,9 +241,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     }
 
     public String readFile(File file) throws FileNotFoundException {
-		String s = "";
-		s = new Scanner(file).useDelimiter("\\A").next();
-		return s;
+		return new Scanner(file).useDelimiter("\\A").next();
 	}
 	public void saveFile(){
 		int returnVal = fileChooser.showSaveDialog(null);
@@ -262,17 +266,24 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 			writeFile(file, this.panelReports.getText());
 		}
 	}
-	public void exit(){
-		System.exit(0);
+	protected void exit(){
+		int n = JOptionPane.showOptionDialog(this,
+				"Are sure you want to exit?", "Exit",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null,
+				null, null);
+		if (n == 0)
+			System.exit(0);
 	}
 	public void generateReports(){
 		// PENDIENTE
 	}
 	public void clear(){
-
+		this.panelEventsEditor.clear();
 	}
 	public int getSteps(){
-		return this.
+		return 0;
+		// PENDIENTE
 	}
 	public String getEventsEditorText(){
 		return this.panelEventsEditor.getText();
@@ -286,8 +297,9 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 	}
 	private void addToolBar(JPanel panel){
 		this.toolBar = new ToolBar(this, this.controller);
+		panel.add(this.toolBar); // PENDIENTE REVISION
 	}
-	public void insert(String str){
+	protected void insertAtEventsEditor(String str){
 		this.panelEventsEditor.insert(str);
 	}
 }

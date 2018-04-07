@@ -3,6 +3,7 @@ package view;
 import control.Controller;
 
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class TableModel<T> extends DefaultTableModel implements ObserverTrafficSimulator {
@@ -30,4 +31,16 @@ public abstract class TableModel<T> extends DefaultTableModel implements Observe
     public String getColumnName(int column) {
         return this.columnIds[column];
     }
+    public void clear(){
+        this.list = new ArrayList<>();
+        this.columnIds = null;
+    }
+
+	public void setColumnIds(String[] columnIds) {
+		this.columnIds = columnIds;
+	}
+
+	public void setList(List<T> list) {
+		this.list = list;
+	}
 }

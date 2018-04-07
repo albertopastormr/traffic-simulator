@@ -15,7 +15,7 @@ public class EventsEditorPanel extends TextAreaPanel {
         this.textArea.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                // empty, its not necessary to be implemented
             }
 
             @Override
@@ -26,17 +26,17 @@ public class EventsEditorPanel extends TextAreaPanel {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                // PENDIENTE
+                // empty, its not necessary to be implemented
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-
+                // empty, its not necessary to be implemented
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-
+                // empty, its not necessary to be implemented
             }
         });
     }
