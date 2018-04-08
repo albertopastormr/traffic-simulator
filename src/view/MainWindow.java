@@ -107,6 +107,9 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
         // (contiene una JLabel param mostrar el estado del simulador)
         this.addStatusBar();
 
+        // BARRA DE HERRAMIENTAS
+        this.addToolBar(mainPanel);
+
         // PANEL QUE CONTIENE EL RESTO DE COMPONENTES
         // (Lo dividimos en dos paneles (superior e inferior))
         JPanel centralPanel = this.createCentralPanel();
@@ -121,9 +124,6 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 
         // PANEL INFERIOR
         this.createBottomPanel(centralPanel);
-
-        // BARRA DE HERRAMIENTAS
-        this.addToolBar(mainPanel);
 
         // FILE CHOOSER
         this.fileChooser = new JFileChooser();
@@ -149,13 +149,14 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
             this.actualFile = null;
             this.showErrorDialog("ERROR: file read did not work " + e.getMessage());
         }
-        topPanel.setLayout(new BoxLayout( centralPanel, BoxLayout.X_AXIS)); // pendiente revision
+        topPanel.setLayout(new BoxLayout( topPanel, BoxLayout.X_AXIS)); // pendiente revision
         // No es observador
         this.panelEventsEditor = new EventsEditorPanel(this.actualFile.getName(), text, true,this);
         // Es observador
         this.panelEventsQueue = new TablePanel<Event>("Events Queue: ", new EventsTableModel(MainWindow.columnIdEvents, this.controller));
         // Es observador
         this.panelReports = new ReportsPanel("Reports: ", false,this.controller);
+
         topPanel.add(this.panelEventsEditor);
         topPanel.add(this.panelEventsQueue);
         topPanel.add(this.panelReports);
@@ -163,7 +164,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     }
     private void createBottomPanel(JPanel centralPanel){
         JPanel bottomPanel = new JPanel(), tablesPanel = new JPanel(), graphicPanel = new JPanel();
-        bottomPanel.setLayout(new BoxLayout(centralPanel, BoxLayout.X_AXIS));
+        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
         tablesPanel.setLayout(new GridLayout(3, 1));
         graphicPanel.setLayout(new GridLayout(1,1));
         // Es observador
@@ -186,8 +187,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     }
     private JPanel createMainPanel(){
         JPanel mainPanel = new JPanel();
-
-        // PENDIENTE
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		return mainPanel;
     }
 
@@ -199,6 +199,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     			String str = readFile(file);
     			this.controller.reset();
     			this.actualFile = file;
+                //this.panelEventsEditor = new EventsEditorPanel(this.actualFile.getName(), str, true,this);
     			this.panelEventsEditor.setText(str);
     			this.panelEventsEditor.setBorder(this.actualFile.getName());
     			this.panelStatusBar.setMessage("File " + file.getName() + " of events loaded into the editor");

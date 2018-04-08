@@ -203,7 +203,7 @@ public class Main {
 						Main.executeFiles(Main.directoryPath);
 					} break;
 					case"gui":{
-						// modo gui
+						Main.initGraphicMode();
 					} break;
 					default:{
 						System.out.println("mode argument not valid");
@@ -223,7 +223,17 @@ public class Main {
 				System.out.print("Available commands:\n-f <file path> (-o <file path>)(-s positive-int)\n-t <directory path> (-s positive-int)\n-d <directory path> (-s positive-int)\n-c <directory path>\n");
 			} break;
 			default:{
-				System.out.println("program arguments not valid");
+				switch(mode){
+					case"batch":{
+						Main.executeFiles(Main.directoryPath);
+					} break;
+					case"gui":{
+						Main.initGraphicMode();
+					} break;
+					default:{
+						System.out.println("program arguments not valid");
+					}
+				}
 			}
 		}
 	}
