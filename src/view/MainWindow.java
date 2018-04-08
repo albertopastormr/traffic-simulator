@@ -197,10 +197,8 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     		File file = this.fileChooser.getSelectedFile();
     		try{
     			String str = readFile(file);
-    			this.controller.reset();
     			this.actualFile = file;
-                //this.panelEventsEditor = new EventsEditorPanel(this.actualFile.getName(), str, true,this);
-    			this.panelEventsEditor.setText(str);
+    			this.panelEventsEditor.textArea.setText(str);
     			this.panelEventsEditor.setBorder(this.actualFile.getName());
     			this.panelStatusBar.setMessage("File " + file.getName() + " of events loaded into the editor");
 			}

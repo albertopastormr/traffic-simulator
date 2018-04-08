@@ -24,6 +24,7 @@ public abstract class TextAreaPanel extends JPanel {
     public void setTextArea(JTextArea textArea) {
         this.textArea = textArea;
     }
+
     public void clear(){
         this.setTextArea(new JTextArea(40,30));
     }
