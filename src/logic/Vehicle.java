@@ -158,6 +158,17 @@ public class Vehicle extends SimulationObject {
         return destination;
     }
 
+    public int getKilometrage() {
+        return kilometrage;
+    }
+
+    public int getSpeedActual() {
+        return speedActual;
+    }
+
+    public List<GenericJunction<?>> getItinerary() {
+        return itinerary;
+    }
 
     @Override
     public String toString() {

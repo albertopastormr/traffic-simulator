@@ -107,4 +107,8 @@ public class Road  extends SimulationObject {
     public List<Vehicle> getVehicles() {
         return vehicles;
     }
+
+    public int getSpeedMax() {
+        return speedMax;
+    }
 }

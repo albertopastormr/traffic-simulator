@@ -22,6 +22,6 @@ public class EventNewCongestedJunction extends EventNewJunction {
 
     @Override
     public String toString() {
-        return "New CongestedJunction";
+        return "New Congested-Junction";
     }
 }

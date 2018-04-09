@@ -20,4 +20,7 @@ public interface ObserverTrafficSimulator {
     // notifica que la simulación se ha reiniciado
     void reset(int time, RoadMap map, List<Event> events);
 
+    // notifica que se ha borrado un evento
+    void removeEvent(int time, RoadMap map, List<Event> events);
+
 }

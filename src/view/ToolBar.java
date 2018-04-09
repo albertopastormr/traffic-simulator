@@ -34,7 +34,7 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
 
 		// CHECK-IN
 		JButton checkInButton = new JButton(new ImageIcon("media/icons/checkInButton.png"));
-		checkInButton.setToolTipText("Load events to the simulation");
+		checkInButton.setToolTipText("Execute pre-loaded events");
 		checkInButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -54,8 +54,8 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
 		this.add( new JLabel(" Steps: "));
 		this.steps = new JSpinner(new SpinnerNumberModel(5,1,1000,1));
 		this.steps.setToolTipText("steps to execute: 1-1000");
-		this.steps.setMaximumSize(new Dimension(70, 70));
-		this.steps.setMinimumSize(new Dimension(70,70));
+		this.steps.setMaximumSize(new Dimension(40, 50));
+		this.steps.setMinimumSize(new Dimension(40,50));
 		this.steps.setValue(1);
 		this.add(steps);
 
@@ -74,7 +74,7 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
 		generateReportsButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainWindow.generateReports();
+				mainWindow.generateReport();
 			}
 		});
 		this.add(generateReportsButton);
@@ -82,6 +82,9 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
 
 	}
 
+	public int getSteps(){
+		return (int) this.steps.getValue();
+	}
 	@Override
 	public void simulatorError(int time, RoadMap map, List<Event> event, SimulationError e) {
 
@@ -89,17 +92,22 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
 
 	@Override
 	public void advance(int time, RoadMap map, List<Event> events) {
-		this.time.setText(""+this.time);
+		this.time.setText(String.valueOf(time + 1));
 	}
 
 	@Override
 	public void addEvent(int time, RoadMap map, List<Event> events) {
-
+		// empty
 	}
 
 	@Override
 	public void reset(int time, RoadMap map, List<Event> events) {
 		this.steps.setValue(1);
 		this.time.setText("0");
+	}
+
+	@Override
+	public void removeEvent(int time, RoadMap map, List<Event> events) {
+		// empty
 	}
 }

@@ -67,4 +67,9 @@ public class ReportsDialog extends JDialog implements ObserverTrafficSimulator {
 	public void reset(int time, RoadMap map, List<Event> events) {
 		this.setMap(map);
 	}
+
+	@Override
+	public void removeEvent(int time, RoadMap map, List<Event> events) {
+
+	}
 }

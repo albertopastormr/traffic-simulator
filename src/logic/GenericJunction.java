@@ -47,6 +47,10 @@ abstract public class GenericJunction<T extends InRoad> extends SimulationObject
         return "junction_report";
     }
 
+    public int getGreenTrafficLightIndex() {
+        return greenTrafficLightIndex;
+    }
+
     @Override
     public void advance() throws EventException {
         if(!this.InRoads.isEmpty()){

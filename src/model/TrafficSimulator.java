@@ -50,11 +50,14 @@ public class TrafficSimulator implements Observer<ObserverTrafficSimulator> {
                 else {
                     events.get(0).execute(map);
                     events.remove(0); // Once it has been executed, we remove it from the list of events
+                    notifyEventRemove();
                 }
                 i++;
             }
 
             map.update();
+            notifyAdvance();
+
             if(fileOutput != null) {
                 PrintStream printStream = new PrintStream(fileOutput);
                 printStream.print(map.generateReport(this.timeCount));
@@ -75,8 +78,7 @@ public class TrafficSimulator implements Observer<ObserverTrafficSimulator> {
             }
         };
         this.events = new SortedArrayList<>(cmp); // Sorted by time
-        for(ObserverTrafficSimulator obs : this.observers)
-            obs.reset(this.timeCount, this.map, this.events);
+        notifyReset();
     }
     public void insertEvent(Event e) throws SimulationError {
         if(e != null){
@@ -97,7 +99,9 @@ public class TrafficSimulator implements Observer<ObserverTrafficSimulator> {
         }
 
     }
-
+    public String generateReport(){
+        return this.map.generateReport(this.timeCount);
+    }
     private void notifyNewEvent(){
         for(ObserverTrafficSimulator obs : this.observers)
             obs.addEvent(this.timeCount, this.map, this.events);
@@ -105,6 +109,18 @@ public class TrafficSimulator implements Observer<ObserverTrafficSimulator> {
     private void notifyError(SimulationError error){
         for(ObserverTrafficSimulator obs : this.observers)
             obs.simulatorError(this.timeCount, this.map, this.events, error);
+    }
+    private void notifyReset(){
+        for(ObserverTrafficSimulator obs : this.observers)
+            obs.reset(this.timeCount, this.map, this.events);
+    }
+    private void notifyAdvance(){
+        for(ObserverTrafficSimulator obs : this.observers)
+            obs.advance(this.timeCount, this.map, this.events);
+    }
+    private void notifyEventRemove(){
+        for(ObserverTrafficSimulator obs : this.observers)
+            obs.removeEvent(this.timeCount, this.map, this.events);
     }
     @Override
     public void addObserver(ObserverTrafficSimulator o) {

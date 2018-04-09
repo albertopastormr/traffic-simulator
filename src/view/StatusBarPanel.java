@@ -45,4 +45,9 @@ public class StatusBarPanel extends JPanel implements ObserverTrafficSimulator {
 	public void reset(int time, RoadMap map, List<Event> events) {
 		this.executeInfo = new JLabel();
 	}
+
+	@Override
+	public void removeEvent(int time, RoadMap map, List<Event> events) {
+		// empty
+	}
 }

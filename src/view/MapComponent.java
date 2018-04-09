@@ -251,4 +251,9 @@ public class MapComponent extends JComponent implements ObserverTrafficSimulator
 		refresh();
 	}
 
+	@Override
+	public void removeEvent(int time, RoadMap map, List<Event> events) {
+		// empty
+	}
+
 }

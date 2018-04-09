@@ -26,6 +26,6 @@ public class EventNewBreakdown extends Event {
     }
     @Override
     public String toString() {
-        return ""; // Por completar
+        return "New Breakdown";
     }
 }

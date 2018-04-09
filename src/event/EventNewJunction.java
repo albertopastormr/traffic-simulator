@@ -26,6 +26,6 @@ public class EventNewJunction extends Event {
 
     @Override
     public String toString() {
-        return time + id; // Por completar
+        return "New Junction";
     }
 }

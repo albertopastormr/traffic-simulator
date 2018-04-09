@@ -34,7 +34,9 @@ public class MenuBar extends JMenuBar {
 		load.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				mainWindow.loadFile();
+				mainWindow.showDialog("File has been loaded !");
 			}
 		});
 		// SAVE
@@ -45,6 +47,8 @@ public class MenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				mainWindow.saveFile();
+				mainWindow.showDialog("File has been saved !");
+
 			}
 		});
 		// SAVE REPORTS
@@ -53,7 +57,9 @@ public class MenuBar extends JMenuBar {
 		saveReports.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK)); // Podria fallar InputEvent, cambiado sobre pdf ayuda
 		saveReports.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) { mainWindow.saveReports();
+			public void actionPerformed(ActionEvent e) {
+				mainWindow.saveReports();
+				mainWindow.showDialog("Actual execution reports have been saved !");
 			}
 		});
 		// EXIT
@@ -93,7 +99,7 @@ public class MenuBar extends JMenuBar {
 		reset.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controller.reset();
+				mainWindow.resetAll();
 			}
 		});
 
@@ -110,7 +116,8 @@ public class MenuBar extends JMenuBar {
 		generate.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainWindow.generateReports();
+				mainWindow.generateReport();
+				mainWindow.showDialog("Reports have been generated !");
 			}
 		});
 		// CLEAR
@@ -120,7 +127,8 @@ public class MenuBar extends JMenuBar {
 		clear.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainWindow.clear();
+				mainWindow.clearReports();
+				mainWindow.showDialog("Reports have been cleared !");
 			}
 		});
 

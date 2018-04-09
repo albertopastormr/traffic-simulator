@@ -71,6 +71,10 @@ public class Controller {
         }
     }
 
+    public String generateReport(){
+        return this.simulator.generateReport();
+    }
+
     public void addObserver(ObserverTrafficSimulator obs){
         this.simulator.addObserver(obs);
     }

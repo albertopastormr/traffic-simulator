@@ -32,4 +32,9 @@ public class ReportsPanel extends TextAreaPanel implements ObserverTrafficSimula
     public void reset(int time, RoadMap map, List<Event> event) {
         // pendiente
     }
+
+    @Override
+    public void removeEvent(int time, RoadMap map, List<Event> events) {
+        // pendiente
+    }
 }

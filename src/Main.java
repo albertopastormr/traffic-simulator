@@ -140,7 +140,7 @@ public class Main {
 
 	private static void initStandardMode() throws IOException {
 		InputStream is = new FileInputStream(new File(Main.ficheroEntrada));
-		OutputStream os = Main.ficheroSalida == null ? System.out : new FileOutputStream(new File(Main.ficheroSalida));
+		OutputStream os = (Main.ficheroSalida == null ? System.out : new FileOutputStream(new File(Main.ficheroSalida)));
 		TrafficSimulator sim = new TrafficSimulator();
 		Controller ctrl = new Controller(sim, Main.timeLimit, is, os);
 		ctrl.execute();
@@ -184,7 +184,7 @@ public class Main {
 	}
 	private static  void execute() throws IOException {
 		switch (Main.commands){
-			case "i": case"io": case"is": case"ios":case "im": case"imo": case"ims": case"imos": case"iom": case"ism": case"ioms": case"imso":{
+			case "i": case"m": case"io": case"is": case"ios":case "im": case"imo": case"ims": case"imos": case"iom": case"ism": case"ioms": case"imso":{
 				switch(mode){
 					case"batch":{
 						Main.initStandardMode();

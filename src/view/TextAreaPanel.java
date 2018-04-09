@@ -26,7 +26,7 @@ public abstract class TextAreaPanel extends JPanel {
     }
 
     public void clear(){
-        this.setTextArea(new JTextArea(40,30));
+        this.setText("");
     }
     public void insert(String value){
         this.textArea.insert(value, this.textArea.getCaretPosition());

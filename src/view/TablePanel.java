@@ -1,8 +1,9 @@
 package view;
 
+import view.TableModel.TableModel;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class TablePanel<T> extends JPanel {
 
@@ -15,8 +16,4 @@ public class TablePanel<T> extends JPanel {
         JTable table = new JTable(this.model);
         this.add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
     }
-
-	TableModel<T> getModel() {
-		return model;
-	}
 }

@@ -23,6 +23,6 @@ public class EventNewRoundabout extends EventNewJunction {
 
     @Override
     public String toString() {
-        return "New Roundabout";
+        return "New Round-about";
     }
 }
