@@ -18,16 +18,14 @@ public class ReportsDialog extends JDialog implements ObserverTrafficSimulator {
 	public static char	TECLA_LIMPIAR = 'C';
 
 	public ReportsDialog(MainWindow mainWindow, Controller controller){
-		// . . .
-		this.vehiclesPanel = new SimulationObjectPanel<Vehicle>("Vehicles");
-		this.roadsPanel = new SimulationObjectPanel<Road>("Roads");
-		this.junctionsPanel = new SimulationObjectPanel<GenericJunction<?>>("Junctions");
-		this.buttonsPanel = new ButtonsPanel(this);
+		this.setLayout(new GridLayout(3,1));
 		InformationPanel panelInfo = new InformationPanel();
 		mainWindow.add(panelInfo, BorderLayout.PAGE_START);
 
-		controller.addObserver(this); // Esto esta bien ???
-		// . . .
+		createCentralPanel();
+		createButtonsPanel();
+
+		controller.addObserver(this);
 	}
 	public void show(){
 		this.setVisible(true);
@@ -48,6 +46,21 @@ public class ReportsDialog extends JDialog implements ObserverTrafficSimulator {
 		return this.junctionsPanel.getSelectedItems();
 	}
 
+	private void createCentralPanel(){
+		JPanel centralPanel = new JPanel();
+		this.vehiclesPanel = new SimulationObjectPanel<Vehicle>("Vehicles");
+		this.roadsPanel = new SimulationObjectPanel<Road>("Roads");
+		this.junctionsPanel = new SimulationObjectPanel<GenericJunction<?>>("Junctions");
+		centralPanel.add(this.vehiclesPanel);
+		centralPanel.add(this.roadsPanel);
+		centralPanel.add(this.junctionsPanel);
+		this.add(centralPanel);
+
+	}
+	private void createButtonsPanel(){
+		this.buttonsPanel = new ButtonsPanel(this);
+
+	}
 	@Override
 	public void simulatorError(int time, RoadMap map, List<Event> event, SimulationError e) {
 

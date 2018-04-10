@@ -215,15 +215,6 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 		this.panelStatusBar.setMessage("New event with time " + time);
     }
 
-    public void resetAll(){
-        this.actualFile = null;
-        this.controller.reset();
-        this.panelEventsEditor.clear();
-        this.panelReports.clear();
-        this.panelStatusBar.setMessage("Reset done!");
-        this.showDialog("Reset done!");
-        this.loadFile();
-    }
     @Override
     public void reset(int time, RoadMap map, List<event.Event> event) {
     	// Reset no observadores
@@ -260,7 +251,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     public String readFile(File file) throws FileNotFoundException {
 		return new Scanner(file).useDelimiter("\\A").next();
 	}
-	public void saveFile(){
+	public void saveEventsEditor(){
 		int returnVal = fileChooser.showSaveDialog(null);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			File file = fileChooser.getSelectedFile();
@@ -283,6 +274,18 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 			writeFile(file, this.panelReports.getText());
 		}
 	}
+	protected void execute(){
+		this.controller.execute(this.getSteps());
+	}
+	public void resetAll(){
+		this.actualFile = null;
+		this.controller.reset();
+		this.panelEventsEditor.clear();
+		this.panelReports.clear();
+		this.panelStatusBar.setMessage("Reset done!");
+		this.showDialog("Reset done!");
+		this.loadFile();
+	}
 	protected void exit(){
 		int n = JOptionPane.showOptionDialog(this,
 				"Are sure you want to exit?", "Exit",
@@ -298,7 +301,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 	public void clearReports(){
         this.panelReports.clear();
     }
-	public void clear(){
+	public void clearEventsEditor(){
 		this.panelEventsEditor.clear();
 	}
 	public int getSteps(){
@@ -317,7 +320,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 	}
 	private void addToolBar(JPanel panel){
 		this.toolBar = new ToolBar(this, this.controller);
-		panel.add(this.toolBar); // PENDIENTE REVISION
+		panel.add(this.toolBar);
 	}
 	protected void insertAtEventsEditor(String str){
 		this.panelEventsEditor.insert(str);

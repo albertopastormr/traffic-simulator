@@ -15,7 +15,7 @@ public class PopUpMenu extends JPopupMenu{
 		JMenu templates = new JMenu("New template");
 		this.add(templates);
 
-		// Agregar las opciones con sus listeners
+		// Agrega las opciones con sus listeners
 		for(EventConstructor eventConstructor : EventParser.getEvents()){
 			JMenuItem menuItem = new JMenuItem(eventConstructor.toString());
 			menuItem.addActionListener(new ActionListener() {

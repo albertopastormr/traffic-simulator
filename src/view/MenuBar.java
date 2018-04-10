@@ -46,7 +46,7 @@ public class MenuBar extends JMenuBar {
 		save.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainWindow.saveFile();
+				mainWindow.saveEventsEditor();
 				mainWindow.showDialog("File has been saved !");
 
 			}
@@ -64,8 +64,8 @@ public class MenuBar extends JMenuBar {
 		});
 		// EXIT
 		JMenuItem exit = new JMenuItem("Exit");
-		exit.setMnemonic(KeyEvent.VK_ESCAPE);
-		exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, InputEvent.CTRL_MASK)); // Podria fallar InputEvent, cambiado sobre pdf ayuda
+		exit.setMnemonic(KeyEvent.VK_Q);
+		exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK)); // Podria fallar InputEvent, cambiado sobre pdf ayuda
 		exit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -88,8 +88,7 @@ public class MenuBar extends JMenuBar {
 		execute.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int steps = mainWindow.getSteps();
-				controller.execute(steps);
+				mainWindow.execute();
 			}
 		});
 		// RESET
