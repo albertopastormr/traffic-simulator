@@ -57,9 +57,9 @@ public class Road  extends SimulationObject {
             is.setValue("state", "");
         else{
             String s = "";
-            s += this.vehicles.get(0);
+            s += this.vehicles.get(0).details();
             for(int i = 1; i < this.vehicles.size(); i++)
-                s += "," +  this.vehicles.get(i).toString();
+                s += "," +  this.vehicles.get(i).details();
             is.setValue("state", s);
         }
     }

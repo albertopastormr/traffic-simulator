@@ -36,7 +36,7 @@ public class JunctionsTableModel extends TableModel<GenericJunction<?>> {
 
 	@Override
 	public void simulatorError(int time, RoadMap map, List<Event> event, SimulationError e) {
-		// PENDIENTE
+		// empty, its not necessary to be implemented
 	}
 
 	@Override

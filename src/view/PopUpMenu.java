@@ -11,11 +11,28 @@ import java.awt.event.ActionListener;
 public class PopUpMenu extends JPopupMenu{
 
 	public PopUpMenu(MainWindow mainWindow){
+		// OPCIONES EN POPUPMENU
+		JMenu templatesItem = new JMenu("New template");
+		this.add(templatesItem);
+		JMenuItem loadItem = new JMenuItem("Load");
+		loadItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainWindow.loadFile();
+			}
+		});
+		JMenuItem saveItem = new JMenuItem("Save");
+		saveItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainWindow.saveEventsEditor();
+			}
+		});
+		this.addSeparator();
+		this.add(loadItem);
+		this.add(saveItem);
 
-		JMenu templates = new JMenu("New template");
-		this.add(templates);
-
-		// Agrega las opciones con sus listeners
+		// OPCIONES EN TEMPLATES
 		for(EventConstructor eventConstructor : EventParser.getEvents()){
 			JMenuItem menuItem = new JMenuItem(eventConstructor.toString());
 			menuItem.addActionListener(new ActionListener() {
@@ -28,7 +45,7 @@ public class PopUpMenu extends JPopupMenu{
 					}
 				}
 			});
-			templates.add(menuItem);
+			templatesItem.add(menuItem);
 		}
 	}
 }

@@ -1,9 +1,11 @@
 package view;
 
+import logic.SimulationObject;
+
 import javax.swing.*;
 import java.util.List;
 
-public class ListModel<T> extends DefaultListModel<T> {
+public class ListModel<T extends SimulationObject> extends DefaultListModel<T> {
 
 	private List<T> list;
 

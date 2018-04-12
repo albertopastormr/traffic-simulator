@@ -134,6 +134,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 
         // REPORT DIALOG
         this.reportsDialog = new ReportsDialog(this, this.controller);
+        this.setVisibleReportsDialog(false);
         this.pack();
         this.setVisible(true);
     }
@@ -296,6 +297,18 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 	public void generateReport(){
         this.panelReports.setText(this.controller.generateReport());
 	}
+	public void generateSelectedItemsReport(){
+		String report = "";
+
+		for(GenericJunction<?> j : this.reportsDialog.getSelectedJunctions())
+			report += j.generateReport(this.toolBar.getTime());
+		for(Road r : this.reportsDialog.getSelectedRoads())
+			report += r.generateReport(this.toolBar.getTime());
+		for(Vehicle v : this.reportsDialog.getSelectedVehicles())
+			report += v.generateReport(this.toolBar.getTime());
+
+		this.panelReports.setText(report);
+	}
 	public void clearReports(){
         this.panelReports.clear();
     }
@@ -311,6 +324,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 	public void setMessage(String str){
 		this.showDialog(str);
 	}
+	public void setVisibleReportsDialog(boolean visible){ this.reportsDialog.setVisible(visible);}
 
 	private void addStatusBar(JPanel mainPanel){
 		this.panelStatusBar = new StatusBarPanel("Welcome to the Traffic Simulator !", this.controller);

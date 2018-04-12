@@ -1,8 +1,12 @@
 package view;
 
-public class ButtonsPanel {
+import javax.swing.*;
+import java.awt.*;
 
-	public ButtonsPanel(ReportsDialog reportsDialog){
-		// PENDIENTE
+public class ButtonsPanel extends JPanel {
+
+
+	public ButtonsPanel(){
+		this.setLayout(new FlowLayout());
 	}
 }

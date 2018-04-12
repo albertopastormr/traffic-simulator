@@ -43,16 +43,19 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
 				if(content.length != 0){
 					try {
 						controller.loadEvent(new ByteArrayInputStream(content));
-					} catch (SimulationError simulationError) {
-						simulationError.printStackTrace();
+						mainWindow.setMessage("Events loaded to the simulation!");
+					} catch (Exception err) {
+						controller.reset();
+						mainWindow.showErrorDialog("ERROR: error loading events from the Editor Panel:\n" + err.getMessage());
 					}
-					mainWindow.setMessage("Events loaded to the simulation!");
 				}
 				else
 					mainWindow.setMessage("Events editor is empty ! Can't load any events !");
 			}
 		});
 		this.add(checkInButton);
+
+		this.addSeparator();
 
 		// SAVE EVENTS EDITOR
 		JButton saveEventsEditorButton = new JButton(new ImageIcon("media/icons/saveEventsEditorButton.png"));
@@ -75,6 +78,10 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
 			}
 		});
 		this.add(clearEventsEditorButton);
+
+
+		this.addSeparator();
+
 
 		// EXECUTE
 		JButton executeButton = new JButton(new ImageIcon("media/icons/executeButton.png"));
@@ -116,13 +123,13 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
 		this.time.setEditable(false);
 		this.add(this.time);
 
-		// GENERATE REPORTS
+		// GENERATE REPORTS AREA
 		JButton generateReportsButton = new JButton(new ImageIcon("media/icons/generateReportsButton.png"));
 		generateReportsButton.setToolTipText("Generate reports into the reports panel");
 		generateReportsButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainWindow.generateReport();
+				mainWindow.setVisibleReportsDialog(true);
 			}
 		});
 		this.add(generateReportsButton);
@@ -138,6 +145,8 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
 		});
 		this.add(clearReportsButton);
 
+		this.addSeparator();
+
 		// SAVE REPORTS FILE
 		JButton saveReportsButton = new JButton(new ImageIcon("media/icons/saveReportsButton.png"));
 		saveReportsButton.setToolTipText("Save actual reports to a file");
@@ -148,6 +157,8 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
 			}
 		});
 		this.add(saveReportsButton);
+
+		this.addSeparator();
 
 		// EXIT
 		JButton exitButton = new JButton(new ImageIcon("media/icons/exitButton.png"));
@@ -164,9 +175,13 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
 	public int getSteps(){
 		return (int) this.steps.getValue();
 	}
+	public Integer getTime() {
+		return Integer.parseInt(time.getText());
+	}
+
 	@Override
 	public void simulatorError(int time, RoadMap map, List<Event> event, SimulationError e) {
-
+		// empty, its not necessary to be implemented
 	}
 
 	@Override
@@ -176,7 +191,7 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
 
 	@Override
 	public void addEvent(int time, RoadMap map, List<Event> events) {
-		// empty
+		// empty, its not necessary to be implemented
 	}
 
 	@Override
@@ -187,6 +202,6 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
 
 	@Override
 	public void removeEvent(int time, RoadMap map, List<Event> events) {
-		// empty
+		// empty, its not necessary to be implemented
 	}
 }

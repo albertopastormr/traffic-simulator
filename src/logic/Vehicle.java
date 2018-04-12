@@ -170,8 +170,8 @@ public class Vehicle extends SimulationObject {
         return itinerary;
     }
 
-    @Override
-    public String toString() {
+    public String details() {
         return "(" + this.id + "," + this.locationActual + ")";
     }
+
 }

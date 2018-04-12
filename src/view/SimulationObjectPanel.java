@@ -1,5 +1,7 @@
 package view;
 
+import logic.SimulationObject;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -7,7 +9,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimulationObjectPanel<T> extends JPanel {
+public class SimulationObjectPanel<T extends SimulationObject> extends JPanel {
 
 	private ListModel<T> listModel;
 	private JList<T> objList;
@@ -23,7 +25,7 @@ public class SimulationObjectPanel<T> extends JPanel {
 		list.addKeyListener((new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				if(e.getKeyChar() == ReportsDialog.TECLA_LIMPIAR)
+				if(e.getKeyChar() == ReportsDialog.CLEAN_KEY)
 					list.clearSelection();
 			}
 

@@ -4,9 +4,12 @@ import control.Controller;
 import error.SimulationError;
 import event.Event;
 import logic.*;
+import sun.applet.Main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class ReportsDialog extends JDialog implements ObserverTrafficSimulator {
@@ -15,19 +18,28 @@ public class ReportsDialog extends JDialog implements ObserverTrafficSimulator {
 	private SimulationObjectPanel<Vehicle> vehiclesPanel;
 	private SimulationObjectPanel<Road> roadsPanel;
 	private SimulationObjectPanel<GenericJunction<?>> junctionsPanel;
-	public static char	TECLA_LIMPIAR = 'C';
+	public static char	CLEAN_KEY = 'C';
+	private static String informationText = "Select items for which you want to generate reports.\nUse 'c' to clear your selection.\nUse Ctrl+A to select all";
 
 	public ReportsDialog(MainWindow mainWindow, Controller controller){
-		this.setLayout(new GridLayout(3,1));
-		InformationPanel panelInfo = new InformationPanel();
-		mainWindow.add(panelInfo, BorderLayout.PAGE_START);
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-		createCentralPanel();
-		createButtonsPanel();
+		createInformationPanel(mainPanel);
+		createCentralPanel(mainPanel);
+		createButtonsPanel(mainWindow, mainPanel);
 
+		this.add(mainPanel);
 		controller.addObserver(this);
+
+		setPreferredSize(new Dimension(1024, 300));
+		setTitle("Generate Selected Reports");
+
+		setModal(true);
+		pack();
+		setLocationRelativeTo(getParent());
 	}
-	public void show(){
+	public void showReportsDialog(){
 		this.setVisible(true);
 	}
 	private void setMap(RoadMap roadMap){
@@ -46,7 +58,11 @@ public class ReportsDialog extends JDialog implements ObserverTrafficSimulator {
 		return this.junctionsPanel.getSelectedItems();
 	}
 
-	private void createCentralPanel(){
+	private void createInformationPanel(JPanel mainPanel){
+		InformationPanel panelInfo = new InformationPanel(informationText);
+		mainPanel.add(panelInfo);
+	}
+	private void createCentralPanel(JPanel mainPanel){
 		JPanel centralPanel = new JPanel();
 		this.vehiclesPanel = new SimulationObjectPanel<Vehicle>("Vehicles");
 		this.roadsPanel = new SimulationObjectPanel<Road>("Roads");
@@ -54,16 +70,35 @@ public class ReportsDialog extends JDialog implements ObserverTrafficSimulator {
 		centralPanel.add(this.vehiclesPanel);
 		centralPanel.add(this.roadsPanel);
 		centralPanel.add(this.junctionsPanel);
-		this.add(centralPanel);
+		mainPanel.add(centralPanel);
 
 	}
-	private void createButtonsPanel(){
-		this.buttonsPanel = new ButtonsPanel(this);
+	private void createButtonsPanel(MainWindow mainWindow, JPanel mainPanel){
+		this.buttonsPanel = new ButtonsPanel();
+		JButton cancelButton = new JButton("Cancel");
+		cancelButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainWindow.setVisibleReportsDialog(false);
+			}
+		});
+		JButton generateButton = new JButton("Generate");
+		generateButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainWindow.generateSelectedItemsReport();
+				dispose();
+			}
+		});
 
+		this.buttonsPanel.add(cancelButton);
+		this.buttonsPanel.add(generateButton);
+
+		mainPanel.add(this.buttonsPanel);
 	}
 	@Override
 	public void simulatorError(int time, RoadMap map, List<Event> event, SimulationError e) {
-
+		setVisible(false);
 	}
 
 	@Override

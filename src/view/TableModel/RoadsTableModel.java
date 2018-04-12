@@ -31,7 +31,7 @@ public class RoadsTableModel extends TableModel<Road> {
 
 	@Override
 	public void simulatorError(int time, RoadMap map, List<Event> event, SimulationError e) {
-		// PENDIENTE
+		// empty, its not necessary to be implemented
 	}
 
 	@Override
