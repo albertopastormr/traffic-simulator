@@ -59,8 +59,10 @@ public class TrafficSimulator implements Observer<ObserverTrafficSimulator> {
             notifyAdvance();
 
             if(fileOutput != null) {
-                PrintStream printStream = new PrintStream(fileOutput);
-                printStream.print(map.generateReport(this.timeCount));
+                /*PrintStream printStream = new PrintStream(fileOutput);
+                printStream.print(map.generateReport(this.timeCount));*/
+
+                fileOutput.write(map.generateReport(this.timeCount).getBytes());
             }
             else
                 throw new SimulationError("FileOutput unknown\n");

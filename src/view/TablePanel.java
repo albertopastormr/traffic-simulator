@@ -14,6 +14,7 @@ public class TablePanel<T> extends JPanel {
         this.setBorder(BorderFactory.createTitledBorder(borderId));
         this.model = model;
         JTable table = new JTable(this.model);
+        table.setEnabled(false);
         this.add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
     }
 }

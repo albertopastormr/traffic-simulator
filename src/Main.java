@@ -3,6 +3,7 @@ import java.awt.*;
 import java.io.*;
 
 import error.ParseException;
+import error.SimulationError;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -11,6 +12,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import control.Controller;
 import model.TrafficSimulator;
+import util.ReportsPanelStream;
 import view.MainWindow;
 
 import javax.swing.*;
@@ -154,7 +156,11 @@ public class Main {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				new MainWindow(Main.ficheroEntrada, controller);
+				try {
+					new MainWindow(Main.ficheroEntrada, controller);
+				} catch (SimulationError simulationError) {
+					simulationError.printStackTrace();
+				}
 			}
 		});
 	}

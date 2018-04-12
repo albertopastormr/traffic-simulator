@@ -4,6 +4,7 @@ import control.Controller;
 import error.SimulationError;
 import event.Event;
 import logic.*;
+import util.ReportsPanelStream;
 import view.TableModel.EventsTableModel;
 import view.TableModel.JunctionsTableModel;
 import view.TableModel.RoadsTableModel;
@@ -58,7 +59,10 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     private File actualFile;
     private Controller controller;
 
-    public MainWindow(String inputFile, Controller controller){
+    // OUTPUT OPTIONS
+	public enum OutputOption{CONSOLE, GRAPHIC}
+
+    public MainWindow(String inputFile, Controller controller) throws SimulationError {
         super("Traffic Simulator");
         this.controller = controller;
         this.actualFile = (inputFile != null ? new File(inputFile) : null);
@@ -66,7 +70,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
         controller.addObserver(this);
     }
 
-    private void initGUI(){
+    private void initGUI() throws SimulationError {
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowListener() {
             @Override
@@ -137,6 +141,8 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
         this.setVisibleReportsDialog(false);
         this.pack();
         this.setVisible(true);
+
+		this.switchOutputStream(OutputOption.GRAPHIC); // Opcion grafica para salida reportes por defecto
     }
 
     private JPanel createCentralPanel(){
@@ -294,6 +300,19 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 		if (n == 0)
 			System.exit(0);
 	}
+	public void switchOutputStream(OutputOption option) throws SimulationError {
+		switch(option){
+			case CONSOLE:{
+				this.controller.setOutputStream(System.out);
+			} break;
+			case GRAPHIC:{
+				this.controller.setOutputStream(new ReportsPanelStream(this.panelReports.getTextArea()));
+			} break;
+			default:{
+				throw new SimulationError("OutputOption not valid\n");
+			}
+		}
+	}
 	public void generateReport(){
         this.panelReports.setText(this.controller.generateReport());
 	}
@@ -309,6 +328,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 
 		this.panelReports.setText(report);
 	}
+
 	public void clearReports(){
         this.panelReports.clear();
     }

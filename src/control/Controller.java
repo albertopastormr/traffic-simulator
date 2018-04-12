@@ -18,14 +18,14 @@ import java.io.OutputStream;
 public class Controller {
 
     private TrafficSimulator simulator;
-    private OutputStream fileOutput;
+    private OutputStream outputStream;
     private InputStream fileInput;
     private int simulatorSteps;
 
     public void execute() {
         try {
             this.loadEvent(this.fileInput);
-            this.simulator.execute(simulatorSteps, this.fileOutput);
+            this.simulator.execute(simulatorSteps, this.outputStream);
         }
         catch (Exception e){
             System.out.println(e.getMessage());
@@ -34,7 +34,7 @@ public class Controller {
     }
     public void execute(int simulationSteps){
         try {
-            this.simulator.execute(simulationSteps, this.fileOutput);
+            this.simulator.execute(simulationSteps, this.outputStream);
         } catch (SimulationError | RoadMapException | NewEventException | EventException | IOException error) {
             error.printStackTrace();
         }
@@ -43,9 +43,9 @@ public class Controller {
         this.simulator.reset();
     }
 
-    public Controller(TrafficSimulator simulator, int simulatorSteps, InputStream fileInput,  OutputStream fileOutput) {
+    public Controller(TrafficSimulator simulator, int simulatorSteps, InputStream fileInput,  OutputStream outputStream) {
         this.simulator = simulator;
-        this.fileOutput = fileOutput;
+        this.outputStream = outputStream;
         this.fileInput = fileInput;
         this.simulatorSteps = simulatorSteps;
     }
@@ -81,4 +81,7 @@ public class Controller {
         this.simulator.removeObserver(obs);
     }
 
+    public void setOutputStream(OutputStream outputStream) {
+        this.outputStream = outputStream;
+    }
 }

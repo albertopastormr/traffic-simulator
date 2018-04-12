@@ -1,6 +1,7 @@
 package view;
 
 import control.Controller;
+import error.SimulationError;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -103,6 +104,21 @@ public class MenuBar extends JMenuBar {
 				mainWindow.resetAll();
 			}
 		});
+		// OUTPUT OPTION
+		JCheckBoxMenuItem outputOption = new JCheckBoxMenuItem("Console Output");
+		outputOption.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AbstractButton abstractButton = (AbstractButton) e.getSource();
+				boolean selected = abstractButton.getModel().isSelected();
+				try {
+					mainWindow.switchOutputStream((selected ? MainWindow.OutputOption.CONSOLE : MainWindow.OutputOption.GRAPHIC));
+				} catch (SimulationError simulationError) {
+					simulationError.printStackTrace();
+				}
+			}
+		});
+
 		// CHECK-IN
 		JMenuItem checkIn = new JMenuItem("Check-In");
 		checkIn.setMnemonic(KeyEvent.VK_I);
@@ -139,6 +155,7 @@ public class MenuBar extends JMenuBar {
 
 		menu.add(execute);
 		menu.add(reset);
+		menu.add(outputOption);
 		menu.addSeparator();
 		menu.add(checkIn);
 		menu.add(clearEvents);
