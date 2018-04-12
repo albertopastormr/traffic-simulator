@@ -16,6 +16,8 @@ public class EventsEditorPanel extends TextAreaPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // empty, its not necessary to be implemented
+				if(e.isPopupTrigger() && textArea.isEnabled())
+					popUp.show(e.getComponent(), e.getX(), e.getY());
             }
 
             @Override
@@ -27,6 +29,8 @@ public class EventsEditorPanel extends TextAreaPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 // empty, its not necessary to be implemented
+				if(e.isPopupTrigger() && textArea.isEnabled())
+					popUp.show(e.getComponent(), e.getX(), e.getY());
             }
 
             @Override

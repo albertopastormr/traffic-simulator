@@ -22,11 +22,12 @@ public class JunctionsTableModel extends TableModel<GenericJunction<?>> {
 			case 0: s = this.list.get(row).getId(); break;
 			case 1: s = ( this.list.get(row).getGreenTrafficLightIndex() >= 0  ? this.list.get(row).getInRoads().get(this.list.get(row).getGreenTrafficLightIndex()).getRoad().getId() : ""); break;
 			case 2:{
-				s = "";
+				s = "[";
 				if(this.list.get(row).getGreenTrafficLightIndex() >= 0){
 					for (InRoad inRoad : this.list.get(row).getInRoads())
-						s += ( !inRoad.isTrafficLight() ? inRoad.getRoad().getId() : "");
+						s += ( !inRoad.isTrafficLight() ? inRoad.getRoad().getId() : "") + " ";
 				}
+				s += "]";
 			} break;
 			default: assert (false);
 		}

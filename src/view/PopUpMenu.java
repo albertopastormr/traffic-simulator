@@ -22,7 +22,7 @@ public class PopUpMenu extends JPopupMenu{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					try {
-						mainWindow.insertAtEventsEditor(eventConstructor.template() + System.lineSeparator());
+						mainWindow.insertAtEventsEditor(  System.lineSeparator() + "["+ eventConstructor.getTag() +"]" + System.lineSeparator() + eventConstructor.template() + System.lineSeparator());
 					} catch (SimulationError simulationError) {
 						simulationError.printStackTrace();
 					}

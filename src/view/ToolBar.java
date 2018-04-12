@@ -40,12 +40,16 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
 			public void actionPerformed(ActionEvent e) {
 				controller.reset();
 				byte[] content = mainWindow.getEventsEditorText().getBytes();
-				try {
-					controller.loadEvent(new ByteArrayInputStream(content));
-				} catch (SimulationError simulationError) {
-					simulationError.printStackTrace();
+				if(content.length != 0){
+					try {
+						controller.loadEvent(new ByteArrayInputStream(content));
+					} catch (SimulationError simulationError) {
+						simulationError.printStackTrace();
+					}
+					mainWindow.setMessage("Events loaded to the simulation!");
 				}
-				mainWindow.setMessage("Events loaded to the simulation!");
+				else
+					mainWindow.setMessage("Events editor is empty ! Can't load any events !");
 			}
 		});
 		this.add(checkInButton);
@@ -82,6 +86,17 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
 			}
 		});
 		this.add(executeButton);
+
+		// RESET
+		JButton resetButton = new JButton(new ImageIcon("media/icons/resetButton.png"));
+		resetButton.setToolTipText("Reset the current execution");
+		resetButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainWindow.resetAll();
+			}
+		});
+		this.add(resetButton);
 
 		// SPINNER
 		this.add( new JLabel(" Steps: "));

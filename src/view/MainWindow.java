@@ -127,7 +127,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 
         // BARRA ESTADO INFERIOR
         // (contiene una JLabel param mostrar el estado del simulador)
-        this.addStatusBar();
+        this.addStatusBar(mainPanel);
 
         // FILE CHOOSER
         this.fileChooser = new JFileChooser();
@@ -198,7 +198,6 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 
     @Override
     public void simulatorError(int time, RoadMap map, List<event.Event> event, SimulationError e) {
-		this.panelStatusBar.setMessage("Simulation error at time " + time + "!");
 		this.showErrorDialog(e.getMessage());
     }
 
@@ -212,7 +211,6 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     @Override
     public void addEvent(int time, RoadMap map, List<event.Event> event) {
 		// AddEvent no observadores
-		this.panelStatusBar.setMessage("New event with time " + time);
     }
 
     @Override
@@ -314,9 +312,9 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 		this.showDialog(str);
 	}
 
-	private void addStatusBar(){
+	private void addStatusBar(JPanel mainPanel){
 		this.panelStatusBar = new StatusBarPanel("Welcome to the Traffic Simulator !", this.controller);
-		this.add(this.panelStatusBar);
+		mainPanel.add(this.panelStatusBar, BorderLayout.PAGE_END);
 	}
 	private void addToolBar(JPanel panel){
 		this.toolBar = new ToolBar(this, this.controller);

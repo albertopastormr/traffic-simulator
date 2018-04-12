@@ -58,7 +58,11 @@ public abstract class EventConstructor {
             throw new SimulationError("keys array does not have the same length as defaultValues array at EventConstructor.template()");
         String str = "";
     	for (int i = 0; i < keys.length; i++)
-    	    str += keys[i] + " = " + defaultValues[i];
+    	    str += keys[i] + " = " + defaultValues[i] + System.lineSeparator();
     	return str;
 	}
+
+    public String getTag() {
+        return tag;
+    }
 }

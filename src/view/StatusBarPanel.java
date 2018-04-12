@@ -16,6 +16,7 @@ public class StatusBarPanel extends JPanel implements ObserverTrafficSimulator {
 	public StatusBarPanel(String message, Controller controller){
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 		this.executeInfo = new JLabel(message);
+		this.setVisible(true);
 		this.add(this.executeInfo);
 		this.setBorder(BorderFactory.createBevelBorder(1));
 		controller.addObserver(this);
@@ -28,7 +29,7 @@ public class StatusBarPanel extends JPanel implements ObserverTrafficSimulator {
 
 	@Override
 	public void simulatorError(int time, RoadMap map, List<Event> event, SimulationError e) {
-		// PENDIENTE
+		this.executeInfo.setText("Simulation error at time " + time + "!");
 	}
 
 	@Override
@@ -38,12 +39,12 @@ public class StatusBarPanel extends JPanel implements ObserverTrafficSimulator {
 
 	@Override
 	public void addEvent(int time, RoadMap map, List<Event> events) {
-		this.executeInfo.setText("Event added to the simulator");
+		this.executeInfo.setText("Event added to the simulator at time " + time);
 	}
 
 	@Override
 	public void reset(int time, RoadMap map, List<Event> events) {
-		this.executeInfo = new JLabel();
+		this.executeInfo = new JLabel("Reset has been done!");
 	}
 
 	@Override
