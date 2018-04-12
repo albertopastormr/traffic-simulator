@@ -17,5 +17,8 @@ public class EventNewFreeway extends  EventNewRoad {
         return new Freeway(this.id, this.length, this.speedMax, originJunction, destinationJunction, this.numLanes);
     }
 
-    // . . .
+    @Override
+    public String toString() {
+        return "New Freeway";
+    }
 }

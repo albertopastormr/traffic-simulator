@@ -26,6 +26,9 @@ abstract public class GenericJunction<T extends InRoad> extends SimulationObject
         this.greenTrafficLightIndex = -1;
     }
 
+    public List<T> getInRoads() {
+        return InRoads;
+    }
 
     @Override
     public void completeSectionDetails(IniSection is) {
@@ -42,6 +45,10 @@ abstract public class GenericJunction<T extends InRoad> extends SimulationObject
     @Override
     public String getSectionName() {
         return "junction_report";
+    }
+
+    public int getGreenTrafficLightIndex() {
+        return greenTrafficLightIndex;
     }
 
     @Override

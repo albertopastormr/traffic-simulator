@@ -14,5 +14,8 @@ public class EventNewPath extends EventNewRoad {
         return new Path(this.id, this.length, this.speedMax, originJunction, destinationJunction);
     }
 
-    // . . .
+    @Override
+    public String toString() {
+        return "New Path";
+    }
 }

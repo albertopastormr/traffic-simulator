@@ -9,7 +9,7 @@ public class EventConstructorNewVehicle extends EventConstructor {
     public EventConstructorNewVehicle() {
         this.tag = "new_vehicle";
         this.keys = new String[] { "time", "id" , "max_speed", "itinerary"};
-        this.defaultValues = new String[] { "", "", };
+        this.defaultValues = new String[] { "", "", "",""};
     }
 
     @Override

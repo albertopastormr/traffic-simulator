@@ -8,8 +8,8 @@ public class EventConstructorNewRoundabout extends EventConstructor {
 
     public EventConstructorNewRoundabout() {
         this.tag = "new_junction";
-        this.keys = new String[] { "time", "id" };
-        this.defaultValues = new String[] { "", "", };
+        this.keys = new String[] { "time", "id", "type", "min_time_slice", "max_time_slice"};
+        this.defaultValues = new String[] { "", "", "rr","",""};
     }
 
     @Override

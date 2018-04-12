@@ -20,6 +20,8 @@ public class RoadMap {
     private Map<String, Vehicle> vehicleMap;
 
 
+
+
     public RoadMap() {
         this.roads = new ArrayList<Road>();
         this.junctions = new ArrayList<GenericJunction<?>>();
@@ -107,4 +109,15 @@ public class RoadMap {
         else
             throw new RoadMapException("The road " + id + " doesn't exist in roadMap\n");
     }
+    public List<GenericJunction<?>> getJunctions() {
+        return junctions;
+    }
+
+	public List<Road> getRoads() {
+		return roads;
+	}
+
+	public List<Vehicle> getVehicles() {
+		return vehicles;
+	}
 }

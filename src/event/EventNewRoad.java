@@ -41,5 +41,4 @@ public class EventNewRoad extends Event {
         return "New Road";
     }
 
-    // . . .
 }

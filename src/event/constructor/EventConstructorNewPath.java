@@ -8,8 +8,8 @@ public class EventConstructorNewPath extends EventConstructor {
 
     public EventConstructorNewPath() {
         this.tag = "new_road";
-        this.keys = new String[] { "time", "id" };
-        this.defaultValues = new String[] { "", "", };
+        this.keys = new String[] { "time", "id", "type"};
+        this.defaultValues = new String[] { "", "", "dirt"};
     }
 
     @Override

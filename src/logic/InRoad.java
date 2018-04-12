@@ -18,6 +18,10 @@ public class InRoad {
         this.trafficLight = false;
     }
 
+    public boolean isTrafficLight() {
+        return trafficLight;
+    }
+
     void setTrafficLight(boolean colour){
         this.trafficLight = colour;
     }
@@ -36,6 +40,10 @@ public class InRoad {
     private void copyVehiclesQueueFromRoad(Road road){
         for(Vehicle v : road.vehicles)
             this.addVehicleToQueue(v);
+    }
+
+    public Road getRoad() {
+        return road;
     }
 
     @Override
