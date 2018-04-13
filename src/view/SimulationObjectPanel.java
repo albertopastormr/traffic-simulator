@@ -19,6 +19,9 @@ public class SimulationObjectPanel<T extends SimulationObject> extends JPanel {
 		this.objList = new JList<>(this.listModel);
 		this.addCleanSelectionListener(objList);
 		this.add(new JScrollPane(objList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED), BorderLayout.CENTER);
+		setBorder(BorderFactory.createTitledBorder(title));
+		this.objList.setMinimumSize(new Dimension(190, 160));
+		this.objList.setPreferredSize(new Dimension(190, 160));
 	}
 
 	private void addCleanSelectionListener(JList<?> list){
@@ -31,12 +34,14 @@ public class SimulationObjectPanel<T extends SimulationObject> extends JPanel {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-
+				if(e.getKeyChar() == ReportsDialog.CLEAN_KEY)
+					list.clearSelection();
 			}
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-
+				if(e.getKeyChar() == ReportsDialog.CLEAN_KEY)
+					list.clearSelection();
 			}
 		}));
 	}

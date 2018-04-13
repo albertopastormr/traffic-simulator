@@ -11,9 +11,10 @@ import java.awt.event.ActionListener;
 public class PopUpMenu extends JPopupMenu{
 
 	public PopUpMenu(MainWindow mainWindow){
-		// OPCIONES EN POPUPMENU
+		// OPCIONES EN POPUPMENU //
 		JMenu templatesItem = new JMenu("New template");
 		this.add(templatesItem);
+		// LOAD OPTION
 		JMenuItem loadItem = new JMenuItem("Load");
 		loadItem.addActionListener(new ActionListener() {
 			@Override
@@ -21,6 +22,7 @@ public class PopUpMenu extends JPopupMenu{
 				mainWindow.loadFile();
 			}
 		});
+		// SAVE OPTION
 		JMenuItem saveItem = new JMenuItem("Save");
 		saveItem.addActionListener(new ActionListener() {
 			@Override
@@ -28,9 +30,19 @@ public class PopUpMenu extends JPopupMenu{
 				mainWindow.saveEventsEditor();
 			}
 		});
+		// CLEAR OPTION
+		JMenuItem clearItem = new JMenuItem("Clear");
+		clearItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainWindow.clearEventsEditor();
+			}
+		});
 		this.addSeparator();
 		this.add(loadItem);
 		this.add(saveItem);
+		this.add(clearItem);
+
 
 		// OPCIONES EN TEMPLATES
 		for(EventConstructor eventConstructor : EventParser.getEvents()){

@@ -139,10 +139,11 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
         // REPORT DIALOG
         this.reportsDialog = new ReportsDialog(this, this.controller);
         this.setVisibleReportsDialog(false);
-        this.pack();
-        this.setVisible(true);
-
+		this.setMinimumSize(new Dimension(1920, 1080));
+		this.setPreferredSize(new Dimension(2240, 1720)); // Comentar para entregar
 		this.switchOutputStream(OutputOption.GRAPHIC); // Opcion grafica para salida reportes por defecto
+		this.pack();
+        this.setVisible(true);
     }
 
     private JPanel createCentralPanel(){
@@ -192,6 +193,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
         // Este mapComponent se inserta en el panel inferior
 		// Es observador
         graphicPanel.add(new JScrollPane(this.mapComponent, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+        graphicPanel.setBorder(BorderFactory.createTitledBorder("Map"));
         bottomPanel.add(tablesPanel);
         bottomPanel.add(graphicPanel);
         centralPanel.add(bottomPanel);
