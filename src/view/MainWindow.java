@@ -5,10 +5,12 @@ import error.SimulationError;
 import event.Event;
 import logic.*;
 import util.ReportsPanelStream;
+import view.observer.ObserverTrafficSimulator;
 import view.TableModel.EventsTableModel;
 import view.TableModel.JunctionsTableModel;
 import view.TableModel.RoadsTableModel;
 import view.TableModel.VehiclesTableModel;
+import view.toolbar.ToolBar;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -208,6 +210,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     @Override
     public void simulatorError(int time, RoadMap map, List<event.Event> event, SimulationError e) {
 		this.showErrorDialog(e.getMessage());
+		this.resetAll();
     }
 
     @Override
@@ -239,7 +242,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     }
     public void showDialog(String str){ JOptionPane.showMessageDialog(this, str);}
 
-    public void loadFile(){
+    public boolean loadFile(){
     	int returnValue = this.fileChooser.showOpenDialog(null);
     	if(returnValue == JFileChooser.APPROVE_OPTION){
     		File file = this.fileChooser.getSelectedFile();
@@ -252,18 +255,26 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 			}
 			catch (FileNotFoundException e){
     			this.showErrorDialog("ERROR: file read did not work " + e.getMessage());
+    			return false;
 			}
+			return true;
 		}
+		else
+			return false;
 	}
+
     public String readFile(File file) throws FileNotFoundException {
 		return new Scanner(file).useDelimiter("\\A").next();
 	}
-	public void saveEventsEditor(){
+	public boolean saveEventsEditor(){
 		int returnVal = fileChooser.showSaveDialog(null);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			File file = fileChooser.getSelectedFile();
 			writeFile(file, this.panelEventsEditor.getText());
+			return true;
 		}
+		else
+			return false;
     }
 	public static void writeFile(File file, String content) {
 		try {
@@ -274,26 +285,28 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 			e.printStackTrace();
 		}
 	}
-	public void saveReports(){
+	public boolean saveReports(){
 		int returnVal = fileChooser.showSaveDialog(null);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			File file = fileChooser.getSelectedFile();
 			writeFile(file, this.panelReports.getText());
+			return true;
 		}
+		else
+			return false;
 	}
-	protected void execute(){
+	public void execute(){
 		this.controller.execute(this.getSteps());
 	}
 	public void resetAll(){
 		this.actualFile = null;
 		this.controller.reset();
-		this.panelEventsEditor.clear();
 		this.panelReports.clear();
 		this.panelStatusBar.setMessage("Reset done!");
 		this.showDialog("Reset done!");
 		this.loadFile();
 	}
-	protected void exit(){
+	public void exit(){
 		int n = JOptionPane.showOptionDialog(this,
 				"Are sure you want to exit?", "Exit",
 				JOptionPane.YES_NO_OPTION,
@@ -320,15 +333,18 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 	}
 	public void generateSelectedItemsReport(){
 		String report = "";
+		if(!this.reportsDialog.getSelectedJunctions().isEmpty() || !this.reportsDialog.getSelectedVehicles().isEmpty() || !this.reportsDialog.getSelectedRoads().isEmpty()) {
+			for (GenericJunction<?> j : this.reportsDialog.getSelectedJunctions())
+				report += j.generateReport(this.toolBar.getTime());
+			for (Road r : this.reportsDialog.getSelectedRoads())
+				report += r.generateReport(this.toolBar.getTime());
+			for (Vehicle v : this.reportsDialog.getSelectedVehicles())
+				report += v.generateReport(this.toolBar.getTime());
 
-		for(GenericJunction<?> j : this.reportsDialog.getSelectedJunctions())
-			report += j.generateReport(this.toolBar.getTime());
-		for(Road r : this.reportsDialog.getSelectedRoads())
-			report += r.generateReport(this.toolBar.getTime());
-		for(Vehicle v : this.reportsDialog.getSelectedVehicles())
-			report += v.generateReport(this.toolBar.getTime());
-
-		this.panelReports.setText(report);
+			this.panelReports.setText(report);
+		}
+		else
+			this.showDialog("Empty Items Selection !");
 	}
 
 	public void clearReports(){

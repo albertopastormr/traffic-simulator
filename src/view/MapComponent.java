@@ -15,6 +15,7 @@ import control.Controller;
 import logic.*;
 import error.SimulationError;
 import event.Event;
+import view.observer.ObserverTrafficSimulator;
 
 public class MapComponent extends JComponent implements ObserverTrafficSimulator {
 

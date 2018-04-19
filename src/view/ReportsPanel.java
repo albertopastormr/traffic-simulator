@@ -4,6 +4,7 @@ import control.Controller;
 import error.SimulationError;
 import event.Event;
 import logic.RoadMap;
+import view.observer.ObserverTrafficSimulator;
 
 import java.util.List;
 

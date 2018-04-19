@@ -36,9 +36,8 @@ public class MenuBar extends JMenuBar {
 		load.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				mainWindow.loadFile();
-				mainWindow.showDialog("File has been loaded !");
+				if(mainWindow.loadFile())
+					mainWindow.showDialog("File has been loaded !");
 			}
 		});
 		// SAVE EVENTS
@@ -48,8 +47,8 @@ public class MenuBar extends JMenuBar {
 		save.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainWindow.saveEventsEditor();
-				mainWindow.showDialog("File has been saved !");
+				if(mainWindow.saveEventsEditor())
+					mainWindow.showDialog("File has been saved !");
 
 			}
 		});
@@ -60,8 +59,8 @@ public class MenuBar extends JMenuBar {
 		saveReports.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainWindow.saveReports();
-				mainWindow.showDialog("Actual execution reports have been saved !");
+				if(mainWindow.saveReports())
+					mainWindow.showDialog("Actual execution reports have been saved !");
 			}
 		});
 		// EXIT
@@ -131,14 +130,14 @@ public class MenuBar extends JMenuBar {
 				if(content.length != 0){
 					try {
 						controller.loadEvent(new ByteArrayInputStream(content));
-						mainWindow.setMessage("Events loaded to the simulation!");
+						mainWindow.showDialog("Events loaded to the simulation!");
 					} catch (Exception err) {
 						controller.reset();
 						mainWindow.showErrorDialog("ERROR: error loading events from the Editor Panel:\n" + err.getMessage());
 					}
 				}
 				else
-					mainWindow.setMessage("Events editor is empty ! Can't load any events !");
+					mainWindow.showDialog("Events editor is empty ! Can't load any events !");
 			}
 		});
 		// CLEAR EVENTS AREA

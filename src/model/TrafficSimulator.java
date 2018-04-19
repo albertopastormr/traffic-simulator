@@ -7,12 +7,11 @@ import error.SimulationError;
 import event.Event;
 import logic.RoadMap;
 import util.SortedArrayList;
-import view.Observer;
-import view.ObserverTrafficSimulator;
+import view.observer.Observer;
+import view.observer.ObserverTrafficSimulator;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -41,29 +40,34 @@ public class TrafficSimulator implements Observer<ObserverTrafficSimulator> {
     public void execute(int simulationStep, OutputStream fileOutput) throws SimulationError, IOException, EventException, NewEventException, RoadMapException {
 
         int timeLimit = this.timeCount + simulationStep - 1;
-        while (this.timeCount <= timeLimit) {
+        try {
+            while (this.timeCount <= timeLimit) {
 
-            int i = 0, end =events.size();
-            while(i < end){
-                if(events.get(0).getTime() != this.timeCount) // events is sorted by time
-                    break;
-                else {
-                    events.get(0).execute(map);
-                    events.remove(0); // Once it has been executed, we remove it from the list of events
-                    notifyEventRemove();
+                int i = 0, end = events.size();
+                while (i < end) {
+                    if (events.get(0).getTime() != this.timeCount) // events is sorted by time
+                        break;
+                    else {
+                        events.get(0).execute(map);
+                        events.remove(0); // Once it has been executed, we remove it from the list of events
+                        notifyEventRemove();
+                    }
+                    i++;
                 }
-                i++;
-            }
 
-            map.update();
-            notifyAdvance();
+                map.update();
+                notifyAdvance();
 
-            if(fileOutput != null) {
-                fileOutput.write(map.generateReport(this.timeCount).getBytes());
+                if (fileOutput != null) {
+                    fileOutput.write(map.generateReport(this.timeCount).getBytes());
+                } else {
+                    this.notifyError(new SimulationError("FileOutput unknown\n"));
+                }
+                this.timeCount++;
             }
-            else
-                throw new SimulationError("FileOutput unknown\n");
-            this.timeCount++;
+        }
+        catch(Exception ex){
+            this.notifyError(new SimulationError(ex.getMessage()));
         }
     }
     public void reset(){

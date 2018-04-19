@@ -9,7 +9,7 @@ import ini.Ini;
 import ini.IniSection;
 import model.TrafficSimulator;
 import util.EventParser;
-import view.ObserverTrafficSimulator;
+import view.observer.ObserverTrafficSimulator;
 
 import java.io.IOException;
 import java.io.InputStream;

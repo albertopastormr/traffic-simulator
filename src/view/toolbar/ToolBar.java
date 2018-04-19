@@ -1,9 +1,11 @@
-package view;
+package view.toolbar;
 
 import control.Controller;
 import error.SimulationError;
 import event.Event;
 import logic.RoadMap;
+import view.MainWindow;
+import view.observer.ObserverTrafficSimulator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.io.ByteArrayInputStream;
 import java.util.List;
 
-public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
+public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 
 	private JSpinner steps;
 	private JTextField time;
@@ -43,14 +45,14 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator{
 				if(content.length != 0){
 					try {
 						controller.loadEvent(new ByteArrayInputStream(content));
-						mainWindow.setMessage("Events loaded to the simulation!");
+						mainWindow.showDialog("Events loaded to the simulation!");
 					} catch (Exception err) {
 						controller.reset();
 						mainWindow.showErrorDialog("ERROR: error loading events from the Editor Panel:\n" + err.getMessage());
 					}
 				}
 				else
-					mainWindow.setMessage("Events editor is empty ! Can't load any events !");
+					mainWindow.showDialog("Events editor is empty ! Can't load any events !");
 			}
 		});
 		this.add(checkInButton);

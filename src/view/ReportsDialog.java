@@ -4,7 +4,7 @@ import control.Controller;
 import error.SimulationError;
 import event.Event;
 import logic.*;
-import sun.applet.Main;
+import view.observer.ObserverTrafficSimulator;
 
 import javax.swing.*;
 import java.awt.*;

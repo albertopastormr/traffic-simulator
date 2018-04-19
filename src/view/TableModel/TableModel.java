@@ -1,7 +1,7 @@
 package view.TableModel;
 
 import control.Controller;
-import view.ObserverTrafficSimulator;
+import view.observer.ObserverTrafficSimulator;
 
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;

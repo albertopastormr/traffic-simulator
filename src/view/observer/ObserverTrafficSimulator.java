@@ -1,4 +1,4 @@
-package view;
+package view.observer;
 
 import error.SimulationError;
 import event.Event;
