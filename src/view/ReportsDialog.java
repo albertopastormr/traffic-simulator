@@ -87,7 +87,7 @@ public class ReportsDialog extends JDialog implements ObserverTrafficSimulator {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				mainWindow.generateSelectedItemsReport();
-				dispose();
+				mainWindow.setVisibleReportsDialog(false);
 			}
 		});
 
