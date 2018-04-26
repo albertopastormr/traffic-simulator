@@ -4,6 +4,7 @@ import control.Controller;
 import error.SimulationError;
 import event.Event;
 import logic.*;
+import view.observer.ObserverButton;
 import view.observer.ObserverTrafficSimulator;
 
 import javax.swing.*;
@@ -12,8 +13,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class ReportsDialog extends JDialog implements ObserverTrafficSimulator {
+public class ReportsDialog extends JDialog implements ObserverTrafficSimulator, ObserverButton {
 
+	private MainWindow mainWindow;
 	private ButtonsPanel buttonsPanel;
 	private SimulationObjectPanel<Vehicle> vehiclesPanel;
 	private SimulationObjectPanel<Road> roadsPanel;
@@ -24,10 +26,11 @@ public class ReportsDialog extends JDialog implements ObserverTrafficSimulator {
 	public ReportsDialog(MainWindow mainWindow, Controller controller){
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		this.mainWindow = mainWindow;
 
 		createInformationPanel(mainPanel);
 		createCentralPanel(mainPanel);
-		createButtonsPanel(mainWindow, mainPanel);
+		createButtonsPanel(mainPanel);
 
 		this.add(mainPanel);
 		controller.addObserver(this);
@@ -73,27 +76,8 @@ public class ReportsDialog extends JDialog implements ObserverTrafficSimulator {
 		mainPanel.add(centralPanel);
 
 	}
-	private void createButtonsPanel(MainWindow mainWindow, JPanel mainPanel){
-		this.buttonsPanel = new ButtonsPanel();
-		JButton cancelButton = new JButton("Cancel");
-		cancelButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				mainWindow.setVisibleReportsDialog(false);
-			}
-		});
-		JButton generateButton = new JButton("Generate");
-		generateButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				mainWindow.generateSelectedItemsReport();
-				mainWindow.setVisibleReportsDialog(false);
-			}
-		});
-
-		this.buttonsPanel.add(cancelButton);
-		this.buttonsPanel.add(generateButton);
-
+	private void createButtonsPanel(JPanel mainPanel){
+		this.buttonsPanel = new ButtonsPanel(new String[]{"Cancel", "Generate"},this);
 		mainPanel.add(this.buttonsPanel);
 	}
 	@Override
@@ -117,7 +101,18 @@ public class ReportsDialog extends JDialog implements ObserverTrafficSimulator {
 	}
 
 	@Override
-	public void removeEvent(int time, RoadMap map, List<Event> events) {
+	public void removeEvent(int time, RoadMap map, List<Event> events) { this.setMap(map); }
 
+	@Override
+	public void executeButton(String button_tag) {
+		switch(button_tag){
+			case"Generate":
+				this.mainWindow.generateSelectedItemsReport();
+				this.mainWindow.setVisibleReportsDialog(false);
+				break;
+			case"Cancel":
+				this.mainWindow.setVisibleReportsDialog(false);
+				break;
+		}
 	}
 }
