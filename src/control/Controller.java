@@ -21,6 +21,7 @@ public class Controller {
     private OutputStream outputStream;
     private InputStream fileInput;
     private int simulatorSteps;
+    private Thread ctrlExecute;
 
     public void execute() {
         try {
@@ -32,15 +33,38 @@ public class Controller {
             e.printStackTrace();
         }
     }
-    public void execute(int simulationSteps){
-        try {
-
-            this.simulator.execute(simulationSteps, this.outputStream);
-        } catch (SimulationError | RoadMapException | NewEventException | EventException | IOException error) {
-            System.out.println(error.getMessage());
-            error.printStackTrace();
-        }
+    public void execute(int simulationSteps, int milliseconds_to_sleep_execution){
+		ctrlExecute = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					for(int i = 0; i < simulationSteps; i++) {
+						simulator.execute(1, outputStream);
+						Thread.sleep(milliseconds_to_sleep_execution);
+					}
+				} catch (SimulationError | RoadMapException | NewEventException | EventException | IOException | InterruptedException error) {
+					System.out.println(error.getMessage());
+					error.printStackTrace();
+				}
+			}
+		});
+		ctrlExecute.start();
     }
+    public void sleepExecution(long milliseconds_to_sleep_execution){
+		if (ctrlExecute != null) {
+			try {
+				Thread.sleep(milliseconds_to_sleep_execution);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public void stopExecution(){
+		if(ctrlExecute != null){
+			ctrlExecute.interrupt();
+		}
+	}
+
     public void reset(){
         this.simulator.reset();
     }

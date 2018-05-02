@@ -300,7 +300,13 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 			return false;
 	}
 	public void execute(){
-		this.controller.execute(this.getSteps());
+		this.controller.execute(this.getSteps(), this.getDelay());
+	}
+	public void sleepExecution(){
+		this.controller.sleepExecution(this.getDelay());
+	}
+	public void stopExecution(){
+		this.controller.stopExecution();
 	}
 	public void resetAll(){
 		this.actualFile = null;
@@ -379,7 +385,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 		this.toolBar = new ToolBar(this, this.controller);
 		panel.add(this.toolBar);
 	}
-	protected void insertAtEventsEditor(String str){
+	public void insertAtEventsEditor(String str){
 		this.panelEventsEditor.insert(str);
 	}
 }

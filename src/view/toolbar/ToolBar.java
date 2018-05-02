@@ -103,7 +103,7 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 		stopButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// pendiente
+				mainWindow.stopExecution();
 			}
 		});
 		this.add(stopButton);
@@ -121,12 +121,12 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 
 		// DELAY SPINNER
 		this.add( new JLabel(" Delay: "));
-		this.delay = new JSpinner(new SpinnerNumberModel(5,1,15000,1));
+		this.delay = new JSpinner(new SpinnerNumberModel(5,0,15000,1));
 		this.delay.setToolTipText("delay the current execution a number of ms");
 		this.delay.setMaximumSize(new Dimension(40, 50));
 		this.delay.setMinimumSize(new Dimension(40,50));
 		this.delay.setValue(0);
-		this.add(steps);
+		this.add(delay);
 
 		// STEPS SPINNER
 		this.add( new JLabel(" Steps: "));
