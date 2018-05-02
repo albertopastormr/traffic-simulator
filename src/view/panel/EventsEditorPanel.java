@@ -1,5 +1,7 @@
-package view;
+package view.panel;
 
+
+import view.MainWindow;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

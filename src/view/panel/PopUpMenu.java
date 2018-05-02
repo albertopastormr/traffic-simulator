@@ -1,8 +1,9 @@
-package view;
+package view.panel;
 
 import error.SimulationError;
 import event.constructor.EventConstructor;
 import util.EventParser;
+import view.MainWindow;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

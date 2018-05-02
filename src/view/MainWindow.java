@@ -5,11 +5,15 @@ import error.SimulationError;
 import event.Event;
 import logic.*;
 import util.ReportsPanelStream;
+import view.dialog.ReportsDialog;
+import view.mapcomponent.MapComponent;
+import view.menubar.MenuBar;
 import view.observer.ObserverTrafficSimulator;
 import view.TableModel.EventsTableModel;
 import view.TableModel.JunctionsTableModel;
 import view.TableModel.RoadsTableModel;
 import view.TableModel.VehiclesTableModel;
+import view.panel.*;
 import view.toolbar.ToolBar;
 
 import javax.swing.*;
@@ -125,7 +129,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
         this.createTopPanel(centralPanel);
 
         // MENU
-        MenuBar menuBar = new MenuBar(this, this.controller);
+        view.menubar.MenuBar menuBar = new MenuBar(this, this.controller);
         this.setJMenuBar(menuBar);
 
         // PANEL INFERIOR
@@ -355,6 +359,9 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 	}
 	public int getSteps(){
 		return this.toolBar.getSteps();
+	}
+	public int getDelay(){
+		return this.toolBar.getDelay();
 	}
 	public String getEventsEditorText(){
 		return this.panelEventsEditor.getText();

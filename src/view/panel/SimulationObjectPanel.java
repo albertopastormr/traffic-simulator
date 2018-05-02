@@ -1,6 +1,7 @@
-package view;
+package view.panel;
 
 import logic.SimulationObject;
+import view.dialog.ReportsDialog;
 
 import javax.swing.*;
 import java.awt.*;

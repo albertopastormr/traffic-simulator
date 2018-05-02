@@ -1,16 +1,18 @@
-package view;
+package view.dialog;
 
 import control.Controller;
 import error.SimulationError;
 import event.Event;
 import logic.*;
+import view.MainWindow;
 import view.observer.ObserverButton;
 import view.observer.ObserverTrafficSimulator;
+import view.panel.ButtonsPanel;
+import view.panel.InformationPanel;
+import view.panel.SimulationObjectPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 public class ReportsDialog extends JDialog implements ObserverTrafficSimulator, ObserverButton {

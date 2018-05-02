@@ -17,6 +17,7 @@ import java.util.List;
 public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 
 	private JSpinner steps;
+	private JSpinner delay;
 	private JTextField time;
 
 	public ToolBar(MainWindow mainWindow, Controller controller){
@@ -96,6 +97,17 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 		});
 		this.add(executeButton);
 
+		// STOP
+		JButton stopButton = new JButton(new ImageIcon("media/icons/stopButton.png"));
+		stopButton.setToolTipText("Stop the current simulation");
+		stopButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// pendiente
+			}
+		});
+		this.add(stopButton);
+
 		// RESET
 		JButton resetButton = new JButton(new ImageIcon("media/icons/resetButton.png"));
 		resetButton.setToolTipText("Reset the current execution");
@@ -107,7 +119,16 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 		});
 		this.add(resetButton);
 
-		// SPINNER
+		// DELAY SPINNER
+		this.add( new JLabel(" Delay: "));
+		this.delay = new JSpinner(new SpinnerNumberModel(5,1,15000,1));
+		this.delay.setToolTipText("delay the current execution a number of ms");
+		this.delay.setMaximumSize(new Dimension(40, 50));
+		this.delay.setMinimumSize(new Dimension(40,50));
+		this.delay.setValue(0);
+		this.add(steps);
+
+		// STEPS SPINNER
 		this.add( new JLabel(" Steps: "));
 		this.steps = new JSpinner(new SpinnerNumberModel(5,1,1000,1));
 		this.steps.setToolTipText("steps to execute: 1-1000");
@@ -177,6 +198,7 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 	public int getSteps(){
 		return (int) this.steps.getValue();
 	}
+	public int getDelay(){ return (int) this.delay.getValue();}
 	public Integer getTime() {
 		return Integer.parseInt(time.getText());
 	}
@@ -199,6 +221,7 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 	@Override
 	public void reset(int time, RoadMap map, List<Event> events) {
 		this.steps.setValue(1);
+		this.delay.setValue(0);
 		this.time.setText("0");
 	}
 

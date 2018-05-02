@@ -25,7 +25,7 @@ public class Controller {
     public void execute() {
         try {
             this.loadEvent(this.fileInput);
-            this.simulator.execute(simulatorSteps, this.outputStream);
+            this.simulator.execute(this.simulatorSteps, this.outputStream);
         }
         catch (Exception e){
             System.out.println(e.getMessage());
@@ -34,8 +34,10 @@ public class Controller {
     }
     public void execute(int simulationSteps){
         try {
+
             this.simulator.execute(simulationSteps, this.outputStream);
         } catch (SimulationError | RoadMapException | NewEventException | EventException | IOException error) {
+            System.out.println(error.getMessage());
             error.printStackTrace();
         }
     }

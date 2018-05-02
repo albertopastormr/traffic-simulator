@@ -1,7 +1,8 @@
-package view;
+package view.menubar;
 
 import control.Controller;
 import error.SimulationError;
+import view.MainWindow;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
