@@ -242,7 +242,17 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
         // empty
     }
 
-    public void showErrorDialog(String str){
+	@Override
+	public void executeStart(int time, RoadMap map, List<Event> events) {
+		this.menuBar.setEnabledForExecute(false);
+	}
+
+	@Override
+	public void executeEnd(int time, RoadMap map, List<Event> events) {
+		this.menuBar.setEnabledForExecute(true);
+	}
+
+	public void showErrorDialog(String str){
         JOptionPane.showMessageDialog(this,str);
     }
     public void showDialog(String str){ JOptionPane.showMessageDialog(this, str);}

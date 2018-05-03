@@ -16,26 +16,36 @@ public class ReportsPanel extends TextAreaPanel implements ObserverTrafficSimula
 
     @Override
     public void simulatorError(int time, RoadMap map, List<Event> event, SimulationError e) {
-        // pendiente
+        // Empty, does not need to be implemented
     }
 
     @Override
     public void advance(int time, RoadMap map, List<Event> event) {
-        // pendiente
+        // Empty, does not need to be implemented
     }
 
     @Override
     public void addEvent(int time, RoadMap map, List<Event> event) {
-        // pendiente
+        // Empty, does not need to be implemented
     }
 
     @Override
     public void reset(int time, RoadMap map, List<Event> event) {
-        // pendiente
+        // Empty, does not need to be implemented
     }
 
     @Override
     public void removeEvent(int time, RoadMap map, List<Event> events) {
-        // pendiente
+        // Empty, does not need to be implemented
+    }
+
+    @Override
+    public void executeStart(int time, RoadMap map, List<Event> events) {
+        // Empty, does not need to be implemented
+    }
+
+    @Override
+    public void executeEnd(int time, RoadMap map, List<Event> events) {
+        // Empty, does not need to be implemented
     }
 }

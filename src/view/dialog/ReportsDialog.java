@@ -106,6 +106,16 @@ public class ReportsDialog extends JDialog implements ObserverTrafficSimulator, 
 	public void removeEvent(int time, RoadMap map, List<Event> events) { this.setMap(map); }
 
 	@Override
+	public void executeStart(int time, RoadMap map, List<Event> events) {
+		// Empty, does not need to be implemented
+	}
+
+	@Override
+	public void executeEnd(int time, RoadMap map, List<Event> events) {
+		// Empty, does not need to be implemented
+	}
+
+	@Override
 	public void executeButton(String button_tag) {
 		switch(button_tag){
 			case"Generate":

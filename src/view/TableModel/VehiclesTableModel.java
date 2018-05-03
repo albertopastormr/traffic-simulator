@@ -57,4 +57,14 @@ public class VehiclesTableModel extends TableModel<Vehicle> {
 	public void removeEvent(int time, RoadMap map, List<Event> events) {
 		this.fireTableStructureChanged();
 	}
+
+	@Override
+	public void executeStart(int time, RoadMap map, List<Event> events) {
+		// Empty, does not need to be implemented
+	}
+
+	@Override
+	public void executeEnd(int time, RoadMap map, List<Event> events) {
+		// Empty, does not need to be implemented
+	}
 }

@@ -257,4 +257,14 @@ public class MapComponent extends JComponent implements ObserverTrafficSimulator
 		// empty
 	}
 
+	@Override
+	public void executeStart(int time, RoadMap map, List<Event> events) {
+		// Empty, does not need to be implemented
+	}
+
+	@Override
+	public void executeEnd(int time, RoadMap map, List<Event> events) {
+		// Empty, does not need to be implemented
+	}
+
 }
