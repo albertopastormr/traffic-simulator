@@ -5,6 +5,7 @@ import error.SimulationError;
 import view.MainWindow;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -17,16 +18,16 @@ public class MenuBar extends JMenuBar {
 		super();
 		// MANEJO DE FICHEROS
 		JMenu filesMenu = new JMenu("Files");
-		this.add(filesMenu);
 		this.createFilesMenu(filesMenu, mainWindow);
+		this.add(filesMenu);
 		// SIMULADOR
 		JMenu simulatorMenu = new JMenu("Simulator");
-		this.add(simulatorMenu);
 		this.createSimulatorMenu(simulatorMenu, controller, mainWindow);
+		this.add(simulatorMenu);
 		// INFORMES
 		JMenu reportsMenu = new JMenu("Reports");
-		this.add(reportsMenu);
 		this.createReportsMenu(reportsMenu, mainWindow);
+		this.add(reportsMenu);
 	}
 
 	private void createFilesMenu(JMenu menu,MainWindow mainWindow){
@@ -80,7 +81,6 @@ public class MenuBar extends JMenuBar {
 		menu.add(saveReports);
 		menu.addSeparator();
 		menu.add(exit);
-
 	}
 
 	private void createSimulatorMenu(JMenu menu, Controller controller, MainWindow mainWindow){
@@ -203,5 +203,8 @@ public class MenuBar extends JMenuBar {
 
 	}
 
-
+	public void setEnabledForExecute(boolean enabled){
+		for(Component comp : this.getComponents())
+			comp.setEnabled(enabled);
+	}
 }

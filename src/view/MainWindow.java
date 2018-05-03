@@ -42,6 +42,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     // MENU AND TOOL BAR
     private JFileChooser fileChooser;
     private ToolBar toolBar;
+    private MenuBar menuBar;
 
     // GRAPHIC PANEL
     private MapComponent mapComponent;
@@ -129,7 +130,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
         this.createTopPanel(centralPanel);
 
         // MENU
-        view.menubar.MenuBar menuBar = new MenuBar(this, this.controller);
+        this.menuBar = new MenuBar(this, this.controller);
         this.setJMenuBar(menuBar);
 
         // PANEL INFERIOR
@@ -300,8 +301,11 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 			return false;
 	}
 	public void execute(){
-		if(!this.panelEventsQueue.isEmpty())
+		if( this.isPossibleToExecute()){
+			this.setEnabledForExecute(false);
 			this.controller.execute(this.getSteps(), this.getDelay());
+			this.setEnabledForExecute(true);
+		}
 	}
 	public void sleepExecution(){
 		this.controller.sleepExecution(this.getDelay());
@@ -388,5 +392,13 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 	}
 	public void insertAtEventsEditor(String str){
 		this.panelEventsEditor.insert(str);
+	}
+
+	public boolean isPossibleToExecute(){ return !this.panelEventsQueue.isEmpty() || !this.panelVehicles.isEmpty() || !this.panelJunctions.isEmpty() || !this.panelRoads.isEmpty();}
+
+	public void setEnabledForExecute(boolean enabled){
+		this.panelEventsEditor.setEnabled(enabled);
+		this.toolBar.setEnabledForExecute(enabled);
+		this.menuBar.setEnabledForExecute(enabled);
 	}
 }

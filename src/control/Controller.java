@@ -9,6 +9,7 @@ import ini.Ini;
 import ini.IniSection;
 import model.TrafficSimulator;
 import util.EventParser;
+import view.MainWindow;
 import view.observer.ObserverTrafficSimulator;
 
 import javax.swing.*;
