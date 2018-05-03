@@ -17,4 +17,12 @@ public class TablePanel<T> extends JPanel {
         table.setEnabled(false);
         this.add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
     }
+
+    public int getTableListSize(){
+        return this.model.getSize();
+    }
+
+    public boolean isEmpty(){
+        return this.model.isEmpty();
+    }
 }

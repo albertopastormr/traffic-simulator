@@ -11,6 +11,7 @@ import model.TrafficSimulator;
 import util.EventParser;
 import view.observer.ObserverTrafficSimulator;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -37,15 +38,27 @@ public class Controller {
 		ctrlExecute = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				try {
-					for(int i = 0; i < simulationSteps; i++) {
-						simulator.execute(1, outputStream);
+				int i = 0;
+				while(i < simulationSteps && !Thread.interrupted()) {
+					SwingUtilities.invokeLater(new Runnable() {
+						@Override
+						public void run() {
+							try {
+								simulator.execute(1, outputStream);
+							} catch (SimulationError | RoadMapException | NewEventException | EventException | IOException error) {
+								System.out.println(error.getMessage());
+								error.printStackTrace();
+							}
+						}
+					});
+					try {
 						Thread.sleep(milliseconds_to_sleep_execution);
+					} catch (InterruptedException e) {
+						Thread.currentThread().interrupt();
 					}
-				} catch (SimulationError | RoadMapException | NewEventException | EventException | IOException | InterruptedException error) {
-					System.out.println(error.getMessage());
-					error.printStackTrace();
+					i++;
 				}
+				ctrlExecute = null;
 			}
 		});
 		ctrlExecute.start();
@@ -60,8 +73,8 @@ public class Controller {
 		}
 	}
 	public void stopExecution(){
-		if(ctrlExecute != null){
-			ctrlExecute.interrupt();
+		if(this.ctrlExecute != null && this.ctrlExecute.isAlive()){
+			this.ctrlExecute.interrupt();
 		}
 	}
 

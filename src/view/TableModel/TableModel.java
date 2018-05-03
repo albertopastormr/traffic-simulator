@@ -32,6 +32,7 @@ public abstract class TableModel<T> extends DefaultTableModel implements Observe
     public String getColumnName(int column) {
         return this.columnIds[column];
     }
+
     public void clear(){
         this.list = new ArrayList<>();
         this.columnIds = null;
@@ -43,5 +44,13 @@ public abstract class TableModel<T> extends DefaultTableModel implements Observe
 
 	public void setList(List<T> list) {
 		this.list = list;
+	}
+
+	public int getSize(){
+    	return this.list.size();
+	}
+
+	public boolean isEmpty(){
+		return this.list.isEmpty();
 	}
 }

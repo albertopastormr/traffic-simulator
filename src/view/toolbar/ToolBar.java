@@ -121,11 +121,11 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 
 		// DELAY SPINNER
 		this.add( new JLabel(" Delay: "));
-		this.delay = new JSpinner(new SpinnerNumberModel(5,0,15000,1));
+		this.delay = new JSpinner(new SpinnerNumberModel(500,0,15000,1));
 		this.delay.setToolTipText("delay the current execution a number of ms");
 		this.delay.setMaximumSize(new Dimension(40, 50));
 		this.delay.setMinimumSize(new Dimension(40,50));
-		this.delay.setValue(0);
+		this.delay.setValue(500);
 		this.add(delay);
 
 		// STEPS SPINNER
@@ -221,7 +221,7 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 	@Override
 	public void reset(int time, RoadMap map, List<Event> events) {
 		this.steps.setValue(1);
-		this.delay.setValue(0);
+		this.delay.setValue(500);
 		this.time.setText("0");
 	}
 

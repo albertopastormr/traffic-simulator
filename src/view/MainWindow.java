@@ -300,7 +300,8 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 			return false;
 	}
 	public void execute(){
-		this.controller.execute(this.getSteps(), this.getDelay());
+		if(!this.panelEventsQueue.isEmpty())
+			this.controller.execute(this.getSteps(), this.getDelay());
 	}
 	public void sleepExecution(){
 		this.controller.sleepExecution(this.getDelay());
