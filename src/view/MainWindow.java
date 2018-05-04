@@ -69,6 +69,9 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     // OUTPUT OPTIONS
 	public enum OutputOption{CONSOLE, GRAPHIC}
 
+	// THREAD FOR EXECUTE THE SIMULATION
+	private Thread control_execute_thread;
+
     public MainWindow(String inputFile, Controller controller) throws SimulationError {
         super("Traffic Simulator");
         this.controller = controller;
@@ -312,17 +315,50 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 	}
 	public void execute(){
 		if( this.isPossibleToExecute()){
+			// Deshabilitado de las funcionalidades no permitidas durante la ejecucion
 			this.setEnabledForExecute(false);
-			this.controller.execute(this.getSteps(), this.getDelay());
-			this.setEnabledForExecute(true);
+			control_execute_thread = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					int i = 0;
+					while(i < MainWindow.this.getSteps() && !Thread.interrupted()) {
+						SwingUtilities.invokeLater(new Runnable() {
+							@Override
+							public void run() {
+								try {
+									controller.execute(1);
+								} catch (SimulationError simulationError) {
+									MainWindow.this.showErrorDialog(simulationError.getMessage());
+								}
+							}
+						});
+						try {
+							Thread.sleep( MainWindow.this.getDelay() );
+						} catch (InterruptedException e) {
+							Thread.currentThread().interrupt();
+						}
+						i++;
+					}
+					// Habilitado de las funcionalidades no permitidas durante la ejecucion
+					SwingUtilities.invokeLater(new Runnable() {
+						@Override
+						public void run() {
+							MainWindow.this.setEnabledForExecute(true);
+						}
+					});
+					control_execute_thread = null;
+				}
+			});
+			control_execute_thread.start();
 		}
 	}
-	public void sleepExecution(){
-		this.controller.sleepExecution(this.getDelay());
-	}
+
 	public void stopExecution(){
-		this.controller.stopExecution();
+		if(this.control_execute_thread != null && this.control_execute_thread.isAlive()){
+			this.control_execute_thread.interrupt();
+		}
 	}
+
 	public void resetAll(){
 		this.actualFile = null;
 		this.controller.reset();
@@ -331,6 +367,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 		this.showDialog("Reset done!");
 		this.loadFile();
 	}
+
 	public void exit(){
 		int n = JOptionPane.showOptionDialog(this,
 				"Are sure you want to exit?", "Exit",
@@ -340,6 +377,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 		if (n == 0)
 			System.exit(0);
 	}
+
 	public void switchOutputStream(OutputOption option) throws SimulationError {
 		switch(option){
 			case CONSOLE:{
@@ -353,6 +391,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 			}
 		}
 	}
+
 	public void generateReport(){
         this.panelReports.setText(this.controller.generateReport());
 	}
@@ -404,10 +443,10 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 		this.panelEventsEditor.insert(str);
 	}
 
-	public boolean isPossibleToExecute(){ return !this.panelEventsQueue.isEmpty() || !this.panelVehicles.isEmpty() || !this.panelJunctions.isEmpty() || !this.panelRoads.isEmpty();}
+	private boolean isPossibleToExecute(){ return !this.panelEventsQueue.isEmpty() || !this.panelVehicles.isEmpty() || !this.panelJunctions.isEmpty() || !this.panelRoads.isEmpty();}
 
-	public void setEnabledForExecute(boolean enabled){
-		this.panelEventsEditor.setEnabled(enabled);
+	private void setEnabledForExecute(boolean enabled){
+		this.panelEventsEditor.setEnabledForExecute(enabled);
 		this.toolBar.setEnabledForExecute(enabled);
 		this.menuBar.setEnabledForExecute(enabled);
 	}

@@ -23,7 +23,6 @@ public class Controller {
     private OutputStream outputStream;
     private InputStream fileInput;
     private int simulatorSteps;
-    private Thread ctrlExecute;
 
     public void execute() {
         try {
@@ -35,49 +34,14 @@ public class Controller {
             e.printStackTrace();
         }
     }
-    public void execute(int simulationSteps, int milliseconds_to_sleep_execution){
-		ctrlExecute = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				int i = 0;
-				while(i < simulationSteps && !Thread.interrupted()) {
-					SwingUtilities.invokeLater(new Runnable() {
-						@Override
-						public void run() {
-							try {
-								simulator.execute(1, outputStream);
-							} catch (SimulationError | RoadMapException | NewEventException | EventException | IOException error) {
-								System.out.println(error.getMessage());
-								error.printStackTrace();
-							}
-						}
-					});
-					try {
-						Thread.sleep(milliseconds_to_sleep_execution);
-					} catch (InterruptedException e) {
-						Thread.currentThread().interrupt();
-					}
-					i++;
-				}
-				ctrlExecute = null;
-			}
-		});
-		ctrlExecute.start();
+
+    public void execute(int simulationSteps) throws SimulationError {
+		try {
+			simulator.execute(simulationSteps, outputStream);
+		} catch (Exception error) {
+			throw new SimulationError(error.getMessage());
+		}
     }
-    public void sleepExecution(long milliseconds_to_sleep_execution){
-		if (ctrlExecute != null) {
-			try {
-				Thread.sleep(milliseconds_to_sleep_execution);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	public void stopExecution(){
-		if(this.ctrlExecute != null && this.ctrlExecute.isAlive()){
-			this.ctrlExecute.interrupt();
-		}
-	}
 
     public void reset(){
         this.simulator.reset();

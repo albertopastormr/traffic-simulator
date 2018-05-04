@@ -35,4 +35,6 @@ public abstract class TextAreaPanel extends JPanel {
         this.textArea.setText(text);
     }
     public String getText(){return this.textArea.getText();}
+
+    public void setEnabledForExecute(boolean enabled){ this.setEnabled(enabled);}
 }
