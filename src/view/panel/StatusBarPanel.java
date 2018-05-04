@@ -53,13 +53,4 @@ public class StatusBarPanel extends JPanel implements ObserverTrafficSimulator {
 		// empty, its not necessary to be implemented
 	}
 
-	@Override
-	public void executeStart(int time, RoadMap map, List<Event> events) {
-		// Empty, does not need to be implemented
-	}
-
-	@Override
-	public void executeEnd(int time, RoadMap map, List<Event> events) {
-		// Empty, does not need to be implemented
-	}
 }

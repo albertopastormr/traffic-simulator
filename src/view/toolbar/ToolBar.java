@@ -262,13 +262,4 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 		// empty, its not necessary to be implemented
 	}
 
-	@Override
-	public void executeStart(int time, RoadMap map, List<Event> events) {
-		this.setEnabledForExecute(false);
-	}
-
-	@Override
-	public void executeEnd(int time, RoadMap map, List<Event> events) {
-		this.setEnabledForExecute(true);
-	}
 }

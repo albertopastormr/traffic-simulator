@@ -38,7 +38,6 @@ public class TrafficSimulator implements Observer<ObserverTrafficSimulator> {
     }
 
     public void execute(int simulationStep, OutputStream fileOutput) throws SimulationError, IOException, EventException, NewEventException, RoadMapException {
-        this.notifyExecuteStart();
         int timeLimit = this.timeCount + simulationStep - 1;
         try {
             while (this.timeCount <= timeLimit) {
@@ -69,7 +68,6 @@ public class TrafficSimulator implements Observer<ObserverTrafficSimulator> {
         catch(Exception ex){
             this.notifyError(new SimulationError(ex.getMessage()));
         }
-        this.notifyExecuteEnd();
     }
     public void reset(){
         this.map = new RoadMap();
@@ -125,14 +123,6 @@ public class TrafficSimulator implements Observer<ObserverTrafficSimulator> {
     private void notifyEventRemove(){
         for(ObserverTrafficSimulator obs : this.observers)
             obs.removeEvent(this.timeCount, this.map, this.events);
-    }
-    public void notifyExecuteStart(){
-        for (ObserverTrafficSimulator obs : this.observers)
-            obs.executeStart(this.timeCount, this.map, this.events);
-    }
-    public void notifyExecuteEnd(){
-        for (ObserverTrafficSimulator obs : this.observers)
-            obs.executeEnd(this.timeCount, this.map, this.events);
     }
     @Override
     public void addObserver(ObserverTrafficSimulator o) {

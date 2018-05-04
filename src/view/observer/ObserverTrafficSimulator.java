@@ -23,10 +23,4 @@ public interface ObserverTrafficSimulator {
     // notifica que se ha borrado un evento
     void removeEvent(int time, RoadMap map, List<Event> events);
 
-    // notifica que ha comenzado la ejecucion
-    void executeStart(int time, RoadMap map, List<Event> events);
-
-    // notifica que ha terminado la ejecucion
-    void executeEnd(int time, RoadMap map, List<Event> events);
-
 }

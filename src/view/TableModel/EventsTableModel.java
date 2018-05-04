@@ -54,13 +54,4 @@ public class EventsTableModel extends TableModel<Event> {
         this.fireTableStructureChanged();
     }
 
-    @Override
-    public void executeStart(int time, RoadMap map, List<Event> events) {
-        // Empty, does not need to be implemented
-    }
-
-    @Override
-    public void executeEnd(int time, RoadMap map, List<Event> events) {
-        // Empty, does not need to be implemented
-    }
 }
