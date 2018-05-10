@@ -375,4 +375,5 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 	protected void insertAtEventsEditor(String str){
 		this.panelEventsEditor.insert(str);
 	}
+
 }
