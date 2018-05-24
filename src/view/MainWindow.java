@@ -162,6 +162,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
         centralPanel.setLayout(new GridLayout(2,1));
         return centralPanel;
     }
+
     private void createTopPanel(JPanel centralPanel){
         JPanel topPanel = new JPanel();
         String text = "", inputName = (this.actualFile != null ? this.actualFile.getName() : "none" );
@@ -184,6 +185,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
         topPanel.add(this.panelReports);
         centralPanel.add(topPanel);
     }
+
     private void createBottomPanel(JPanel centralPanel){
         JPanel bottomPanel = new JPanel(), tablesPanel = new JPanel(), graphicPanel = new JPanel();
         bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
@@ -271,7 +273,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 			return false;
 	}
 
-    public String readFile(File file) throws FileNotFoundException {
+    private String readFile(File file) throws FileNotFoundException {
 		return new Scanner(file).useDelimiter("\\A").next();
 	}
 	public boolean saveEventsEditor(){
@@ -284,7 +286,7 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 		else
 			return false;
     }
-	public static void writeFile(File file, String content) {
+	private static void writeFile(File file, String content) {
 		try {
 			PrintWriter pw = new PrintWriter(file);
 			pw.print(content);
@@ -306,40 +308,42 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 	public void execute(){
 		if( this.isPossibleToExecute()){
 			// Deshabilitado de las funcionalidades no permitidas durante la ejecucion
-			this.setEnabledForExecute(false);
-			control_execute_thread = new Thread(new Runnable() {
-				@Override
-				public void run() {
-					int i = 0;
-					while(i < MainWindow.this.getSteps() && !Thread.interrupted()) {
+			if(control_execute_thread == null) {
+				this.setEnabledForExecute(false);
+				control_execute_thread = new Thread(new Runnable() {
+					@Override
+					public void run() {
+						int i = 0;
+						while (i < MainWindow.this.getSteps() && !Thread.interrupted()) {
+							SwingUtilities.invokeLater(new Runnable() {
+								@Override
+								public void run() {
+									try {
+										controller.execute(1);
+									} catch (SimulationError simulationError) {
+										MainWindow.this.showErrorDialog(simulationError.getMessage());
+									}
+								}
+							});
+							try {
+								Thread.sleep(MainWindow.this.getDelay());
+							} catch (InterruptedException e) {
+								Thread.currentThread().interrupt();
+							}
+							i++;
+						}
+						// Habilitado de las funcionalidades no permitidas durante la ejecucion
 						SwingUtilities.invokeLater(new Runnable() {
 							@Override
 							public void run() {
-								try {
-									controller.execute(1);
-								} catch (SimulationError simulationError) {
-									MainWindow.this.showErrorDialog(simulationError.getMessage());
-								}
+								MainWindow.this.setEnabledForExecute(true);
 							}
 						});
-						try {
-							Thread.sleep( MainWindow.this.getDelay() );
-						} catch (InterruptedException e) {
-							Thread.currentThread().interrupt();
-						}
-						i++;
+						control_execute_thread = null;
 					}
-					// Habilitado de las funcionalidades no permitidas durante la ejecucion
-					SwingUtilities.invokeLater(new Runnable() {
-						@Override
-						public void run() {
-							MainWindow.this.setEnabledForExecute(true);
-						}
-					});
-					control_execute_thread = null;
-				}
-			});
-			control_execute_thread.start();
+				});
+				control_execute_thread.start();
+			}
 		}
 	}
 

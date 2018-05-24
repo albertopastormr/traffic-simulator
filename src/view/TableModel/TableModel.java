@@ -51,6 +51,6 @@ public abstract class TableModel<T> extends DefaultTableModel implements Observe
 	}
 
 	public boolean isEmpty(){
-		return this.list.isEmpty();
+		return (this.list == null || this.list.isEmpty());
 	}
 }

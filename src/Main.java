@@ -248,9 +248,16 @@ public class Main {
 
 		// example command lines:
 		//
-		// -i resources/examples/event/basic/ex1.ini
-		// -i resources/examples/event/advanced/ex1.ini
-		// --help
+		// GUI:
+		//	-i examples-out3/cruces_2.ini -m gui
+		// ONE FILE:
+		//	-i examples-out2\advanced\15_misc.ini
+		// DIRECTORY:
+		//	-d examples-out3
+		// CHECK:
+		//	-c examples-out/basic
+		// TEST:
+		//	-t examples-out3 -s 120
 		//
 		try {
 			Main.ParseArguments(args);
