@@ -242,7 +242,12 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 
 	@Override
 	public void advance(int time, RoadMap map, List<Event> events) {
-		this.time.setText(String.valueOf(time + 1));
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				ToolBar.this.time.setText(String.valueOf(time + 1));
+			}
+		});
 	}
 
 	@Override
@@ -252,9 +257,14 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 
 	@Override
 	public void reset(int time, RoadMap map, List<Event> events) {
-		this.steps.setValue(1);
-		this.delay.setValue(500);
-		this.time.setText("0");
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				ToolBar.this.steps.setValue(1);
+				ToolBar.this.delay.setValue(500);
+				ToolBar.this.time.setText("0");
+			}
+		});
 	}
 
 	@Override

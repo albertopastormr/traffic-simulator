@@ -219,15 +219,24 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 
     @Override
     public void simulatorError(int time, RoadMap map, List<event.Event> event, SimulationError e) {
-		this.showErrorDialog(e.getMessage());
-		this.resetAll();
+    	SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				MainWindow.this.showErrorDialog(e.getMessage());
+				MainWindow.this.resetAll();
+			}
+		});
     }
 
     @Override
     public void advance(int time, RoadMap map, List<event.Event> event) {
 		// Advance no observadores
-		this.panelStatusBar.setMessage("Advance executed with time " + time);
-
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				MainWindow.this.panelStatusBar.setMessage("Advance executed with time " + time);
+			}
+		});
     }
 
     @Override
@@ -238,8 +247,13 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     @Override
     public void reset(int time, RoadMap map, List<event.Event> event) {
     	// Reset no observadores
-		this.actualFile = null;
-		this.panelReports.clear();
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				MainWindow.this.actualFile = null;
+				MainWindow.this.panelReports.clear();
+			}
+		});
     }
 
     @Override
@@ -315,16 +329,11 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 					public void run() {
 						int i = 0;
 						while (i < MainWindow.this.getSteps() && !Thread.interrupted()) {
-							SwingUtilities.invokeLater(new Runnable() {
-								@Override
-								public void run() {
-									try {
-										controller.execute(1);
-									} catch (SimulationError simulationError) {
-										MainWindow.this.showErrorDialog(simulationError.getMessage());
-									}
-								}
-							});
+							try {
+								controller.execute(1);
+							} catch (SimulationError simulationError) {
+								MainWindow.this.showErrorDialog(simulationError.getMessage());
+							}
 							try {
 								Thread.sleep(MainWindow.this.getDelay());
 							} catch (InterruptedException e) {

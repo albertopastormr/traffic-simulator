@@ -30,22 +30,42 @@ public class StatusBarPanel extends JPanel implements ObserverTrafficSimulator {
 
 	@Override
 	public void simulatorError(int time, RoadMap map, List<Event> event, SimulationError e) {
-		this.executeInfo.setText("Simulation error at time " + time + "!");
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				StatusBarPanel.this.executeInfo.setText("Simulation error at time " + time + "!");
+			}
+		});
 	}
 
 	@Override
 	public void advance(int time, RoadMap map, List<Event> events) {
-		this.executeInfo.setText("Step: " + time + " of simulation");
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				StatusBarPanel.this.executeInfo.setText("Step: " + time + " of simulation");
+			}
+		});
 	}
 
 	@Override
 	public void addEvent(int time, RoadMap map, List<Event> events) {
-		this.executeInfo.setText("Event added to the simulator at time " + time);
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				StatusBarPanel.this.executeInfo.setText("Event added to the simulator at time " + time);
+			}
+		});
 	}
 
 	@Override
 	public void reset(int time, RoadMap map, List<Event> events) {
-		this.executeInfo = new JLabel("Reset has been done!");
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				StatusBarPanel.this.executeInfo = new JLabel("Reset has been done!");
+			}
+		});
 	}
 
 	@Override
