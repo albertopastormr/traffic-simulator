@@ -33,5 +33,5 @@ public class EventConstructorNewCar extends EventConstructor {
     }
 
     @Override
-    public String toString() { return "New Car"; } // Por completar
+    public String toString() { return "New Car"; }
 }

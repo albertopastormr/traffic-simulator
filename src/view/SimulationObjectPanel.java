@@ -18,10 +18,10 @@ public class SimulationObjectPanel<T extends SimulationObject> extends JPanel {
 		this.listModel = new ListModel<>();
 		this.objList = new JList<>(this.listModel);
 		this.addCleanSelectionListener(objList);
+		this.objList.setMinimumSize(new Dimension(190, 500));
+		this.objList.setPreferredSize(new Dimension(190, 500));
 		this.add(new JScrollPane(objList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED), BorderLayout.CENTER);
 		setBorder(BorderFactory.createTitledBorder(title));
-		this.objList.setMinimumSize(new Dimension(190, 160));
-		this.objList.setPreferredSize(new Dimension(190, 160));
 	}
 
 	private void addCleanSelectionListener(JList<?> list){
