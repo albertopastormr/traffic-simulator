@@ -75,13 +75,8 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     // OUTPUT OPTIONS
 	public enum OutputOption{CONSOLE, GRAPHIC}
 
-<<<<<<< HEAD
 	// THREAD FOR EXECUTE THE SIMULATION
 	private Thread control_execute_thread;
-=======
-	// EXECUTE THREAD
-	private Thread executeThread;
->>>>>>> 4521dedd9b96a75715cb3d1a49e69b16d7a72290
 
     public MainWindow(String inputFile, Controller controller) throws SimulationError {
         super("Traffic Simulator");
@@ -343,7 +338,6 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 			return false;
 	}
 	public void execute(){
-<<<<<<< HEAD
 		if( this.isPossibleToExecute()){
 			// Deshabilitado de las funcionalidades no permitidas durante la ejecucion
 			if(control_execute_thread == null) {
@@ -377,28 +371,6 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 				});
 				control_execute_thread.start();
 			}
-=======
-		if(this.executeThread == null){
-			int executeSteps = this.getSteps();
-			this.executeThread = new Thread(new Runnable() {
-				@Override
-				public void run() {
-					int i = 0;
-					while (i < executeSteps && !Thread.interrupted()) {
-						MainWindow.this.controller.execute(1);
-
-						try {
-							Thread.sleep(250);
-						} catch (InterruptedException e) {
-							Thread.currentThread().interrupt();
-						}
-						i++;
-					}
-					executeThread = null;
-				}
-			});
-			this.executeThread.start();
->>>>>>> 4521dedd9b96a75715cb3d1a49e69b16d7a72290
 		}
 	}
 
@@ -494,14 +466,12 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 		this.panelEventsEditor.insert(str);
 	}
 
-<<<<<<< HEAD
 	private boolean isPossibleToExecute(){ return !this.panelEventsQueue.isEmpty() || !this.panelVehicles.isEmpty() || !this.panelJunctions.isEmpty() || !this.panelRoads.isEmpty();}
 
 	private void setEnabledForExecute(boolean enabled){
 		this.panelEventsEditor.setEnabledForExecute(enabled);
 		this.toolBar.setEnabledForExecute(enabled);
 		this.menuBar.setEnabledForExecute(enabled);
-=======
 	public void removeSelectedVehicles(){
 		for(Vehicle v : removeVehiclesDialog.getSelectedVehicles()){
 			controller.removeVehicle(v.getId());
@@ -510,6 +480,5 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 
 	public static String[] getColumnIdVehicle() {
 		return columnIdVehicle;
->>>>>>> 4521dedd9b96a75715cb3d1a49e69b16d7a72290
 	}
 }
