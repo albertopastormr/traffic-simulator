@@ -71,8 +71,16 @@ public class Controller {
         }
     }
 
+    public void removeVehicle(String vehicle_id){
+        this.simulator.removeVehicle(vehicle_id);
+    }
+
     public String generateReport(){
         return this.simulator.generateReport();
+    }
+
+    public String showAll(){
+        return this.simulator.showAll();
     }
     public void addObserver(ObserverTrafficSimulator obs){
         this.simulator.addObserver(obs);
@@ -84,4 +92,5 @@ public class Controller {
     public void setOutputStream(OutputStream outputStream) {
         this.outputStream = outputStream;
     }
+    public void setInputStream(InputStream inputStream) {this.fileInput = inputStream;}
 }

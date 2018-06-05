@@ -57,12 +57,21 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     // REPORT DIALOG
     private ReportsDialog reportsDialog;
 
+    // BRVEHICLE DIALOG
+	private BrVehiclesDialog brVehiclesDialog;
+
+	// REMOVE VEHICLES DIALOG
+	private RemoveVehiclesDialog removeVehiclesDialog;
+
     // MODEL PART - VIEW CONTROLLER MODEL
     private File actualFile;
     private Controller controller;
 
     // OUTPUT OPTIONS
 	public enum OutputOption{CONSOLE, GRAPHIC}
+
+	// EXECUTE THREAD
+	private Thread executeThread;
 
     public MainWindow(String inputFile, Controller controller) throws SimulationError {
         super("Traffic Simulator");
@@ -140,6 +149,14 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 
         // REPORT DIALOG
         this.reportsDialog = new ReportsDialog(this, this.controller);
+
+        // BRVEHICLE DIALOG
+		this.brVehiclesDialog = new BrVehiclesDialog(this, this.controller);
+
+		// REMOVE VEHICLES DIALOG
+		this.removeVehiclesDialog = new RemoveVehiclesDialog(this,this.controller);
+
+        // MAINWINDOW FRAME CONFIG
         this.setVisibleReportsDialog(false);
 		this.setMinimumSize(new Dimension(1920, 1080));
 		this.setPreferredSize(new Dimension(2240, 1720)); // Comentar para entregar
@@ -216,7 +233,12 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     @Override
     public void advance(int time, RoadMap map, List<event.Event> event) {
 		// Advance no observadores
-		this.panelStatusBar.setMessage("Advance executed with time " + time);
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				MainWindow.this.panelStatusBar.setMessage("Advance executed with time " + time);
+			}
+		});
 
     }
 
@@ -228,8 +250,13 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
     @Override
     public void reset(int time, RoadMap map, List<event.Event> event) {
     	// Reset no observadores
-		this.actualFile = null;
-		this.panelReports.clear();
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				MainWindow.this.actualFile = null;
+				MainWindow.this.panelReports.clear();
+			}
+		});
     }
 
     @Override
@@ -296,7 +323,27 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 			return false;
 	}
 	public void execute(){
-		this.controller.execute(this.getSteps());
+		if(this.executeThread == null){
+			int executeSteps = this.getSteps();
+			this.executeThread = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					int i = 0;
+					while (i < executeSteps && !Thread.interrupted()) {
+						MainWindow.this.controller.execute(1);
+
+						try {
+							Thread.sleep(250);
+						} catch (InterruptedException e) {
+							Thread.currentThread().interrupt();
+						}
+						i++;
+					}
+					executeThread = null;
+				}
+			});
+			this.executeThread.start();
+		}
 	}
 	public void resetAll(){
 		this.actualFile = null;
@@ -363,6 +410,8 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 		this.showDialog(str);
 	}
 	public void setVisibleReportsDialog(boolean visible){ this.reportsDialog.setVisible(visible);}
+	public void setVisibleBrVehiclesDialog(boolean visible){ this.brVehiclesDialog.setVisible(visible);}
+	public void setVisibleRemoveVehiclesDialog(boolean visible) {this.removeVehiclesDialog.setVisible(visible);}
 
 	private void addStatusBar(JPanel mainPanel){
 		this.panelStatusBar = new StatusBarPanel("Welcome to the Traffic Simulator !", this.controller);
@@ -376,4 +425,13 @@ public class MainWindow extends JFrame implements ObserverTrafficSimulator {
 		this.panelEventsEditor.insert(str);
 	}
 
+	public void removeSelectedVehicles(){
+		for(Vehicle v : removeVehiclesDialog.getSelectedVehicles()){
+			controller.removeVehicle(v.getId());
+		}
+	}
+
+	public static String[] getColumnIdVehicle() {
+		return columnIdVehicle;
+	}
 }

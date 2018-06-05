@@ -168,6 +168,28 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 		// CLOCK
 		this.add(new ClockPanel(mainWindow));
 
+		// BRVEHICLES DIALOG
+		JButton brvehiclesButton = new JButton(new ImageIcon("media/icons/calendarButton.png"));
+		brvehiclesButton.setToolTipText("BrVehicles Dialog");
+		brvehiclesButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainWindow.setVisibleBrVehiclesDialog(true);
+			}
+		});
+		this.add(brvehiclesButton);
+
+		// REMOVE VEHICLES DIALOG
+		JButton removeVehiclesButton = new JButton(new ImageIcon("media/icons/calendarButton.png"));
+		removeVehiclesButton.setToolTipText("Remove Vehicles Dialog");
+		removeVehiclesButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainWindow.setVisibleRemoveVehiclesDialog(true);
+			}
+		});
+		this.add(removeVehiclesButton);
+
 		// EXIT
 		JButton exitButton = new JButton(new ImageIcon("media/icons/exitButton.png"));
 		exitButton.setToolTipText("Exit from traffic Simulator");
@@ -194,7 +216,12 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 
 	@Override
 	public void advance(int time, RoadMap map, List<Event> events) {
-		this.time.setText(String.valueOf(time + 1));
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				ToolBar.this.time.setText(String.valueOf(time + 1));
+			}
+		});
 	}
 
 	@Override
@@ -204,8 +231,13 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 
 	@Override
 	public void reset(int time, RoadMap map, List<Event> events) {
-		this.steps.setValue(1);
-		this.time.setText("0");
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				ToolBar.this.steps.setValue(1);
+				ToolBar.this.time.setText("0");
+			}
+		});
 	}
 
 	@Override

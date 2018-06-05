@@ -6,6 +6,7 @@ import event.Event;
 import logic.RoadMap;
 import logic.Vehicle;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,23 +39,43 @@ public class VehiclesTableModel extends TableModel<Vehicle> {
 
 	@Override
 	public void advance(int time, RoadMap map, List<Event> events) {
-		this.fireTableStructureChanged();
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				VehiclesTableModel.this.fireTableStructureChanged();
+			}
+		});
 	}
 
 	@Override
 	public void addEvent(int time, RoadMap map, List<Event> events) {
-		this.list = map.getVehicles();
-		this.fireTableStructureChanged();
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				VehiclesTableModel.this.list = map.getVehicles();
+				VehiclesTableModel.this.fireTableStructureChanged();
+			}
+		});
 	}
 
 	@Override
 	public void reset(int time, RoadMap map, List<Event> events) {
-		this.list = new ArrayList<>();
-		this.fireTableStructureChanged();
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				VehiclesTableModel.this.list = new ArrayList<>();
+				VehiclesTableModel.this.fireTableStructureChanged();
+			}
+		});
 	}
 
 	@Override
 	public void removeEvent(int time, RoadMap map, List<Event> events) {
-		this.fireTableStructureChanged();
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				VehiclesTableModel.this.fireTableStructureChanged();
+			}
+		});
 	}
 }

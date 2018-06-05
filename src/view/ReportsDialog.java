@@ -87,21 +87,43 @@ public class ReportsDialog extends JDialog implements ObserverTrafficSimulator, 
 
 	@Override
 	public void advance(int time, RoadMap map, List<Event> events) {
-		this.setMap(map);
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				ReportsDialog.this.setMap(map);
+			}
+		});
 	}
 
 	@Override
 	public void addEvent(int time, RoadMap map, List<Event> events) {
-		this.setMap(map);
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				ReportsDialog.this.setMap(map);
+			}
+		});
 	}
 
 	@Override
 	public void reset(int time, RoadMap map, List<Event> events) {
-		this.setMap(map);
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				ReportsDialog.this.setMap(map);
+			}
+		});
 	}
 
 	@Override
-	public void removeEvent(int time, RoadMap map, List<Event> events) { this.setMap(map); }
+	public void removeEvent(int time, RoadMap map, List<Event> events) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				ReportsDialog.this.setMap(map);
+			}
+		});
+	}
 
 	@Override
 	public void executeButton(String button_tag) {

@@ -51,6 +51,14 @@ public class RoadMap {
             throw new RoadMapException("The vehicle" + idVehicle + " found already exists in vehicleMap (duplicated vehicle)\n");
     }
 
+    public void removeVehicle(String idVehicle){
+        if(vehicleMap.containsKey(idVehicle)){
+        	this.roadMap.get(this.vehicleMap.get(idVehicle).getRoadActual().getId()).vehicles.remove(this.vehicleMap.get(idVehicle));
+            this.vehicles.remove(vehicleMap.get(idVehicle));
+            this.vehicleMap.remove(idVehicle);
+        }
+    }
+
     public void addRoad(String idRoad, GenericJunction<?> origin, Road road, GenericJunction<?> destination) throws RoadMapException, EventException {
         if(!roadMap.containsKey(idRoad)){
             this.roads.add(road);
@@ -74,6 +82,20 @@ public class RoadMap {
 
         return report;
     }
+
+	public String showAll() {
+		String ret = "";
+
+		for(GenericJunction<?> j : junctions)
+			ret += j.toString()  + "\n";
+		for(Road r : roads)
+			ret += r.toString()  + "\n";
+		for(Vehicle v : vehicles)
+			ret += v.toString()  + "\n";
+
+		return ret;
+	}
+
     public void update() throws EventException {
 
         for(Road r : roads) // Calls advance() for every road

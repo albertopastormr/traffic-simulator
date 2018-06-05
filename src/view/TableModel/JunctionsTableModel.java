@@ -7,6 +7,7 @@ import logic.GenericJunction;
 import logic.InRoad;
 import logic.RoadMap;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,23 +42,43 @@ public class JunctionsTableModel extends TableModel<GenericJunction<?>> {
 
 	@Override
 	public void advance(int time, RoadMap map, List<Event> events) {
-		this.fireTableStructureChanged();
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				JunctionsTableModel.this.fireTableStructureChanged();
+			}
+		});
 	}
 
 	@Override
 	public void addEvent(int time, RoadMap map, List<Event> events) {
-		this.list = map.getJunctions();
-		this.fireTableStructureChanged();
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				JunctionsTableModel.this.list = map.getJunctions();
+				JunctionsTableModel.this.fireTableStructureChanged();
+			}
+		});
 	}
 
 	@Override
 	public void reset(int time, RoadMap map, List<Event> events) {
-		this.list = new ArrayList<>();
-		this.fireTableStructureChanged();
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				JunctionsTableModel.this.list = new ArrayList<>();
+				JunctionsTableModel.this.fireTableStructureChanged();
+			}
+		});
 	}
 
 	@Override
 	public void removeEvent(int time, RoadMap map, List<Event> events) {
-		this.fireTableStructureChanged();
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				JunctionsTableModel.this.fireTableStructureChanged();
+			}
+		});
 	}
 }

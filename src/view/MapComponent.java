@@ -233,23 +233,39 @@ public class MapComponent extends JComponent implements ObserverTrafficSimulator
 
 	@Override
 	public void advance(int tiempo, RoadMap mapa, List<Event> eventos) {
-		this.mapa = mapa;
-		calculaCoordenadasCruce();
-		refresh();
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				MapComponent.this.mapa = mapa;
+				calculaCoordenadasCruce();
+				refresh();
+			}
+		});
+
 	}
 
 	@Override
 	public void addEvent(int tiempo, RoadMap mapa, List<Event> eventos) {
-		this.mapa = mapa;
-		calculaCoordenadasCruce();
-		refresh();
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				MapComponent.this.mapa = mapa;
+				calculaCoordenadasCruce();
+				refresh();
+			}
+		});
 	}
 
 	@Override
 	public void reset(int tiempo, RoadMap mapa, List<Event> eventos) {
-		this.mapa = mapa;
-		calculaCoordenadasCruce();
-		refresh();
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				MapComponent.this.mapa = mapa;
+				calculaCoordenadasCruce();
+				refresh();
+			}
+		});
 	}
 
 	@Override

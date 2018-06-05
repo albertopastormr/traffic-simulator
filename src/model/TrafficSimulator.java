@@ -102,6 +102,16 @@ public class TrafficSimulator implements Observer<ObserverTrafficSimulator> {
         }
 
     }
+
+    public void removeVehicle(String idVehicle){
+        this.map.removeVehicle(idVehicle);
+        notifyAdvance();
+    }
+
+    public String showAll(){
+        return map.showAll();
+    }
+
     public String generateReport(){
         return this.map.generateReport(this.timeCount);
     }
