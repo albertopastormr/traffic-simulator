@@ -6,7 +6,10 @@ import event.Event;
 import logic.RoadMap;
 
 import javax.swing.*;
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+>>>>>>> 4521dedd9b96a75715cb3d1a49e69b16d7a72290
 import java.util.List;
 
 public class EventsTableModel extends TableModel<Event> {
@@ -37,6 +40,10 @@ public class EventsTableModel extends TableModel<Event> {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+<<<<<<< HEAD
+=======
+            	EventsTableModel.this.list = events;
+>>>>>>> 4521dedd9b96a75715cb3d1a49e69b16d7a72290
                 EventsTableModel.this.fireTableStructureChanged();
             }
         });
@@ -58,7 +65,11 @@ public class EventsTableModel extends TableModel<Event> {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+<<<<<<< HEAD
                 EventsTableModel.this.list = new ArrayList<>();
+=======
+                EventsTableModel.this.list = events;
+>>>>>>> 4521dedd9b96a75715cb3d1a49e69b16d7a72290
                 EventsTableModel.this.fireTableStructureChanged();
             }
         });

@@ -16,6 +16,9 @@ public class EventParser {
             new EventConstructorNewCongestedJunction(),
             new EventConstructorNewFreeway(),
             new EventConstructorNewPath(),
+            new EventConstructorNewTank(),
+            new EventConstructorNewTollRoad(),
+            new EventConstructorNewBicJunction(),
             new EventConstructorNewRoundabout()
     };
 

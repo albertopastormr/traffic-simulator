@@ -246,6 +246,10 @@ public class MapComponent extends JComponent implements ObserverTrafficSimulator
 				refresh();
 			}
 		});
+<<<<<<< HEAD:src/view/mapcomponent/MapComponent.java
+=======
+
+>>>>>>> 4521dedd9b96a75715cb3d1a49e69b16d7a72290:src/view/MapComponent.java
 	}
 
 	@Override

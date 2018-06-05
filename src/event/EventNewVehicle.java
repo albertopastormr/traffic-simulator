@@ -39,6 +39,6 @@ public class EventNewVehicle extends Event {
     }
     @Override
     public String toString() {
-        return "New Vehicle"; // Por completar
+        return "New Vehicle";
     }
 }

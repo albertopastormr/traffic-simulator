@@ -100,7 +100,10 @@ public class ReportsDialog extends JDialog implements ObserverTrafficSimulator, 
 				ReportsDialog.this.setMap(map);
 			}
 		});
+<<<<<<< HEAD:src/view/dialog/ReportsDialog.java
 
+=======
+>>>>>>> 4521dedd9b96a75715cb3d1a49e69b16d7a72290:src/view/ReportsDialog.java
 	}
 
 	@Override
@@ -130,7 +133,12 @@ public class ReportsDialog extends JDialog implements ObserverTrafficSimulator, 
 			public void run() {
 				ReportsDialog.this.setMap(map);
 			}
+<<<<<<< HEAD:src/view/dialog/ReportsDialog.java
 	}); }
+=======
+		});
+	}
+>>>>>>> 4521dedd9b96a75715cb3d1a49e69b16d7a72290:src/view/ReportsDialog.java
 
 	@Override
 	public void executeButton(String button_tag) {

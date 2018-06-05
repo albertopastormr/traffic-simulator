@@ -6,9 +6,6 @@ import logic.Roundabout;
 
 public class EventNewCongestedJunction extends EventNewJunction {
 
-    protected Integer maxValueInterval;
-    protected Integer minValueInterval;
-
     public EventNewCongestedJunction(int time, String id) {
         super(time, id);
     }
@@ -17,8 +14,6 @@ public class EventNewCongestedJunction extends EventNewJunction {
     protected GenericJunction<?> createJunction() {
         return new CongestedJunction(this.id);
     }
-
-    // . . .
 
     @Override
     public String toString() {

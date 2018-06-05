@@ -13,6 +13,7 @@ import org.apache.commons.cli.Options;
 import control.Controller;
 import model.TrafficSimulator;
 import util.ReportsPanelStream;
+import view.MainConsole;
 import view.MainWindow;
 
 import javax.swing.*;
@@ -141,13 +142,15 @@ public class Main {
 
 
 	private static void initStandardMode() throws IOException {
-		InputStream is = new FileInputStream(new File(Main.ficheroEntrada));
+		InputStream is = (Main.ficheroEntrada == null ? null : new FileInputStream(new File(Main.ficheroEntrada)));
 		OutputStream os = (Main.ficheroSalida == null ? System.out : new FileOutputStream(new File(Main.ficheroSalida)));
 		TrafficSimulator sim = new TrafficSimulator();
 		Controller ctrl = new Controller(sim, Main.timeLimit, is, os);
-		ctrl.execute();
-		is.close();
-		System.out.println("File " + Main.ficheroEntrada + " has been executed !\n");
+		MainConsole mainConsole = new MainConsole(ctrl, is);
+		mainConsole.init();
+		if (is != null)
+			is.close();
+		//System.out.println("File " + Main.ficheroEntrada + " has been executed !\n");
 	}
 	private static void initGraphicMode() throws IOException{
 		TrafficSimulator simulator = new TrafficSimulator();

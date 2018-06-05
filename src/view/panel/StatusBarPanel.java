@@ -46,6 +46,10 @@ public class StatusBarPanel extends JPanel implements ObserverTrafficSimulator {
 				StatusBarPanel.this.executeInfo.setText("Step: " + time + " of simulation");
 			}
 		});
+<<<<<<< HEAD:src/view/panel/StatusBarPanel.java
+=======
+
+>>>>>>> 4521dedd9b96a75715cb3d1a49e69b16d7a72290:src/view/StatusBarPanel.java
 	}
 
 	@Override

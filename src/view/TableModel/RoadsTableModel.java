@@ -43,6 +43,10 @@ public class RoadsTableModel extends TableModel<Road> {
 				RoadsTableModel.this.fireTableStructureChanged();
 			}
 		});
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4521dedd9b96a75715cb3d1a49e69b16d7a72290
 	}
 
 	@Override

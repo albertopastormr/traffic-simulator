@@ -37,6 +37,15 @@ public class InRoad {
         }
     }
 
+    public int numberOfBicyclesAtQueue(){
+        int ret = 0;
+        for (Vehicle v : vehiclesQueue){
+            if(v instanceof Bicycle)
+                ret++;
+        }
+        return ret;
+    }
+
     private void copyVehiclesQueueFromRoad(Road road){
         for(Vehicle v : road.vehicles)
             this.addVehicleToQueue(v);

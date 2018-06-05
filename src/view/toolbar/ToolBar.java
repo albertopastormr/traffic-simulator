@@ -4,6 +4,7 @@ import control.Controller;
 import error.SimulationError;
 import event.Event;
 import logic.RoadMap;
+import view.ClockPanel;
 import view.MainWindow;
 import view.observer.ObserverTrafficSimulator;
 
@@ -149,9 +150,10 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 		this.add( new JLabel(" Steps: "));
 		this.steps = new JSpinner(new SpinnerNumberModel(5,1,1000,1));
 		this.steps.setToolTipText("steps to execute: 1-1000");
-		this.steps.setMaximumSize(new Dimension(40, 50));
-		this.steps.setMinimumSize(new Dimension(40,50));
+		this.steps.setMaximumSize(new Dimension(70, 70));
+		this.steps.setMinimumSize(new Dimension(70,70));
 		this.steps.setValue(1);
+		this.steps.setFont(new Font("TimesNewRoman", Font.BOLD, 20));
 		this.add(steps);
 
 		// TIME
@@ -160,6 +162,7 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 		this.time.setToolTipText("Actual Time");
 		this.time.setMaximumSize(new Dimension(70, 70));
 		this.time.setMinimumSize(new Dimension(70, 70));
+		this.time.setFont(new Font("TimesNewRoman", Font.BOLD, 24));
 		this.time.setEditable(false);
 		this.add(this.time);
 
@@ -205,6 +208,31 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 		this.buttonList.add(saveReportsButton);
 
 		this.addSeparator();
+
+		// CLOCK
+		this.add(new ClockPanel(mainWindow));
+
+		// BRVEHICLES DIALOG
+		JButton brvehiclesButton = new JButton(new ImageIcon("media/icons/calendarButton.png"));
+		brvehiclesButton.setToolTipText("BrVehicles Dialog");
+		brvehiclesButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainWindow.setVisibleBrVehiclesDialog(true);
+			}
+		});
+		this.add(brvehiclesButton);
+
+		// REMOVE VEHICLES DIALOG
+		JButton removeVehiclesButton = new JButton(new ImageIcon("media/icons/calendarButton.png"));
+		removeVehiclesButton.setToolTipText("Remove Vehicles Dialog");
+		removeVehiclesButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainWindow.setVisibleRemoveVehiclesDialog(true);
+			}
+		});
+		this.add(removeVehiclesButton);
 
 		// EXIT
 		JButton exitButton = new JButton(new ImageIcon("media/icons/exitButton.png"));
@@ -261,7 +289,10 @@ public class ToolBar extends JToolBar  implements ObserverTrafficSimulator {
 			@Override
 			public void run() {
 				ToolBar.this.steps.setValue(1);
+<<<<<<< HEAD
 				ToolBar.this.delay.setValue(500);
+=======
+>>>>>>> 4521dedd9b96a75715cb3d1a49e69b16d7a72290
 				ToolBar.this.time.setText("0");
 			}
 		});
