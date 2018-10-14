@@ -2,7 +2,7 @@
 
 ## About
 
-Traffic Simulator desktop java swing/console application made for Programming Technologies subject of the Computer Science degree at Universidad Complutense Madrid by Alberto Pastor & Ivan Fernandez.
+Traffic Simulator desktop java swing/console application made for Programming Technologies subject of the Computer Science degree at Complutense University of Madrid by Alberto Pastor & Ivan Fernandez.
 
 The application manages three kind of simulation objects:
 - Vehicles(default, car, bicycle)
